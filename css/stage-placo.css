@@ -1,0 +1,178 @@
+/* Variables et base */
+:root{
+    --bg:#0d1117;
+    --card:#161b22;
+    --muted:#9fb7c8;
+    --accent:#9fe0ff
+}
+body { font-family: 'Poppins', sans-serif; background-color:var(--bg); color:#e6edf3; }
+
+/* Container et cards */
+.container { padding-top:20px; padding-bottom:18px; }
+.card { background-color:var(--card); border:1px solid #30363d; }
+h1,h2 { color:#ffffff; }
+
+/* Navbar Portfolio visible en haut */
+.navbar {
+    background-color: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(8px);
+    z-index: 1100;
+}
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff !important;
+}
+
+/* Contenu repoussé sous la navbar */
+.main-content { margin-top: 80px; }
+
+/* Header card styles */
+.header-card {
+    padding: 1.5rem;
+    min-height: auto;
+}
+
+.header-card .row {
+    align-items: center;
+}
+
+/* Logo responsive - recentré et agrandi sur grand écran */
+.logo-img {
+    max-width: 160px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Agrandir le logo sur grand écran */
+@media (min-width: 992px) {
+    .logo-img {
+        max-width: 240px;
+    }
+}
+
+/* Badge style (garde le style actuel) */
+.badge-type {
+    background: linear-gradient(90deg, #3b82f6, #06b6d4);
+    color: #fff;
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    display: inline-block;
+    line-height: 1.3;
+}
+
+/* Bouton retour centré */
+.card-back-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    border-radius: 8px;
+    white-space: nowrap;
+    min-width: 100px;
+}
+
+/* Responsive mobile */
+@media (max-width: 767.98px) {
+    .main-content { margin-top: 70px; }
+    .header-card { padding: 1rem; }
+    .logo-img { max-width: 140px; }
+    .badge-type {
+        font-size: 0.85rem;
+        padding: 6px 12px;
+    }
+}
+
+/* Styles généraux */
+.section-title{color:#9fe0ff;margin-bottom:12px}
+ul { color: #e6edf3; }
+a.back{color:var(--accent);text-decoration:none}
+.kpi{font-weight:700;color:#fff}
+img{max-width:100%;height:auto;display:block}
+
+/* Titres dans le contenu : couleur bleu accent (comme .section-title), taille inchangée */
+.main-content h1, .main-content h2, .main-content h3, .main-content h4, .main-content h5, .main-content h6 {
+    color: var(--accent);
+}
+
+
+/* Descriptions en blanc (paragraphes et listes), sauf éléments explicitement marqués .muted */
+.card p:not(.muted), .card ul:not(.muted), .card li:not(.muted) {
+    color: #ffffff;
+}
+
+/* header spécifique (logo + texte) */
+.header-card{min-height:140px}
+/* centrer verticalement la colonne texte par rapport au logo */
+.header-card .col-md-8{display:flex;flex-direction:column;justify-content:center}
+
+/* lisibilité : espacement des paragraphes et listes (couleur gérée séparément) */
+.card p, .card ul{line-height:1.45}
+
+/* adjust logo size on medium screens */
+@media (min-width:768px) and (max-width:991px){
+    .logo-img{max-height:160px}
+}
+@media (min-width:992px){
+    .logo-img{max-height:220px}
+}
+
+/* Responsive behavior: stack header content on small screens */
+@media (max-width:767px){
+    .container{padding-top:12px;padding-bottom:12px}
+    .main-content{margin-top:68px}
+    .header-card{min-height:auto}
+    .header-card .row{flex-direction:column;align-items:center;text-align:center;gap:12px}
+    .logo-wrap{height:auto;justify-content:center;margin-bottom:0;padding:4px}
+    /* logo visible mais pas trop grand sur mobile */
+    .logo-img{height:auto;max-height:120px;width:auto;max-width:60%}
+    /* déplacer le bouton retour sous le contenu et centré */
+    .card .card-back-btn{display:inline-block;margin-left:0;margin-top:8px}
+    h1{font-size:1.25rem}
+    .navbar .navbar-brand{font-size:1.1rem;line-height:44px}
+}
+
+/* Navbar Portfolio visible en haut */
+.navbar {
+    background-color: rgba(0, 0, 0, 0.95);
+    backdrop-filter: blur(8px);
+    z-index: 1100;
+}
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff !important;
+}
+
+/* Header row alignment */
+.header-card .row {
+    align-items: center;
+}
+
+/* Texte période muted */
+.muted {
+    color: var(--muted);
+    font-size: 0.9rem;
+}
+
+/* Réduire la taille des cards latérales (aside) */
+aside .card {
+    font-size: 0.9rem;
+}
+
+aside .card h4 {
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+}
+
+aside .card p {
+    margin-bottom: 0.5rem;
+}
+
+aside .card .muted {
+    font-size: 0.8rem;
+    margin-bottom: 0.25rem;
+}

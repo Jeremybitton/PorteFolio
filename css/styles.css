@@ -1,0 +1,379 @@
+/* Styles extraits de index.html - tout le CSS a été déplacé ici */
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #0d1117;
+    color: #e6edf3;
+    scroll-behavior: smooth;
+}
+
+/* === Navbar === */
+.navbar {
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    z-index: 1110; /* augmenté pour s'assurer que la navbar reste au-dessus */
+}
+
+.nav-link {
+    color: #e6edf3 !important;
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    color: #58a6ff !important;
+}
+
+/* Rendre le toggler plus visible si besoin */
+.navbar-toggler {
+    border-color: rgba(255,255,255,0.12);
+    z-index: 1130; /* plus haut pour être cliquable */
+}
+
+/* Assure que l'icône du toggler soit visible même si les variables bootstrap différent */
+.navbar-dark .navbar-toggler-icon {
+    /* fallback : on dessine trois barres via background-image multi-gradient */
+    background-image: linear-gradient(#fff, #fff), linear-gradient(#fff, #fff), linear-gradient(#fff, #fff);
+    background-size: 22px 2px, 22px 2px, 22px 2px;
+    background-position: center calc(50% - 8px), center 50%, center calc(50% + 8px);
+    background-repeat: no-repeat;
+    width: 30px;
+    height: 22px;
+    display: inline-block;
+}
+
+/* retire l'ancien fallback basé sur pseudo-éléments si présent */
+.navbar-dark .navbar-toggler-icon::before,
+.navbar-dark .navbar-toggler-icon::after,
+.navbar-dark .navbar-toggler-icon span {
+    display: none;
+}
+
+/* Fond du collapse en mobile pour garantir lisibilité */
+@media (max-width: 991.98px) {
+    .navbar-collapse {
+        background: rgba(13,17,23,0.96);
+        padding: 12px 16px;
+        border-radius: 6px;
+    }
+    .navbar-nav .nav-link {
+        color: #e6edf3 !important;
+        padding: 10px 8px;
+    }
+}
+
+/* Comportement forcé du collapse en mobile pour garantir visibilité et clics */
+@media (max-width: 991.98px) {
+    /* NE PAS forcer display:none ici — laisser Bootstrap gérer l'état par JS */
+    /* quand le collapse est ouvert, on le positionne en absolute sous la navbar pour qu'il soit visible */
+    .navbar-collapse.collapse.show {
+        display: block !important;
+        position: absolute;
+        top: 56px; /* hauteur approximative de la navbar */
+        right: 10px;
+        left: 10px;
+        background: rgba(13,17,23,0.98);
+        padding: 12px 16px;
+        border-radius: 8px;
+        box-shadow: 0 12px 30px rgba(2,6,23,0.6);
+        z-index: 1120; /* au-dessus du reste */
+    }
+    /* empile verticalement les éléments du menu (colonne) */
+    .navbar-nav {
+        display: flex;
+        flex-direction: column;
+    }
+    .navbar-nav .nav-item {
+        margin-bottom: 6px;
+    }
+}
+
+/* Support pour l'état de transition de Bootstrap : rendre le collapse visible pendant l'animation */
+.navbar-collapse.collapsing {
+    display: block !important;
+    position: absolute;
+    top: 56px;
+    left: 10px;
+    right: 10px;
+    background: rgba(13,17,23,0.98);
+    padding: 12px 16px;
+    border-radius: 8px;
+    box-shadow: 0 12px 30px rgba(2,6,23,0.6);
+    z-index: 1120; /* au-dessus du reste */
+}
+
+/* Assure que la version finale (show) est bien positionnée et cliquable */
+.navbar-collapse.collapse.show {
+    display: block !important;
+    position: absolute;
+    top: 56px;
+    left: 10px;
+    right: 10px;
+    background: rgba(13,17,23,0.98);
+    padding: 12px 16px;
+    border-radius: 8px;
+    box-shadow: 0 12px 30px rgba(2,6,23,0.6);
+    z-index: 1120; /* au-dessus du reste */
+}
+
+/* Assure que les liens du collapse soient cliquables */
+.navbar-collapse .nav-link {
+    pointer-events: auto;
+}
+
+/* retire le z-index sur .navbar .container (inutile) */
+.navbar .container {
+    position: relative;
+}
+
+/* s'assurer que le collapse est au-dessus des sections */
+.navbar-collapse {
+    z-index: 1115;
+}
+
+/* Liens du menu (desktop & burger) : changement de couleur + soulignement au hover/focus */
+.navbar-nav .nav-link {
+    transition: color 160ms ease, text-decoration-color 160ms ease, text-shadow 180ms ease;
+    text-decoration: none;
+    text-underline-offset: 4px;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus {
+    color: #9fe0ff !important; /* couleur d'accent au survol */
+    text-decoration: underline !important;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.45);
+}
+
+/* Plus précis pour le menu collapse (burger) quand il est ouvert */
+.navbar-collapse .nav-link {
+    color: #e6edf3 !important;
+}
+.navbar-collapse .nav-link:hover,
+.navbar-collapse .nav-link:focus {
+    color: #9fe0ff !important;
+    text-decoration: underline !important;
+}
+
+/* === Header === */
+header {
+    /* animated gradient background */
+    background: linear-gradient(120deg, #6a11cb 0%, #2575fc 33%, #00c6ff 66%, #6a11cb 100%);
+    background-size: 300% 300%;
+    animation: gradientShift 8s ease infinite;
+    color: #ffffff; /* texte en blanc par défaut */
+    text-align: center;
+    padding: 120px 20px 100px;
+}
+
+header h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #ffffff; /* assurer blanc */
+    transition: color 220ms ease, text-shadow 220ms ease;
+}
+
+header p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    color: #ffffff; /* assurer blanc */
+    transition: color 220ms ease, opacity 220ms ease;
+}
+
+/* Hover sur l'en-tête : texte reste blanc mais on ajoute une subtille ombre pour effet */
+header:hover h1, header:focus-within h1 {
+    color: #ffffff;
+    text-shadow: 0 6px 20px rgba(0,0,0,0.45);
+}
+
+header:hover p, header:focus-within p {
+    color: #ffffff;
+    opacity: 1;
+}
+
+/* Animation keyframes pour le gradient */
+@keyframes gradientShift {
+    0% { background-position: 0 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0 50%; }
+}
+
+/* === Sections === */
+section {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+    padding: 80px 0;
+}
+
+section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+section h2 {
+    color: #58a6ff;
+    text-align: center;
+    margin-bottom: 40px;
+    font-weight: 600;
+}
+
+/* Assure que l'ancre #projects ne soit pas cachée par la navbar fixe */
+#projects {
+    scroll-margin-top: 120px; /* ajuster si la hauteur de la navbar change */
+}
+/* même offset pour la section Stage */
+#stage-1ere-annee { scroll-margin-top: 120px; }
+
+/* === Cards projets === */
+/* Perspective sur le conteneur pour renforcer l'effet 3D */
+#projects .row, #stage-1ere-annee .row {
+    perspective: 1200px;
+    -webkit-perspective: 1200px;
+}
+
+.card {
+    background-color: #161b22;
+    border: 1px solid #30363d;
+    /* animation améliorée */
+    transition: transform 260ms cubic-bezier(.2,.9,.3,1), box-shadow 260ms cubic-bezier(.2,.9,.3,1), filter 260ms ease, border-color 260ms ease;
+    will-change: transform, box-shadow, filter;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    transform-origin: center center;
+    position: relative; /* pour le halo pseudo-élément */
+    color: #ffffff; /* texte blanc par défaut dans la card */
+}
+
+/* Hover/focus fallback (CSS) : plus marqué + applique le gradient statique du header */
+.card:hover,
+
+/* s'applique aussi quand on survole le lien parent */
+a:hover .card,
+a:focus .card {
+    transform: translateY(-16px) scale(1.08);
+    box-shadow: 0 72px 140px rgba(88, 166, 255, 0.28);
+    filter: saturate(1.08) contrast(1.04);
+    border-color: rgba(126,196,255,0.12);
+    /* appliquer le gradient statique du header */
+    background: linear-gradient(120deg, #6a11cb 0%, #2575fc 33%, #00c6ff 66%, #6a11cb 100%);
+    background-size: cover;
+    color: #ffffff;
+}
+
+/* Accessible : indique que la carte est cliquable */
+#projects .card[role="button"],
+#projects a.text-reset .card {
+    cursor: pointer;
+}
+
+.card-title {
+    color: #58a6ff; /* titre en bleu par défaut (comme avant) */
+    font-weight: 600;
+}
+
+/* Texte des cartes en blanc par défaut */
+.card .card-body,
+.card .card-text {
+    color: #ffffff;
+}
+
+/* Halo / aura autour de la carte pour la rendre plus visible */
+.card::before {
+    content: '';
+    position: absolute;
+    left: -6px;
+    right: -6px;
+    top: -6px;
+    bottom: -6px;
+    border-radius: 8px;
+    background: radial-gradient(closest-side, rgba(126,196,255,0.06), rgba(126,196,255,0));
+    opacity: 0;
+    transition: opacity 260ms ease, transform 260ms ease;
+    pointer-events: none;
+    z-index: 0;
+    transform: scale(0.98);
+}
+.card:hover::before,
+a:hover .card::before,
+.card:focus-within::before {
+    opacity: 1;
+    transform: scale(1.02);
+}
+
+/* Pop-out interne pour renforcer l'effet 3D */
+.card .card-body {
+    transition: transform 260ms cubic-bezier(.2,.9,.3,1);
+    transform-style: preserve-3d;
+    will-change: transform;
+    position: relative; /* au-dessus du halo */
+    z-index: 1;
+}
+.card:hover .card-body,
+a:hover .card .card-body {
+    transform: translateZ(36px);
+}
+
+/* Accent de couleur sur le titre au survol pour plus de contraste */
+.card:hover .card-title,
+a:hover .card .card-title {
+    color: #9fe0ff;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.45);
+}
+
+/* Focus-visible pour accessibilité clavier */
+.card:focus-visible {
+    outline: 3px solid rgba(126,196,255,0.18);
+    outline-offset: 6px;
+}
+
+/* === Classes pour comportement au clic === */
+/* Etat activé (même style que :hover) */
+.card.active {
+    transform: translateY(-16px) scale(1.08);
+    box-shadow: 0 72px 140px rgba(88, 166, 255, 0.28);
+    filter: saturate(1.08) contrast(1.04);
+    border-color: rgba(126,196,255,0.12);
+    background: linear-gradient(120deg, #6a11cb 0%, #2575fc 33%, #00c6ff 66%, #6a11cb 100%);
+    background-size: cover;
+    color: #ffffff;
+}
+
+.card.active::before {
+    opacity: 1;
+    transform: scale(1.02);
+}
+
+.card.active .card-body {
+    transform: translateZ(36px);
+}
+
+.card.active .card-title {
+    color: #9fe0ff;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.45);
+}
+
+/* Etat inactif lorsque la souris sort après un clic : texte en noir */
+.card.inactive .card-title {
+    color: #000000 !important;
+}
+.card.inactive .card-text,
+.card.inactive .card-body {
+    color: #000000 !important;
+}
+
+/* Déplacer la limite de largeur du .lead depuis l'inline-style */
+.lead.mx-auto {
+    max-width: 700px;
+}
+
+/* Styles pour l'image GitHub */
+.contact-link img {
+    width: 26px;
+    height: 26px;
+    margin-right: 10px;
+    border-radius: 50%;
+    background-color: #0d1117;
+    padding: 2px;
+}
+
+/* (Galerie retirée de la page principale) */
