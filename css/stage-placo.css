@@ -25,9 +25,24 @@ a.back{color:var(--accent);text-decoration:none}
 .kpi{font-weight:700;color:#fff}
 .muted { color:var(--muted) }
 @media (max-width:767px){
-    /* sur petits écrans, limiter la hauteur pour éviter overflow */
-    .logo-wrap{height:auto}
-    .logo-img{height:90px;width:auto}
+    /* navbar compacte et titre bien dans l'entête */
+    .top-navbar{height:48px; padding:0 12px;}
+    .top-navbar .container{min-height:48px; padding:0;}
+    .top-navbar .navbar-brand{display:inline-flex; align-items:center; height:48px; line-height:48px; font-size:1.15rem; padding:0; margin:0;}
+
+    /* conteneur principal remonte juste sous la navbar */
+    .container{padding-top:12px;padding-bottom:12px}
+    .main-content{margin-top:56px}
+
+    .header-card{min-height:auto}
+    .header-card .row{flex-direction:column;align-items:center;text-align:center;gap:12px}
+    .logo-wrap{height:auto;justify-content:center;margin-bottom:0;padding:4px}
+    /* logo visible mais pas trop grand sur mobile */
+    .logo-img{height:auto;max-height:120px;width:auto;max-width:60%}
+    /* déplacer le bouton retour sous le contenu et centré */
+    .card .card-back-btn{display:inline-block;margin-left:0;margin-top:8px}
+    h1{font-size:1.25rem}
+    /* on ne force plus la navbar générique ici pour éviter les conflits */
 }
 
 /* === Navbar (copiée depuis index.html) === */
@@ -146,7 +161,7 @@ img{max-width:100%;height:auto;display:block}
 /* Responsive behavior: stack header content on small screens */
 @media (max-width:767px){
     .container{padding-top:12px;padding-bottom:12px}
-    .main-content{margin-top:68px}
+    .main-content{margin-top:56px}
     .header-card{min-height:auto}
     .header-card .row{flex-direction:column;align-items:center;text-align:center;gap:12px}
     .logo-wrap{height:auto;justify-content:center;margin-bottom:0;padding:4px}
@@ -155,7 +170,7 @@ img{max-width:100%;height:auto;display:block}
     /* déplacer le bouton retour sous le contenu et centré */
     .card .card-back-btn{display:inline-block;margin-left:0;margin-top:8px}
     h1{font-size:1.25rem}
-    .navbar .navbar-brand{font-size:1.1rem;line-height:44px}
+    /* on ne force plus la navbar générique ici pour éviter les conflits */
 }
 
 
