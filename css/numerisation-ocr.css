@@ -5,9 +5,10 @@ body { font-family: 'Poppins', sans-serif; background-color:#0d1117; color:#e6ed
 .card-title { color:#58a6ff; }
 .thumb { height:120px; object-fit:cover; width:100%; border-radius:6px; cursor:pointer; }
 .img-wrapper { overflow:hidden; }
-#imageModal .modal-content { background-color:#fff !important; color:#212529 !important; }
-#imageModal .modal-header { background-color:#fff !important; border-bottom:1px solid #dee2e6 !important; }
-#imageModal .modal-title { color:#212529 !important; font-weight:400 !important; }
+#imageModal .modal-content { background-color:#000 !important; color:#e6edf3 !important; }
+#imageModal .modal-header { background-color:#000 !important; border-bottom:1px solid #222 !important; }
+#imageModal .modal-title { color:#ffffff !important; font-weight:600 !important; }
+#imageModal .modal-body { background:#000; }
 a.back-link { color:#58a6ff; text-decoration:none; }
 a.back-link:hover { text-decoration:underline; }
 

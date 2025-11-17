@@ -29,7 +29,7 @@
                     <h5 class="card-title">Schéma</h5>
                     <p class="card-text">Diagrammes et schémas du processus.</p>
                     <div class="row g-2">
-                        <div class="col-6 img-wrapper"><img loading="lazy" src="image/img.png" alt="Schéma 1" class="thumb" data-src="image/20250526_153725.jpg" data-group="schema"></div>
+                        <div class="col-6 img-wrapper"><img loading="lazy" src="image/img.png" alt="Schéma 1" class="thumb" data-src="image/img.png" data-group="schema"></div>
 
                     </div>
                 </div>
@@ -138,10 +138,39 @@
         document.getElementById('imageModalLabel').textContent = alt || "Aperçu de l'image";
         const counter = document.getElementById('modalCounter');
         if(counter) counter.textContent = `${modalState.index+1} / ${modalState.list.length}`;
+        updateNavButtons();
+    }
+    function updateNavButtons(){
+        const prevBtn = document.querySelector('#imageModal .btn-nav.prev');
+        const nextBtn = document.querySelector('#imageModal .btn-nav.next');
+        if(!prevBtn || !nextBtn) return;
+        // Cas une seule image : cacher les deux
+        if(modalState.list.length <= 1){
+            prevBtn.style.display = 'none';
+            nextBtn.style.display = 'none';
+            return;
+        } else {
+            prevBtn.style.display = '';
+            nextBtn.style.display = '';
+        }
+        // Cacher la flèche gauche au début
+        if(modalState.index === 0){
+            prevBtn.style.display = 'none';
+        } else {
+            prevBtn.style.display = '';
+        }
+        // Cacher la flèche droite à la fin
+        if(modalState.index === modalState.list.length - 1){
+            nextBtn.style.display = 'none';
+        } else {
+            nextBtn.style.display = '';
+        }
     }
     function navModal(delta){
         if(!modalState.list.length) return;
-        modalState.index = (modalState.index + delta + modalState.list.length) % modalState.list.length;
+        const newIndex = modalState.index + delta;
+        if(newIndex < 0 || newIndex >= modalState.list.length) return; // ne pas boucler
+        modalState.index = newIndex;
         updateModalImage();
         preloadAround();
     }
@@ -160,6 +189,13 @@
             openModalFromThumb(t);
         } else if (t.classList && t.classList.contains('btn-nav')) {
             navModal(t.classList.contains('next') ? 1 : -1);
+        }
+    });
+    document.addEventListener('click', (e)=>{
+        const card = e.target.closest('.gallery-cards .card');
+        if(card && !e.target.classList.contains('thumb')){
+            const first = card.querySelector('img.thumb');
+            if(first){ openModalFromThumb(first); }
         }
     });
     document.addEventListener('keydown', (e)=>{
@@ -181,6 +217,14 @@
         if(Math.abs(dx) > threshold){ navModal(dx < 0 ? 1 : -1); }
         modalState.startX = null;
     });
+    // Fermeture si clic en dehors de l'image (zone noire du modal-body)
+    const modalBody = modalEl.querySelector('.modal-body');
+    modalBody.addEventListener('click', (e)=>{
+        // si on clique directement sur la zone body (pas sur img ni sur nav)
+        if(e.target === modalBody){
+            bootstrap.Modal.getInstance(modalEl)?.hide();
+        }
+    });
 </script>
 <script>
     // Tilt effect for gallery cards (same behavior as index)
@@ -199,7 +243,6 @@
 
             card.addEventListener('mousemove', (e) => {
                 const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
                 const py = (y / rect.height - 0.5) * 2; // -1..1
                 const rotateX = (py) * 8; // vertical tilt
