@@ -77,3 +77,43 @@ a.back-link:hover { text-decoration:underline; }
 @media (max-width:575.98px){
     #imageModal .btn-nav { width:36px; height:36px; font-size:1.2rem; }
 }
+
+/* Responsive améliorations */
+@media (max-width: 991.98px) {
+  .gallery-cards .card {min-height:auto;}
+}
+@media (max-width: 767.98px) {
+  .gallery-cards .card {padding:1rem !important;}
+  .gallery-cards .card .card-title {font-size:1.05rem;}
+  .gallery-cards .card .card-text {font-size:0.85rem;}
+  .thumb {height:100px;}
+}
+@media (max-width: 575.98px) {
+  .row.gallery-cards > [class*='col'] {flex:0 0 100%; max-width:100%;}
+  .thumb {height:90px;}
+  #imageModal .modal-dialog {margin:0; max-width:100%; width:100%;}
+  #imageModal .modal-content {border-radius:0; min-height:100vh;}
+  #imageModal .btn-nav {width:40px; height:40px; font-size:1.2rem;}
+  #imageModal .modal-title {font-size:1rem;}
+}
+@media (orientation: landscape) and (max-height: 500px) {
+  #imageModal .modal-body img {max-height:calc(100vh - 140px);}
+}
+
+/* Meilleure qualité d'affichage des thumbs sans étirement */
+.thumb {aspect-ratio: 4/3; object-fit: cover;}
+
+/* Accessibilité nav boutons focus */
+#imageModal .btn-nav:focus-visible {outline:2px solid #58a6ff; outline-offset:2px;}
+
+/* Transition douce images modal */
+#imageModal .modal-body img {transition:opacity 180ms ease;}
+
+/* Prévenir le scroll horizontal mobile */
+body {overflow-x:hidden;}
+
+/* Swipe horizontal dans les cards (numerisation OCR) */
+.card .thumb-row { display:flex; gap:10px; overflow-x:auto; padding-bottom:8px; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; }
+.card .thumb-row::-webkit-scrollbar{display:none;}
+.card .thumb-row .img-wrapper { flex:0 0 160px; scroll-snap-align:center; }
+@media (max-width:575.98px){ .card .thumb-row .img-wrapper { flex:0 0 140px; } }

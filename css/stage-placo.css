@@ -266,3 +266,18 @@ aside .card .muted {
 
 /* S'assurer que le header n'applique pas overflow hidden */
 .header-card, .header-card .row, .header-card .col-md-7 { overflow: visible; }
+
+/* === Swipe gallery (responsive) === */
+.swipe-gallery { position:relative; overflow:hidden; }
+.swipe-track { display:flex; gap:12px; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; padding:4px 4px 12px; }
+.swipe-track::-webkit-scrollbar{display:none;}
+.swipe-item { flex:0 0 82%; max-width:82%; scroll-snap-align:center; position:relative; }
+@media (min-width:768px){ .swipe-item { flex:0 0 60%; max-width:60%; } }
+@media (min-width:1200px){ .swipe-item { flex:0 0 40%; max-width:40%; } }
+.swipe-item img { width:100%; height:auto; border-radius:10px; box-shadow:0 4px 18px rgba(0,0,0,0.4); object-fit:contain; background:#0d1117; }
+.swipe-dots { display:flex; justify-content:center; gap:6px; margin-top:4px; }
+.swipe-dots button { width:8px; height:8px; border-radius:50%; border:none; background:#374151; padding:0; cursor:pointer; transition:background .25s; }
+.swipe-dots button.active { background:#58a6ff; }
+@media (hover:hover){ .swipe-item img:hover { box-shadow:0 6px 24px rgba(88,166,255,0.4); } }
+/* Fallback si drag JS actif: empêcher sélection de texte */
+.swipe-track.dragging { cursor:grabbing; }
