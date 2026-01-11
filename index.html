@@ -3,132 +3,302 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Mon Portfolio</title>
+    <title>Jeremy Bitton | Portfolio</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/styles.css">
-
 </head>
 
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top glass-nav">
     <div class="container">
-        <a class="navbar-brand text-white fw-bold" href="#">Portfolio</a>
-        <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand fw-bold" href="#">
+            <span class="text-accent">&lt;</span>JB<span class="text-accent">/&gt;</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse justify-content-start" id="navbarNav">
-            <ul class="navbar-nav">
+        <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+            <ul class="navbar-nav gap-3">
                 <li class="nav-item"><a class="nav-link" href="#about">À propos</a></li>
                 <li class="nav-item"><a class="nav-link" href="#projects">Projets</a></li>
-                <li class="nav-item"><a class="nav-link" href="#stage-1ere-annee">Stage 1</a> </li>
-                <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                <li class="nav-item"><a class="nav-link" href="#skills">Compétences</a></li>
+                <li class="nav-item"><a class="nav-link btn-contact" href="#contact">Contact</a></li>
             </ul>
         </div>
     </div>
 </nav>
 
-<header>
-    <h1>Jeremy Bitton</h1>
-    <p>Développeur Fullstack</p>
+<header class="hero-section d-flex align-items-center justify-content-center text-center">
+    <div class="container">
+        <p class="subtitle">Bonjour, je suis</p>
+        <h1 class="display-1 fw-bold name-gradient">Jeremy Bitton</h1>
+        <h2 class="typing-text">Développeur Fullstack</h2>
+        <div class="mt-4">
+            <a href="#projects" class="btn btn-primary btn-lg rounded-pill px-4">Voir mes projets</a>
+            <a href="#contact" class="btn btn-outline-light btn-lg rounded-pill px-4 ms-2">Me contacter</a>
+        </div>
+    </div>
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
 </header>
 
-<section id="about">
-    <div class="container text-center">
-        <h2>À propos</h2>
-        <p class="lead mx-auto">
-            Je suis un développeur passionné par les technologies web et backend.
-            J’aime concevoir des applications performantes et intuitives, avec une
-            attention particulière aux détails et à la qualité du code.
-        </p>
-    </div>
-</section>
+<div class="content-wrapper">
 
-<section id="projects">
-    <div class="container">
-        <h2>Mes Projets</h2>
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="card h-100 p-3" tabindex="0">
-                    <div class="card-body">
-                        <h5 class="card-title">Application de gestion</h5>
-                        <p class="card-text">
-                            Application web construite avec Java Spring Boot, MySQL et interface Vue.js.
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card h-100 p-3" tabindex="0">
-                    <div class="card-body">
-                        <h5 class="card-title">API REST PHP</h5>
-                        <p class="card-text">
-                            API sécurisée en Laravel pour la gestion de contenu avec authentification JWT.
-                        </p>
-                    </div>
+    <section id="about" class="py-5">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="section-title">À propos de moi</h2>
+                    <p class="lead text-light-muted">
+                        Passionné par les technologies web et l'architecture logicielle, je conçois des applications
+                        performantes et intuitives. Mon objectif est de transformer des problèmes complexes en solutions
+                        simples et élégantes grâce au code.
+                    </p>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- Nouvelle section : Stage 1ere année (contient le projet Numérisation OCR) -->
-<section id="stage-1ere-annee">
-    <div class="container">
-        <h2>Stage 1ère année</h2>
-        <div class="row g-4">
-            <div class="col-md-4">
-                <a href="numérisation-OCR.html" class="text-decoration-none text-reset d-block h-100">
-                    <div class="card h-100 p-3" role="button" tabindex="0">
-                        <div class="card-body p-3">
-                            <h5 class="card-title">Projet Numérisation OCR (Power Platform)</h5>
-                            <p class="card-text">
-                                Solution de digitalisation (PowerApps + PowerAutomate) pour scanner des fiches manuscrites, en extraire le texte via IA (OCR), et remplir un tableau SharePoint/Excel.
+    <section id="projects" class="py-5">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Projets Récents</h2>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4">
+                    <div class="project-card h-100">
+                        <div class="card-body">
+                            <div class="icon-box mb-3">
+                                <i class="fa-solid fa-layer-group"></i>
+                            </div>
+                            <h5 class="card-title">Gestion d'App</h5>
+                            <p class="card-text text-light-muted">
+                                Application web complète construite avec Java Spring Boot, MySQL et une interface réactive en Vue.js.
                             </p>
+                            <div class="tags">
+                                <span class="badge-tech">Java</span>
+                                <span class="badge-tech">Vue.js</span>
+                            </div>
                         </div>
                     </div>
-                </a>
-            </div>
-            <div class="col-md-4">
-                <a href="stage-placo.html" class="text-decoration-none text-reset d-block h-100">
-                    <div class="card h-100 p-3" role="button" tabindex="0">
-                        <div class="card-body p-3">
-                            <h5 class="card-title">Stage — Placo by Saint-Gobain</h5>
-                            <p class="card-text">Lieu du stage et missions : digitalisation, OCR et intégration Power Platform.</p>
+                </div>
+
+                <div class="col-md-6 col-lg-4">
+                    <div class="project-card h-100">
+                        <div class="card-body">
+                            <div class="icon-box mb-3">
+                                <i class="fa-solid fa-server"></i>
+                            </div>
+                            <h5 class="card-title">API REST PHP</h5>
+                            <p class="card-text text-light-muted">
+                                API sécurisée développée sous Laravel pour la gestion de contenu avec authentification JWT.
+                            </p>
+                            <div class="tags">
+                                <span class="badge-tech">PHP</span>
+                                <span class="badge-tech">Laravel</span>
+                            </div>
                         </div>
                     </div>
-                </a>
+                </div>
+
+                <div class="col-md-12 col-lg-4">
+                    <a href="stage-placo.html" class="text-decoration-none">
+                        <div class="project-card highlight-card h-100">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <div class="icon-box mb-3">
+                                        <i class="fa-solid fa-briefcase"></i>
+                                    </div>
+                                    <span class="badge bg-warning text-dark">Stage</span>
+                                </div>
+                                <h5 class="card-title">Placo by Saint-Gobain</h5>
+                                <p class="card-text text-light-muted">
+                                    Digitalisation, OCR et intégration Power Platform. Cliquez pour voir le détail et la galerie.
+                                </p>
+                                <div class="tags">
+                                    <span class="badge-tech">OCR</span>
+                                    <span class="badge-tech">PowerApps</span>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section id="contact">
-    <div class="container text-center">
-        <h2>Contact</h2>
-        <p class="lead">
-            📧 <a class="contact-link" href="mailto:jbitton.dev@gmail.com">jbitton.dev@gmail.com</a><br />
-            💼 <a class="contact-link" href="https://www.linkedin.com/in/jeremy-bitton-611921363/" target="_blank">Mon LinkedIn</a> <br />
-            <a class="contact-link d-inline-flex align-items-center" href="https://github.com/Jeremybitton" target="_blank">
-                <img src="image/logo-GitHub.png"
-                     alt="GitHub">
-                Mon lien GitHub</a>
-        </p>
-    </div>
-</section>
+    <section id="skills" class="py-5">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Mes Compétences</h2>
 
-<footer>
-    <p>© 2025 Jeremy Bitton</p>
+            <div class="row g-4 justify-content-center">
+                <div class="col-12 text-center mb-3"><h4 class="text-accent">Backend & Langages</h4></div>
+
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="skill-card">
+                        <i class="fa-brands fa-java skill-icon"></i>
+                        <span>Java</span>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="skill-card">
+                        <i class="fa-brands fa-php skill-icon"></i>
+                        <span>PHP</span>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="skill-card">
+                        <i class="fa-brands fa-python skill-icon"></i>
+                        <span>Python</span>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="skill-card">
+                        <i class="fa-solid fa-database skill-icon"></i>
+                        <span>SQL</span>
+                    </div>
+                </div>
+
+                <div class="col-12 text-center mt-4 mb-3"><h4 class="text-accent">Frontend</h4></div>
+
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="skill-card">
+                        <i class="fa-brands fa-js skill-icon"></i>
+                        <span>JavaScript</span>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="skill-card">
+                        <i class="fa-brands fa-html5 skill-icon"></i>
+                        <span>HTML5</span>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="skill-card">
+                        <i class="fa-brands fa-css3-alt skill-icon"></i>
+                        <span>CSS3</span>
+                    </div>
+                </div>
+
+                <div class="col-12 text-center mt-4 mb-3"><h4 class="text-accent">Outils & DevOps</h4></div>
+
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="skill-card">
+                        <i class="fa-brands fa-docker skill-icon"></i>
+                        <span>Docker</span>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="skill-card">
+                        <i class="fa-brands fa-git-alt skill-icon"></i>
+                        <span>Git</span>
+                    </div>
+                </div>
+                <div class="col-6 col-md-4 col-lg-2">
+                    <div class="skill-card">
+                        <i class="fa-brands fa-github skill-icon"></i>
+                        <span>GitHub</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-5 mb-5">
+        <div class="container">
+            <div class="glass-panel p-4 p-lg-5">
+                <div class="row g-5 align-items-center">
+                    
+                    <!-- Colonne Info & Réseaux -->
+                    <div class="col-lg-5 text-center text-lg-start">
+                        <h2 class="section-title mb-4">Parlons de votre projet</h2>
+                        <p class="mb-4 text-light-muted">
+                            Vous avez une idée, une opportunité de stage ou simplement envie de discuter tech ? 
+                            Remplissez le formulaire ou contactez-moi directement sur mes réseaux.
+                        </p>
+
+                        <div class="contact-info mb-4">
+                            <!-- Email -->
+                            <a href="mailto:jbitton.dev@gmail.com" class="d-flex align-items-center justify-content-center justify-content-lg-start text-decoration-none text-light mb-3 contact-link">
+                                <div class="icon-circle me-3">
+                                    <i class="fa-solid fa-envelope"></i>
+                                </div>
+                                <span class="fs-5">jbitton.dev@gmail.com</span>
+                            </a>
+                            
+                            <!-- LinkedIn -->
+                            <a href="https://www.linkedin.com/in/jeremy-bitton-611921363/" target="_blank" class="d-flex align-items-center justify-content-center justify-content-lg-start text-decoration-none text-light mb-3 contact-link">
+                                <div class="icon-circle me-3">
+                                    <i class="fa-brands fa-linkedin-in"></i>
+                                </div>
+                                <span class="fs-5">LinkedIn</span>
+                            </a>
+
+                            <!-- GitHub -->
+                            <a href="https://github.com/Jeremybitton" target="_blank" class="d-flex align-items-center justify-content-center justify-content-lg-start text-decoration-none text-light mb-3 contact-link">
+                                <div class="icon-circle me-3">
+                                    <i class="fa-brands fa-github"></i>
+                                </div>
+                                <span class="fs-5">GitHub</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Colonne Formulaire -->
+                    <div class="col-lg-7">
+                        <!-- 
+                           IMPORTANT: Pour rendre ce formulaire fonctionnel, inscrivez-vous sur https://formspree.io/
+                           Créez un nouveau formulaire et remplacez "VOTRE_ID_FORMSPREE" ci-dessous par votre ID.
+                        -->
+                        <form action="https://formspree.io/f/mjggvbeo" method="POST" class="contact-form">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control glass-input" id="prenom" name="prenom" placeholder="Prénom" required>
+                                        <label for="prenom">Prénom</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control glass-input" id="nom" name="nom" placeholder="Nom" required>
+                                        <label for="nom">Nom</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <input type="email" class="form-control glass-input" id="email" name="email" placeholder="name@example.com" required>
+                                        <label for="email">Adresse Email</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <textarea class="form-control glass-input" placeholder="Votre message" id="message" name="message" style="height: 150px" required></textarea>
+                                        <label for="message">Votre message</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary btn-lg w-100 py-3 rounded-pill fw-bold">
+                                        Envoyer le message <i class="fa-solid fa-paper-plane ms-2"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<footer class="text-center py-4 glass-footer">
+    <p class="m-0 text-muted">© 2025 Jeremy Bitton. Créé avec passion.</p>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
 <script src="js/main.js"></script>
-
-<!-- (Modal supprimée de la page principale) -->
-
 </body>
 </html>

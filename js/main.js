@@ -107,5 +107,70 @@ document.addEventListener('DOMContentLoaded', function () {
 
     })();
 
+    // --- Formspree AJAX Submission & Toast ---
+    const contactForm = document.querySelector('.contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const btn = contactForm.querySelector('button[type="submit"]');
+            const originalBtnText = btn.innerHTML;
+
+            // Loading state
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Envoi...';
+            btn.disabled = true;
+
+            try {
+                const formData = new FormData(contactForm);
+                const response = await fetch(contactForm.action, {
+                    method: contactForm.method,
+                    body: formData,
+                    headers: { 'Accept': 'application/json' }
+                });
+
+                if (response.ok) {
+                    showToast('Message envoyé avec succès !', 'success');
+                    contactForm.reset();
+                } else {
+                    const data = await response.json();
+                    if (Object.hasOwn(data, 'errors')) {
+                        showToast(data["errors"].map(error => error["message"]).join(", "), 'error');
+                    } else {
+                        showToast('Oups ! Une erreur est survenue.', 'error');
+                    }
+                }
+            } catch (error) {
+                showToast('Erreur de connexion.', 'error');
+            } finally {
+                btn.innerHTML = originalBtnText;
+                btn.disabled = false;
+            }
+        });
+    }
+
+    function showToast(message, type = 'success') {
+        const toast = document.createElement('div');
+        toast.className = `toast-notification ${type}`;
+        
+        const iconClass = type === 'success' ? 'fa-check-circle toast-success-icon' : 'fa-exclamation-circle toast-error-icon';
+        
+        toast.innerHTML = `
+            <i class="fa-solid ${iconClass} toast-icon"></i>
+            <span>${message}</span>
+        `;
+        
+        document.body.appendChild(toast);
+
+        // Trigger animation
+        requestAnimationFrame(() => {
+            setTimeout(() => toast.classList.add('show'), 10);
+        });
+
+        // Remove after 4 seconds
+        setTimeout(() => {
+            toast.classList.remove('show');
+            setTimeout(() => toast.remove(), 500);
+        }, 4000);
+    }
+
 });
 

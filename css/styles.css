@@ -1,379 +1,548 @@
-/* Styles extraits de index.html - tout le CSS a été déplacé ici */
+/* === Variables & Reset === */
+:root {
+    --bg-dark: #1e293b; /* Plus clair (Slate 800) au lieu de Slate 900 */
+    --card-bg: rgba(30, 41, 59, 0.65); /* Un peu plus transparent pour l'effet */
+    --card-border: 1px solid rgba(255, 255, 255, 0.15); /* Bordure plus visible */
+    --text-primary: #f1f5f9; /* Blanc cassé très clair */
+    --text-muted: #cbd5e1; /* Gris clair très lisible (au lieu de gris foncé) */
+    --accent: #38bdf8; /* Bleu Cyan */
+    --accent-secondary: #818cf8; /* Indigo */
+    --accent-gradient: linear-gradient(135deg, #38bdf8 0%, #a855f7 100%); /* Dégradé Cyan vers Violet plus vibrant */
+}
 
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #0d1117;
-    color: #e6edf3;
-    scroll-behavior: smooth;
+    background-color: var(--bg-dark);
+    /* Dégradé de fond plus riche et coloré */
+    background: radial-gradient(circle at top left, #1e1b4b, #0f172a);
+    color: var(--text-primary);
+    overflow-x: hidden;
+    position: relative;
+    line-height: 1.6;
 }
 
-/* === Navbar === */
-.navbar {
-    background-color: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(5px);
-    z-index: 1110; /* augmenté pour s'assurer que la navbar reste au-dessus */
+/* Fond animé global amélioré */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    /* Lueurs d'ambiance plus larges */
+    background: 
+        radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.15), transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(168, 85, 247, 0.15), transparent 40%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* === Navbar Glass === */
+.glass-nav {
+    background: rgba(15, 23, 42, 0.85); /* Plus opaque pour la lisibilité */
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.8rem 0;
+    transition: all 0.3s ease;
+}
+
+.navbar-brand {
+    font-size: 1.6rem;
+    letter-spacing: 1px;
+}
+
+.text-accent {
+    color: var(--accent);
+    text-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
 }
 
 .nav-link {
-    color: #e6edf3 !important;
+    color: var(--text-primary) !important; /* Blanc par défaut */
+    font-weight: 500;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    opacity: 0.85;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--accent) !important;
+    opacity: 1;
+    transform: translateY(-1px);
+}
+
+.btn-contact {
+    border: 2px solid var(--accent); /* Bordure un peu plus épaisse */
+    border-radius: 50px;
+    padding: 0.5rem 1.5rem !important;
+    color: var(--accent) !important;
+    font-weight: 600;
+}
+.btn-contact:hover {
+    background: var(--accent-gradient);
+    border-color: transparent;
+    color: #fff !important;
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
+}
+
+/* === Hero Section === */
+.hero-section {
+    min-height: 100vh;
+    position: relative;
+    padding-top: 80px; /* Plus d'espace pour la navbar */
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.subtitle {
+    color: var(--accent);
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    background: rgba(56, 189, 248, 0.1);
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 20px;
+    border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.name-gradient {
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
+    font-size: 4.5rem;
+    line-height: 1.1;
+    filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.3));
+}
+
+.typing-text {
+    color: var(--text-primary);
+    font-weight: 300;
+    font-size: 2rem;
+    opacity: 0.9;
+}
+
+/* Boutons Hero */
+.btn-lg {
+    padding: 12px 30px;
+    font-weight: 600;
+    transition: transform 0.2s;
+}
+.btn-primary {
+    background: var(--accent-gradient);
+    border: none;
+}
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(56, 189, 248, 0.4);
+}
+.btn-outline-light:hover {
+    background: rgba(255,255,255,0.1);
+    transform: translateY(-3px);
+}
+
+/* Responsive Text sizes */
+@media (max-width: 768px) {
+    .name-gradient { font-size: 3rem; }
+    .typing-text { font-size: 1.5rem; }
+    .hero-section { padding-top: 60px; min-height: 90vh; }
+    .subtitle { font-size: 0.9rem; letter-spacing: 2px; }
+}
+
+/* Formes floues en arrière-plan (Blobs) */
+.shape {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.5; /* Plus visible */
+    z-index: -1;
+    animation: pulseShape 10s infinite alternate;
+}
+@keyframes pulseShape {
+    0% { transform: scale(1); opacity: 0.4; }
+    100% { transform: scale(1.1); opacity: 0.6; }
+}
+
+.shape-1 {
+    width: 350px; height: 350px;
+    background: #38bdf8;
+    top: 15%; left: -80px;
+}
+.shape-2 {
+    width: 450px; height: 450px;
+    background: #a855f7; /* Violet */
+    bottom: 15%; right: -120px;
+}
+
+/* === Section Titles === */
+.section-title {
+    font-weight: 800;
+    margin-bottom: 2.5rem;
+    position: relative;
+    display: inline-block;
+    font-size: 2.5rem;
+}
+.section-title::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 5px;
+    background: var(--accent-gradient);
+    margin-top: 10px;
+    border-radius: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* === Cards Projets (Glassmorphism Amélioré) === */
+.project-card {
+    background: linear-gradient(145deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.8));
+    border: var(--card-border);
+    backdrop-filter: blur(12px);
+    border-radius: 20px; /* Coins plus ronds */
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    position: relative;
+    height: 100%;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    border-color: rgba(56, 189, 248, 0.5);
+}
+
+.highlight-card {
+    border: 1px solid rgba(255, 193, 7, 0.4);
+    background: linear-gradient(145deg, rgba(255, 193, 7, 0.1), rgba(30, 41, 59, 0.8));
+}
+
+.card-title {
+    color: #fff;
+    font-weight: 700;
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
+}
+
+.text-light-muted {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.icon-box {
+    width: 60px; height: 60px;
+    background: rgba(56, 189, 248, 0.1);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: var(--accent);
+    margin-bottom: 1.2rem;
+    border: 1px solid rgba(56, 189, 248, 0.2);
+}
+
+.tags {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.badge-tech {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--accent);
+    padding: 6px 14px;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    border: 1px solid rgba(56, 189, 248, 0.3);
     font-weight: 500;
 }
 
-.nav-link:hover {
-    color: #58a6ff !important;
+/* === Skills (Compétences) Dynamiques === */
+
+/* 1. Animation de flottement (Lévitation) */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
 }
 
-/* Rendre le toggler plus visible si besoin */
-.navbar-toggler {
-    border-color: rgba(255,255,255,0.12);
-    z-index: 1130; /* plus haut pour être cliquable */
-}
-
-/* Assure que l'icône du toggler soit visible même si les variables bootstrap différent */
-.navbar-dark .navbar-toggler-icon {
-    /* fallback : on dessine trois barres via background-image multi-gradient */
-    background-image: linear-gradient(#fff, #fff), linear-gradient(#fff, #fff), linear-gradient(#fff, #fff);
-    background-size: 22px 2px, 22px 2px, 22px 2px;
-    background-position: center calc(50% - 8px), center 50%, center calc(50% + 8px);
-    background-repeat: no-repeat;
-    width: 30px;
-    height: 22px;
-    display: inline-block;
-}
-
-/* retire l'ancien fallback basé sur pseudo-éléments si présent */
-.navbar-dark .navbar-toggler-icon::before,
-.navbar-dark .navbar-toggler-icon::after,
-.navbar-dark .navbar-toggler-icon span {
-    display: none;
-}
-
-/* Fond du collapse en mobile pour garantir lisibilité */
-@media (max-width: 991.98px) {
-    .navbar-collapse {
-        background: rgba(13,17,23,0.96);
-        padding: 12px 16px;
-        border-radius: 6px;
-    }
-    .navbar-nav .nav-link {
-        color: #e6edf3 !important;
-        padding: 10px 8px;
-    }
-}
-
-/* Comportement forcé du collapse en mobile pour garantir visibilité et clics */
-@media (max-width: 991.98px) {
-    /* NE PAS forcer display:none ici — laisser Bootstrap gérer l'état par JS */
-    /* quand le collapse est ouvert, on le positionne en absolute sous la navbar pour qu'il soit visible */
-    .navbar-collapse.collapse.show {
-        display: block !important;
-        position: absolute;
-        top: 56px; /* hauteur approximative de la navbar */
-        right: 10px;
-        left: 10px;
-        background: rgba(13,17,23,0.98);
-        padding: 12px 16px;
-        border-radius: 8px;
-        box-shadow: 0 12px 30px rgba(2,6,23,0.6);
-        z-index: 1120; /* au-dessus du reste */
-    }
-    /* empile verticalement les éléments du menu (colonne) */
-    .navbar-nav {
-        display: flex;
-        flex-direction: column;
-    }
-    .navbar-nav .nav-item {
-        margin-bottom: 6px;
-    }
-}
-
-/* Support pour l'état de transition de Bootstrap : rendre le collapse visible pendant l'animation */
-.navbar-collapse.collapsing {
-    display: block !important;
-    position: absolute;
-    top: 56px;
-    left: 10px;
-    right: 10px;
-    background: rgba(13,17,23,0.98);
-    padding: 12px 16px;
-    border-radius: 8px;
-    box-shadow: 0 12px 30px rgba(2,6,23,0.6);
-    z-index: 1120; /* au-dessus du reste */
-}
-
-/* Assure que la version finale (show) est bien positionnée et cliquable */
-.navbar-collapse.collapse.show {
-    display: block !important;
-    position: absolute;
-    top: 56px;
-    left: 10px;
-    right: 10px;
-    background: rgba(13,17,23,0.98);
-    padding: 12px 16px;
-    border-radius: 8px;
-    box-shadow: 0 12px 30px rgba(2,6,23,0.6);
-    z-index: 1120; /* au-dessus du reste */
-}
-
-/* Assure que les liens du collapse soient cliquables */
-.navbar-collapse .nav-link {
-    pointer-events: auto;
-}
-
-/* retire le z-index sur .navbar .container (inutile) */
-.navbar .container {
-    position: relative;
-}
-
-/* s'assurer que le collapse est au-dessus des sections */
-.navbar-collapse {
-    z-index: 1115;
-}
-
-/* Liens du menu (desktop & burger) : changement de couleur + soulignement au hover/focus */
-.navbar-nav .nav-link {
-    transition: color 160ms ease, text-decoration-color 160ms ease, text-shadow 180ms ease;
-    text-decoration: none;
-    text-underline-offset: 4px;
-}
-
-.navbar-nav .nav-link:hover,
-.navbar-nav .nav-link:focus {
-    color: #9fe0ff !important; /* couleur d'accent au survol */
-    text-decoration: underline !important;
-    text-shadow: 0 2px 6px rgba(0,0,0,0.45);
-}
-
-/* Plus précis pour le menu collapse (burger) quand il est ouvert */
-.navbar-collapse .nav-link {
-    color: #e6edf3 !important;
-}
-.navbar-collapse .nav-link:hover,
-.navbar-collapse .nav-link:focus {
-    color: #9fe0ff !important;
-    text-decoration: underline !important;
-}
-
-/* === Header === */
-header {
-    /* animated gradient background */
-    background: linear-gradient(120deg, #6a11cb 0%, #2575fc 33%, #00c6ff 66%, #6a11cb 100%);
-    background-size: 300% 300%;
-    animation: gradientShift 8s ease infinite;
-    color: #ffffff; /* texte en blanc par défaut */
+.skill-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    padding: 1.5rem;
     text-align: center;
-    padding: 120px 20px 100px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Effet rebond fluide */
+    cursor: default;
+    position: relative;
+    overflow: hidden;
 }
 
-header h1 {
-    font-size: 2.8rem;
-    font-weight: 700;
-    color: #ffffff; /* assurer blanc */
-    transition: color 220ms ease, text-shadow 220ms ease;
+/* L'icône s'anime toute seule */
+.skill-icon {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    display: block;
+
+    /* Couleur par défaut : Dégradé du thème */
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    /* Animation de flottement continue */
+    animation: float 3s ease-in-out infinite;
+    transition: all 0.3s ease;
+    filter: drop-shadow(0 0 0 rgba(0,0,0,0)); /* Prêt pour le glow */
 }
 
-header p {
+/* Décalage des animations pour ne pas qu'elles bougent toutes en même temps (Effet naturel) */
+.col-lg-2:nth-child(odd) .skill-icon { animation-delay: 0s; }
+.col-lg-2:nth-child(even) .skill-icon { animation-delay: 1.5s; }
+
+
+/* === EFFETS AU SURVOL (HOVER) === */
+
+.skill-card:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: translateY(-10px) scale(1.05); /* Monte et grossit */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+.skill-card:hover .skill-icon {
+    animation-play-state: paused; /* Pause le flottement pour focus */
+    -webkit-text-fill-color: initial; /* Réactive la couleur native */
+    background: none; /* Enlève le dégradé */
+    transform: scale(1.1) rotate(5deg); /* Petit pop 3D */
+}
+
+/* === Couleurs Officielles des marques (Apparaissent au survol) === */
+
+/* Java - Tasse Bleue et TOUTE la fumée Rouge */
+.skill-card:hover .fa-java {
+    color: transparent;
+    /* On abaisse la limite à 50% pour être sûr de capturer toute la hauteur de la fumée */
+    /* Bleu (#5382a1) en bas, Rouge vif (#ff3333) en haut */
+    background: linear-gradient(to top, #5382a1 0%, #5382a1 50%, #fa7676 50%, #f46161 100%);
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    /* Double lueur : bleue en bas, rouge en haut pour l'effet "néon" */
+    filter: drop-shadow(0 5px 15px rgba(83, 130, 161, 0.5)) drop-shadow(0 -8px 15px rgba(255, 51, 51, 0.6));
+
+    -webkit-text-fill-color: transparent;
+}
+
+/* PHP - Violet/Bleu */
+.skill-card:hover .fa-php {
+    color: #777bb3;
+    filter: drop-shadow(0 0 15px rgba(119, 123, 179, 0.6));
+}
+
+/* Python - Bleu/Jaune (On prend le bleu dominant) */
+.skill-card:hover .fa-python {
+    color: #3776ab;
+    filter: drop-shadow(0 0 15px rgba(55, 118, 171, 0.6));
+}
+
+/* SQL (Database) - Gris/Bleu */
+.skill-card:hover .fa-database {
+    color: #00758f;
+    filter: drop-shadow(0 0 15px rgba(0, 117, 143, 0.6));
+}
+
+/* JavaScript - Jaune */
+.skill-card:hover .fa-js {
+    color: #f7df1e;
+    filter: drop-shadow(0 0 15px rgba(247, 223, 30, 0.6));
+}
+
+/* HTML5 - Orange */
+.skill-card:hover .fa-html5 {
+    color: #e34c26;
+    filter: drop-shadow(0 0 15px rgba(227, 76, 38, 0.6));
+}
+
+/* CSS3 - Bleu */
+.skill-card:hover .fa-css3-alt {
+    color: #264de4;
+    filter: drop-shadow(0 0 15px rgba(38, 77, 228, 0.6));
+}
+
+/* Docker - Bleu Baleine */
+.skill-card:hover .fa-docker {
+    color: #2496ed;
+    filter: drop-shadow(0 0 15px rgba(36, 150, 237, 0.6));
+}
+
+/* Git - Rouge/Orange */
+.skill-card:hover .fa-git-alt {
+    color: #f05032;
+    filter: drop-shadow(0 0 15px rgba(240, 80, 50, 0.6));
+}
+
+/* GitHub - Blanc (sur fond sombre) */
+.skill-card:hover .fa-github {
+    color: #ffffff;
+    filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.5));
+}
+/* === Contact & Footer === */
+.glass-panel {
+    background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+    border: var(--card-border);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+}
+
+.contact-pill {
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 24px;
+    border-radius: 50px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.contact-pill:hover {
+    background: var(--accent);
+    box-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
+    transform: scale(1.05);
+}
+
+/* === Contact Form & Socials === */
+
+.icon-circle {
+    width: 45px; height: 45px;
+    background: rgba(56, 189, 248, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
     font-size: 1.2rem;
-    opacity: 0.9;
-    color: #ffffff; /* assurer blanc */
-    transition: color 220ms ease, opacity 220ms ease;
+    border: 1px solid rgba(56, 189, 248, 0.2);
 }
 
-/* Hover sur l'en-tête : texte reste blanc mais on ajoute une subtille ombre pour effet */
-header:hover h1, header:focus-within h1 {
-    color: #ffffff;
-    text-shadow: 0 6px 20px rgba(0,0,0,0.45);
+.contact-link {
+    transition: transform 0.3s ease;
+}
+.contact-link:hover {
+    transform: translateX(5px);
+    color: var(--accent) !important;
+}
+.contact-link:hover .icon-circle {
+    background: var(--accent);
+    color: #fff;
 }
 
-header:hover p, header:focus-within p {
-    color: #ffffff;
+/* Boutons Sociaux Ronds */
+.social-btn {
+    width: 55px; height: 55px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-decoration: none;
+}
+
+.social-btn:hover {
+    background: var(--accent-gradient);
+    transform: translateY(-5px) scale(1.1);
+    border-color: transparent;
+    box-shadow: 0 10px 20px rgba(56, 189, 248, 0.4);
+    color: #fff;
+}
+
+/* Inputs Glassmorphism */
+.glass-input {
+    background: rgba(15, 23, 42, 0.6) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: #fff !important;
+    backdrop-filter: blur(5px);
+    border-radius: 12px !important;
+}
+
+.glass-input:focus {
+    background: rgba(15, 23, 42, 0.8) !important;
+    border-color: var(--accent) !important;
+    box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.15) !important;
+    color: #fff !important;
+}
+
+/* Couleur des labels flottants */
+.form-floating > label {
+    color: #94a3b8 !important;
+}
+.form-floating > .form-control:focus ~ label,
+.form-floating > .form-control:not(:placeholder-shown) ~ label {
+    color: var(--accent) !important;
     opacity: 1;
 }
 
-/* Animation keyframes pour le gradient */
-@keyframes gradientShift {
-    0% { background-position: 0 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0 50%; }
+/* Placeholder fix color */
+.glass-input::placeholder { color: transparent; }
+
+/* Footer */
+.glass-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    background: #0b1120;
 }
 
-/* === Sections === */
+/* Toast Notification (Flash Message) */
+.toast-notification {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-left: 4px solid var(--accent);
+    color: #fff;
+    padding: 16px 24px;
+    border-radius: 12px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+    transform: translateY(100px);
+    opacity: 0;
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    z-index: 10000;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.toast-notification.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.toast-notification.success { border-left-color: #10b981; }
+.toast-notification.error { border-left-color: #ef4444; }
+
+.toast-icon { font-size: 1.2rem; }
+.toast-success-icon { color: #10b981; }
+.toast-error-icon { color: #ef4444; }
+
+/* Animations d'apparition */
 section {
     opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-    padding: 80px 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
 }
-
 section.visible {
     opacity: 1;
     transform: translateY(0);
 }
-
-section h2 {
-    color: #58a6ff;
-    text-align: center;
-    margin-bottom: 40px;
-    font-weight: 600;
-}
-
-/* Assure que l'ancre #projects ne soit pas cachée par la navbar fixe */
-#projects {
-    scroll-margin-top: 120px; /* ajuster si la hauteur de la navbar change */
-}
-/* même offset pour la section Stage */
-#stage-1ere-annee { scroll-margin-top: 120px; }
-
-/* === Cards projets === */
-/* Perspective sur le conteneur pour renforcer l'effet 3D */
-#projects .row, #stage-1ere-annee .row {
-    perspective: 1200px;
-    -webkit-perspective: 1200px;
-}
-
-.card {
-    background-color: #161b22;
-    border: 1px solid #30363d;
-    /* animation améliorée */
-    transition: transform 260ms cubic-bezier(.2,.9,.3,1), box-shadow 260ms cubic-bezier(.2,.9,.3,1), filter 260ms ease, border-color 260ms ease;
-    will-change: transform, box-shadow, filter;
-    transform-style: preserve-3d;
-    backface-visibility: hidden;
-    transform-origin: center center;
-    position: relative; /* pour le halo pseudo-élément */
-    color: #ffffff; /* texte blanc par défaut dans la card */
-}
-
-/* Hover/focus fallback (CSS) : plus marqué + applique le gradient statique du header */
-.card:hover,
-
-/* s'applique aussi quand on survole le lien parent */
-a:hover .card,
-a:focus .card {
-    transform: translateY(-16px) scale(1.08);
-    box-shadow: 0 72px 140px rgba(88, 166, 255, 0.28);
-    filter: saturate(1.08) contrast(1.04);
-    border-color: rgba(126,196,255,0.12);
-    /* appliquer le gradient statique du header */
-    background: linear-gradient(120deg, #6a11cb 0%, #2575fc 33%, #00c6ff 66%, #6a11cb 100%);
-    background-size: cover;
-    color: #ffffff;
-}
-
-/* Accessible : indique que la carte est cliquable */
-#projects .card[role="button"],
-#projects a.text-reset .card {
-    cursor: pointer;
-}
-
-.card-title {
-    color: #58a6ff; /* titre en bleu par défaut (comme avant) */
-    font-weight: 600;
-}
-
-/* Texte des cartes en blanc par défaut */
-.card .card-body,
-.card .card-text {
-    color: #ffffff;
-}
-
-/* Halo / aura autour de la carte pour la rendre plus visible */
-.card::before {
-    content: '';
-    position: absolute;
-    left: -6px;
-    right: -6px;
-    top: -6px;
-    bottom: -6px;
-    border-radius: 8px;
-    background: radial-gradient(closest-side, rgba(126,196,255,0.06), rgba(126,196,255,0));
-    opacity: 0;
-    transition: opacity 260ms ease, transform 260ms ease;
-    pointer-events: none;
-    z-index: 0;
-    transform: scale(0.98);
-}
-.card:hover::before,
-a:hover .card::before,
-.card:focus-within::before {
-    opacity: 1;
-    transform: scale(1.02);
-}
-
-/* Pop-out interne pour renforcer l'effet 3D */
-.card .card-body {
-    transition: transform 260ms cubic-bezier(.2,.9,.3,1);
-    transform-style: preserve-3d;
-    will-change: transform;
-    position: relative; /* au-dessus du halo */
-    z-index: 1;
-}
-.card:hover .card-body,
-a:hover .card .card-body {
-    transform: translateZ(36px);
-}
-
-/* Accent de couleur sur le titre au survol pour plus de contraste */
-.card:hover .card-title,
-a:hover .card .card-title {
-    color: #9fe0ff;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.45);
-}
-
-/* Focus-visible pour accessibilité clavier */
-.card:focus-visible {
-    outline: 3px solid rgba(126,196,255,0.18);
-    outline-offset: 6px;
-}
-
-/* === Classes pour comportement au clic === */
-/* Etat activé (même style que :hover) */
-.card.active {
-    transform: translateY(-16px) scale(1.08);
-    box-shadow: 0 72px 140px rgba(88, 166, 255, 0.28);
-    filter: saturate(1.08) contrast(1.04);
-    border-color: rgba(126,196,255,0.12);
-    background: linear-gradient(120deg, #6a11cb 0%, #2575fc 33%, #00c6ff 66%, #6a11cb 100%);
-    background-size: cover;
-    color: #ffffff;
-}
-
-.card.active::before {
-    opacity: 1;
-    transform: scale(1.02);
-}
-
-.card.active .card-body {
-    transform: translateZ(36px);
-}
-
-.card.active .card-title {
-    color: #9fe0ff;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.45);
-}
-
-/* Etat inactif lorsque la souris sort après un clic : texte en noir */
-.card.inactive .card-title {
-    color: #000000 !important;
-}
-.card.inactive .card-text,
-.card.inactive .card-body {
-    color: #000000 !important;
-}
-
-/* Déplacer la limite de largeur du .lead depuis l'inline-style */
-.lead.mx-auto {
-    max-width: 700px;
-}
-
-/* Styles pour l'image GitHub */
-.contact-link img {
-    width: 26px;
-    height: 26px;
-    margin-right: 10px;
-    border-radius: 50%;
-    background-color: #0d1117;
-    padding: 2px;
-}
-
-/* (Galerie retirée de la page principale) */
