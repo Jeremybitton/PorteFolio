@@ -1,115 +1,94 @@
-/* Styles pour stage-placo.html */
-:root {
-    --text-dark: #1e293b; /* Bleu nuit pour le texte */
-    --accent-blue: #2563eb; /* Bleu roi plus vif */
-    --accent-soft: #dbeafe; /* Fond bleu très clair */
+/* Styles pour stage-placo.html (Système de Cards Compactes) */
+
+.bg-dark-soft {
+    background: rgba(15, 23, 42, 0.4);
 }
 
-body {
-    font-family: 'Poppins', sans-serif;
-    /* Fond clair mais pas blanc pur pour moins fatiguer les yeux */
-    background: #f8fafc; 
-    color: var(--text-dark);
+.cursor-zoom {
+    cursor: zoom-in;
+    transition: transform 0.2s;
+}
+.cursor-zoom:hover {
+    transform: scale(1.02);
 }
 
-.site-frame .card {
-    background-color: #ffffff;
-    border: 1px solid #e2e8f0;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05); /* Ombre douce */
-    border-radius: 12px;
-}
-
-/* Navbar: garder le style sombre du portfolio principal pour la cohérence */
-.navbar {
-    background: #0f172a; 
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-.navbar .navbar-brand { color: #fff !important; }
-
-/* Hero Section Spécifique */
-.page-hero-stage {
-    background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-    padding: 110px 20px 60px;
-    text-align: center;
-    border-bottom: 1px solid #bfdbfe;
-    margin-bottom: -40px; /* Chevauchement avec le contenu */
-}
-
-.page-hero-stage h1 {
-    font-size: 2.5rem;
-    font-weight: 800;
-    color: #1e40af;
-    letter-spacing: -1px;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.05);
-}
-
-/* Ajustements Contenu */
-.main-content {
-    position: relative;
-    z-index: 2;
-}
-
-/* Header Card (Logo + Info) */
-.header-card {
-    border-left: 5px solid #2563eb !important;
-}
-
+/* Titre de section plus compact */
 .section-title {
-    color: #1e40af;
+    color: var(--accent);
     font-weight: 700;
-    font-size: 1.75rem;
-    margin-bottom: 1.2rem;
-    border-bottom: 2px solid #e2e8f0;
-    padding-bottom: 0.5rem;
+    font-size: 1.3rem !important; /* Taille réduite */
+    margin-bottom: 1rem !important;
+    display: inline-block;
+    position: relative;
+}
+.section-title::after {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 2px;
+    background: var(--accent-gradient);
+    margin-top: 4px;
+    border-radius: 2px;
 }
 
-h3 { color: #334155; font-weight: 600; font-size: 1.4rem; margin-top: 2rem; }
-h4 { color: #475569; font-weight: 600; font-size: 1.1rem; margin-top: 1.5rem; }
-
-ul li {
-    margin-bottom: 0.5rem;
-    color: #334155;
+/* Réduction globale du padding des cartes pour ce template */
+.project-card {
+    padding: 1.25rem !important;
+    margin-bottom: 1rem !important;
+    border-radius: 12px !important;
+    border-left: 3px solid rgba(56, 189, 248, 0.3) !important;
 }
 
-/* Badge Type - Plus visible */
-.badge-type {
-    background: linear-gradient(135deg, #2563eb, #3b82f6);
-    color: white;
-    padding: 8px 16px;
+/* Typographie plus dense */
+p, li, figcaption {
+    color: var(--text-muted) !important;
+    font-size: 0.95rem; /* Un peu plus petit */
+    line-height: 1.5;
+}
+
+p.lead {
+    font-size: 1.05rem !important;
+}
+
+h1, h2, h3, h4, .text-light {
+    color: #fff !important;
+}
+
+/* Images moins envahissantes */
+.figure-img {
+    max-height: 300px !important; /* Réduit la hauteur des schémas */
+    width: auto;
+}
+
+.badge-tech {
+    background: rgba(56, 189, 248, 0.1);
+    color: var(--accent);
+    padding: 4px 12px;
     border-radius: 50px;
+    font-size: 0.8rem;
+    border: 1px solid rgba(56, 189, 248, 0.3);
     font-weight: 600;
-    font-size: 0.9rem;
-    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
 }
 
-/* Responsive améliorations */
-@media (max-width: 768px) {
-    .page-hero-stage { padding-top: 90px; padding-bottom: 40px; }
-    .page-hero-stage h1 { font-size: 1.8rem; }
-    
-    .header-card .row {
-        gap: 15px;
-    }
-    
-    .logo-img { max-height: 80px; }
-    
-    /* Bouton retour plus facile à cliquer sur mobile */
-    .card-back-btn {
-        width: 100%;
-        display: block;
-        text-align: center;
-        margin-top: 10px;
-        background: #f1f5f9;
-        color: #334155;
-        border: 1px solid #cbd5e1;
-    }
+/* Ajustement KPI (résultats) */
+.display-6 {
+    font-size: 2rem !important;
 }
 
-/* KPI Highlights */
-.kpi {
-    color: #dc2626; /* Rouge vif pour le contraste */
-    font-weight: 800;
-    background: #fef2f2;
-    padding: 2px 8px;
-    border-radius: 4px;
+/* Liste Interactive (Accordéon) */
+.mission-trigger {
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+.mission-trigger:hover {
+    color: #fff !important;
+}
+.mission-icon {
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: inline-block;
+}
+/* Rotation quand ouvert (géré par Bootstrap via aria-expanded) */
+.mission-trigger[aria-expanded="true"] .mission-icon {
+    transform: rotate(90deg);
+    color: #fff; /* L'icône devient blanche pour marquer l'état actif */
 }
