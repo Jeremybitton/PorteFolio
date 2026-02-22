@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Projet CIS - Automatisation & Sécurité</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/stage-placo.css"> <!-- We reuse the same stylesheet for consistency -->
+    <link rel="stylesheet" href="css/gallery.css">
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top glass-nav">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <span class="text-accent">&lt;</span>JB<span class="text-accent">/&gt;</span>
+            </a>
+            <div class="d-flex align-items-center gap-3">
+                <a class="btn btn-outline-light rounded-pill btn-sm px-3" href="index.html#experiences">
+                    <i class="fa-solid fa-arrow-left me-2"></i>Retour
+                </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Changer de thème">
+                    <i class="fa-solid fa-sun"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="site-frame">
+
+        <header class="page-hero page-hero-cis d-flex align-items-center justify-content-center text-center">
+            <div class="container">
+                <h1 class="display-3 fw-bold name-gradient mb-2">Automatisation CIS</h1>
+                <p class="typing-text fs-4">Audit de Sécurité & Conformité</p>
+            </div>
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+        </header>
+
+        <div class="container main-content position-relative z-2">
+
+            <!-- Header Card : Compacte -->
+            <div class="project-card p-3 mb-4">
+                <div class="row align-items-center gy-3">
+                    <div class="col-md-4 text-center text-md-start">
+                        <div class="p-2 rounded-3 d-inline-block shadow-sm" style="background: rgba(255,255,255,0.1);">
+                            <i class="fa-solid fa-shield-halved fa-3x text-white"></i>
+                        </div>
+                    </div>
+                    <div class="col-md-5 text-center text-md-start">
+                        <span class="badge-tech mb-1 d-inline-block">Stage chez Allperf — 2026</span>
+                        <p class="text-light-muted small mb-0"><i class="fa-regular fa-calendar-days me-2"></i>Du 5
+                            janvier au 6 février 2026</p>
+                    </div>
+                    <div class="col-md-3 text-center text-md-end">
+                    </div>
+                </div>
+            </div>
+
+            <div class="row gy-4">
+                <!-- Main Content Column -->
+                <div class="col-lg-8">
+
+                    <!-- À Propos de Allperf -->
+                    <div class="project-card mb-4">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="p-2 rounded bg-white me-3"
+                                style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
+                                <img src="images/allperf_logo.svg" alt="Logo Allperf" class="img-fluid">
+                            </div>
+                            <div>
+                                <h2 class="section-title mb-0">Allperf</h2>
+                                <p class="text-accent small mb-0 fw-bold">Business Intelligence & Dématérialisation</p>
+                            </div>
+                        </div>
+
+                        <p class="text-light-muted mb-3">
+                            Société d'informatique issue de la <strong>recherche électronique et informatique</strong>,
+                            Allperf est un acteur clé dans l'édition de logiciels de dématérialisation.
+                            Membre de la <strong>FNTC</strong> (Fédération Nationale des Tiers de Confiance), elle
+                            propose des solutions SaaS sécurisées pour la signature électronique et l'hébergement de
+                            documents légaux, en stricte conformité avec les directives européennes.
+                        </p>
+
+                        <div class="row g-2 mt-2">
+                            <div class="col-sm-4">
+                                <div class="p-2 rounded border border-secondary bg-dark-soft text-center">
+                                    <i class="fa-solid fa-file-signature text-primary mb-1"></i>
+                                    <p class="small text-white mb-0 fw-bold">Signature Élec.</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="p-2 rounded border border-secondary bg-dark-soft text-center">
+                                    <i class="fa-solid fa-server text-success mb-1"></i>
+                                    <p class="small text-white mb-0 fw-bold">Solutions SaaS</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="p-2 rounded border border-secondary bg-dark-soft text-center">
+                                    <i class="fa-solid fa-shield-halved text-warning mb-1"></i>
+                                    <p class="small text-white mb-0 fw-bold">Tiers de Confiance</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- À Propos du Projet -->
+                    <div class="project-card mb-4">
+                        <span class="text-uppercase text-accent fw-bold small mb-2 d-block">Contexte</span>
+                        <h2 class="section-title mb-3"><i class="fa-solid fa-laptop-code me-2"></i>Le Projet</h2>
+                        <div class="row g-4 align-items-center">
+                            <div class="col-md-12">
+                                <p class="lead mb-3">
+                                    Développement d'un outil professionnel d'<strong>extraction et de
+                                        structuration</strong> des règles de sécurité CIS (Center for Internet Security)
+                                    à partir de fichiers PDF.
+                                </p>
+                                <p class="text-light-muted">
+                                    L'objectif est d'automatiser la comparaison entre différentes versions de benchmarks
+                                    (ex: Oracle Linux 9 vs 10) et de générer des rapports d'audit exploitables pour les
+                                    équipes sécurité.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fonctionnalités Clés -->
+                    <div class="project-card mb-4">
+                        <h2 class="section-title mb-3"><i class="fa-solid fa-list-check me-2"></i>Fonctionnalités Clés
+                        </h2>
+
+                        <div class="row g-3">
+                            <!-- Feature 1 -->
+                            <div class="col-md-6">
+                                <div class="p-3 rounded h-100 border border-secondary"
+                                    style="background: rgba(255, 255, 255, 0.03);">
+                                    <h5 class="text-info fw-bold mb-3"><i
+                                            class="fa-solid fa-file-pdf me-2"></i>Extraction PDF</h5>
+                                    <p class="text-light-muted small mb-0">
+                                        Analyse intelligente de fichiers PDF complexes pour extraire les règles de
+                                        sécurité, leur sévérité, et les descriptions techniques.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Feature 2 -->
+                            <div class="col-md-6">
+                                <div class="p-3 rounded h-100 border border-secondary"
+                                    style="background: rgba(255, 255, 255, 0.03);">
+                                    <h5 class="text-warning fw-bold mb-3"><i
+                                            class="fa-solid fa-code-compare me-2"></i>Comparateur</h5>
+                                    <p class="text-light-muted small mb-0">
+                                        Algorithme de comparaison ("Diff") pour identifier les ajouts, suppressions et
+                                        modifications entre deux versions de benchmarks.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Feature 3 -->
+                            <div class="col-md-6">
+                                <div class="p-3 rounded h-100 border border-secondary"
+                                    style="background: rgba(255, 255, 255, 0.03);">
+                                    <h5 class="text-success fw-bold mb-3"><i
+                                            class="fa-solid fa-file-excel me-2"></i>Rapports</h5>
+                                    <p class="text-light-muted small mb-0">
+                                        Génération automatique de fichiers JSON structurés et de tableaux Excel formatés
+                                        pour les auditeurs.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Feature 4 -->
+                            <div class="col-md-6">
+                                <div class="p-3 rounded h-100 border border-secondary"
+                                    style="background: rgba(255, 255, 255, 0.03);">
+                                    <h5 class="text-danger fw-bold mb-3"><i class="fa-solid fa-rotate me-2"></i>Mise à
+                                        jour</h5>
+                                    <p class="text-light-muted small mb-0">
+                                        Module de mise à jour dynamique pour appliquer les changements et remplacer les
+                                        variables (ex: années) dans les documents finaux.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Interface Streamlit -->
+                    <div class="project-card mb-4">
+                        <span class="text-uppercase text-accent fw-bold small mb-2 d-block">Interface Utilisateur</span>
+                        <h2 class="section-title mb-3"><i class="fa-solid fa-desktop me-2"></i>Dashboard Streamlit</h2>
+                        <p class="lead mb-3">
+                            Une interface web interactive développée avec <strong>Streamlit</strong> pour faciliter
+                            l'usage de l'outil par les équipes non-techniques.
+                        </p>
+
+                        <div class="text-center bg-dark-soft p-2 rounded mb-3">
+                            <!-- Placeholder for Dashboard Image -->
+                            <img src="images/cis_dashboard_mockup.png"
+                                class="img-fluid rounded border border-secondary shadow-sm gallery-img"
+                                alt="Interface Streamlit" style="max-height: 400px; width: 100%; object-fit: cover;">
+                        </div>
+                    </div>
+
+                    <!-- Stack Technique Détaillée -->
+                    <div class="project-card mb-4">
+                        <h2 class="section-title mb-3"><i class="fa-solid fa-layer-group me-2"></i>Architecture
+                            Technique</h2>
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <div class="p-3 rounded bg-dark-soft border border-secondary text-center h-100">
+                                    <i class="fa-brands fa-python fa-2x text-warning mb-2"></i>
+                                    <h6 class="text-white">Python</h6>
+                                    <p class="small text-light-muted mb-0">Langage principal (Backend)</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 rounded bg-dark-soft border border-secondary text-center h-100">
+                                    <img src="images/Pandas.png" alt="Pandas" width="32" height="32" class="mb-2"
+                                        style="filter: invert(1);">
+                                    <h6 class="text-white">Pandas</h6>
+                                    <p class="small text-light-muted mb-0">Manipulation de données</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="p-3 rounded bg-dark-soft border border-secondary text-center h-100">
+                                    <img src="images/Streamlit.svg" alt="Streamlit" width="32" height="32" class="mb-2">
+                                    <h6 class="text-white">Streamlit</h6>
+                                    <p class="small text-light-muted mb-0">Frontend Interactif</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Version Flask -->
+                    <div class="project-card mb-4" style="border-left: 4px solid #7952b3;">
+                        <h2 class="section-title mb-3"><i class="fa-solid fa-flask me-2"
+                                style="color: #7952b3;"></i>Version Alternative</h2>
+                        <div class="row align-items-center">
+                            <div class="col-md-8">
+                                <h5 class="fw-bold text-white mb-2">Variante Flask</h5>
+                                <p class="text-light-muted mb-0">
+                                    Une version allégée de l'outil a également été développée sous
+                                    <strong>Flask</strong>.
+                                    Elle offre une architecture plus flexible pour une intégration future via API REST
+                                    et une personnalisation poussée du frontend (HTML/CSS/JS).
+                                </p>
+                            </div>
+                            <div class="col-md-4 text-center">
+                                <span class="badge bg-dark border border-secondary text-light p-2 mt-3 mt-md-0">
+                                    <i class="fa-solid fa-code-branch me-2"></i>Backend API
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div> <!-- End of Main Content Column -->
+
+                <!-- Sidebar Info -->
+                <aside class="col-lg-4">
+                    <div class="sticky-top" style="top: 100px;">
+
+                        <!-- Fiche Technique -->
+                        <div class="project-card mb-4">
+                            <h4 class="h6 fw-bold mb-3 text-accent">Fiche technique</h4>
+
+                            <div class="mb-3">
+                                <p class="text-uppercase text-light-muted small fw-bold mb-1"
+                                    style="font-size: 0.7rem;">
+                                    Type de Projet</p>
+                                <p class="fw-bold mb-1 text-white small">Outil Interne / Automatisation</p>
+                                <span class="badge bg-secondary text-light border border-secondary"
+                                    style="font-size: 0.7rem;">Cybersécurité</span>
+                            </div>
+
+                            <div class="mb-3">
+                                <p class="text-uppercase text-light-muted small fw-bold mb-1"
+                                    style="font-size: 0.7rem;">Stack
+                                    Technique</p>
+                                <div class="d-flex flex-wrap gap-1">
+                                    <span class="badge-tech">Python 3.10+</span>
+                                    <span class="badge-tech">Streamlit</span>
+                                    <span class="badge-tech">Pandas</span>
+                                    <span class="badge-tech">Regex</span>
+                                </div>
+                            </div>
+
+                            <div class="mb-0">
+                                <p class="text-uppercase text-light-muted small fw-bold mb-1"
+                                    style="font-size: 0.7rem;">Points Clés</p>
+                                <ul class="list-unstyled mb-0 small text-light-muted" style="font-size: 0.8rem;">
+                                    <li class="mb-1"><i class="fa-solid fa-check text-accent me-2"></i>Parsing PDF
+                                    </li>
+                                    <li class="mb-1"><i class="fa-solid fa-check text-accent me-2"></i>Algorithme
+                                        Diff
+                                    </li>
+                                    <li class="mb-1"><i class="fa-solid fa-check text-accent me-2"></i>Export Excel
+                                    </li>
+                                    <li><i class="fa-solid fa-check text-accent me-2"></i>UI/UX Simple</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- CTA Question -->
+                        <div class="project-card text-center">
+                            <h4 class="h6 fw-bold text-white mb-2">Une question ?</h4>
+                            <a href="#contact-stage" class="btn btn-outline-light rounded-pill w-100 fw-bold btn-sm">
+                                Me contacter <i class="fa-solid fa-arrow-down ms-2"></i>
+                            </a>
+                        </div>
+
+                    </div>
+                </aside>
+            </div>
+
+            <!-- Spacer -->
+            <div style="height: 100px;"></div>
+
+            <!-- Section Contact (Moved to Bottom, Full Width) -->
+            <div class="row">
+                <div class="col-12">
+                    <div id="contact-stage" class="project-card text-center mb-5">
+                        <h2 class="section-title mb-4">Me Contacter</h2>
+                        <div class="row justify-content-center">
+                            <div class="col-lg-8">
+                                <form action="https://formspree.io/f/mqakovrz" method="POST" class="contact-form">
+                                    <div class="row g-3 text-start">
+                                        <div class="col-md-6">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control glass-input form-control-sm"
+                                                    id="prenom" name="prenom" placeholder="Prénom" required>
+                                                <label for="prenom">Prénom</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-floating">
+                                                <input type="text" class="form-control glass-input form-control-sm"
+                                                    id="nom" name="nom" placeholder="Nom" required>
+                                                <label for="nom">Nom</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-floating">
+                                                <input type="email" class="form-control glass-input form-control-sm"
+                                                    id="email" name="email" placeholder="Email" required>
+                                                <label for="email">Email</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-floating">
+                                                <textarea class="form-control glass-input form-control-sm" id="message"
+                                                    name="message" placeholder="Votre message" style="height: 150px"
+                                                    required></textarea>
+                                                <label for="message">Votre message</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 text-center mt-4">
+                                            <button type="submit"
+                                                class="btn btn-outline-light px-5 py-2 rounded-pill fw-bold">
+                                                Envoyer <i class="fa-solid fa-paper-plane ms-2"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/gallery.js"></script>
+</body>
+
+</html>

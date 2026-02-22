@@ -1,8 +1,45 @@
-// Script principal (déplacé depuis index.html)
-// Contient : revealOnScroll + gestion du menu collapse (fermeture au clic, hover/leave, scroll)
+// Script principal
+// Contient : revealOnScroll, gestion menu collapse, thème jour/nuit, formspree
 
 document.addEventListener('DOMContentLoaded', function () {
-    // revealOnScroll
+
+    // ═══════════════════════════════════════
+    //  THEME TOGGLE (Jour / Nuit)
+    // ═══════════════════════════════════════
+    const themeToggle = document.getElementById('themeToggle');
+    const html = document.documentElement;
+
+    // Load saved theme
+    const savedTheme = localStorage.getItem('portfolio-theme') || 'dark';
+    html.setAttribute('data-theme', savedTheme);
+    updateThemeIcon(savedTheme);
+
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            const current = html.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', next);
+            localStorage.setItem('portfolio-theme', next);
+            updateThemeIcon(next);
+        });
+    }
+
+    function updateThemeIcon(theme) {
+        if (!themeToggle) return;
+        const icon = themeToggle.querySelector('i');
+        if (!icon) return;
+        if (theme === 'dark') {
+            icon.className = 'fa-solid fa-sun';
+            themeToggle.setAttribute('aria-label', 'Passer en mode jour');
+        } else {
+            icon.className = 'fa-solid fa-moon';
+            themeToggle.setAttribute('aria-label', 'Passer en mode nuit');
+        }
+    }
+
+    // ═══════════════════════════════════════
+    //  REVEAL ON SCROLL
+    // ═══════════════════════════════════════
     const sections = document.querySelectorAll('section');
     const revealOnScroll = () => {
         const triggerBottom = window.innerHeight * 0.85;
@@ -11,21 +48,27 @@ document.addEventListener('DOMContentLoaded', function () {
             if (top < triggerBottom) section.classList.add('visible');
         });
     };
-    
-    // Navbar Scroll Effect
+
+    // ═══════════════════════════════════════
+    //  NAVBAR SCROLL EFFECT
+    // ═══════════════════════════════════════
     const navbar = document.querySelector('.navbar');
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            navbar.classList.add('navbar-scrolled');
-        } else {
-            navbar.classList.remove('navbar-scrolled');
+        if (navbar) {
+            if (window.scrollY > 50) {
+                navbar.classList.add('navbar-scrolled');
+            } else {
+                navbar.classList.remove('navbar-scrolled');
+            }
         }
         revealOnScroll();
     }, { passive: true });
-    
+
     revealOnScroll();
 
-    // Menu collapse behaviour
+    // ═══════════════════════════════════════
+    //  MENU COLLAPSE BEHAVIOUR
+    // ═══════════════════════════════════════
     (function () {
         const navLinks = document.querySelectorAll('#navbarNav .nav-link');
         const navbarCollapseEl = document.getElementById('navbarNav');
@@ -36,7 +79,6 @@ document.addEventListener('DOMContentLoaded', function () {
             link.addEventListener('click', (e) => {
                 const href = link.getAttribute('href');
 
-                // Mobile anchor handling: prevent default, close then smooth scroll
                 if (window.innerWidth < 992 && href && href.startsWith('#')) {
                     e.preventDefault();
                     if (window.bootstrap) {
@@ -53,7 +95,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     return;
                 }
 
-                // Otherwise close collapse if open
                 if (navbarCollapseEl.classList.contains('show') && window.bootstrap) {
                     const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapseEl) || new bootstrap.Collapse(navbarCollapseEl, { toggle: false });
                     bsCollapse.hide();
@@ -61,7 +102,6 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
 
-        // Auto-close when cursor goes below the menu area, plus other guards
         let collapseHideTimer = null;
         const COLLAPSE_HIDE_DELAY = 180;
 
@@ -94,7 +134,6 @@ document.addEventListener('DOMContentLoaded', function () {
         document.addEventListener('pointermove', handlePointer);
         document.addEventListener('mousemove', handlePointer);
 
-        // Click / touch outside to close
         document.addEventListener('click', (ev) => {
             if (!navbarCollapseEl.classList.contains('show')) return;
             const inside = navbarCollapseEl.contains(ev.target) || (navbarToggler && navbarToggler.contains(ev.target));
@@ -106,7 +145,6 @@ document.addEventListener('DOMContentLoaded', function () {
             if (!inside) hideCollapse();
         }, { passive: true });
 
-        // Close on scroll if the menu is moved out of view
         let lastRectBottom = 0;
         window.addEventListener('scroll', () => {
             if (!navbarCollapseEl.classList.contains('show')) return;
@@ -118,15 +156,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
     })();
 
-    // --- Formspree AJAX Submission & Toast ---
+    // ═══════════════════════════════════════
+    //  FORMSPREE AJAX SUBMISSION & TOAST
+    // ═══════════════════════════════════════
     const contactForm = document.querySelector('.contact-form');
     if (contactForm) {
-        contactForm.addEventListener('submit', async function(e) {
+        contactForm.addEventListener('submit', async function (e) {
             e.preventDefault();
             const btn = contactForm.querySelector('button[type="submit"]');
             const originalBtnText = btn.innerHTML;
 
-            // Loading state
             btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Envoi...';
             btn.disabled = true;
 
@@ -161,22 +200,20 @@ document.addEventListener('DOMContentLoaded', function () {
     function showToast(message, type = 'success') {
         const toast = document.createElement('div');
         toast.className = `toast-notification ${type}`;
-        
+
         const iconClass = type === 'success' ? 'fa-check-circle toast-success-icon' : 'fa-exclamation-circle toast-error-icon';
-        
+
         toast.innerHTML = `
             <i class="fa-solid ${iconClass} toast-icon"></i>
             <span>${message}</span>
         `;
-        
+
         document.body.appendChild(toast);
 
-        // Trigger animation
         requestAnimationFrame(() => {
             setTimeout(() => toast.classList.add('show'), 10);
         });
 
-        // Remove after 4 seconds
         setTimeout(() => {
             toast.classList.remove('show');
             setTimeout(() => toast.remove(), 500);

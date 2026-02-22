@@ -1,13 +1,18 @@
-/* Styles pour stage-placo.html (Système de Cards Compactes) */
+/* Styles pour stage-placo.html et stage-cis.html (Système de Cards Compactes) */
 
 .bg-dark-soft {
     background: rgba(15, 23, 42, 0.4);
+}
+
+[data-theme="light"] .bg-dark-soft {
+    background: rgba(241, 245, 249, 0.6);
 }
 
 .cursor-zoom {
     cursor: zoom-in;
     transition: transform 0.2s;
 }
+
 .cursor-zoom:hover {
     transform: scale(1.02);
 }
@@ -16,11 +21,12 @@
 .section-title {
     color: var(--accent);
     font-weight: 700;
-    font-size: 1.3rem !important; /* Taille réduite */
+    font-size: 1.3rem !important;
     margin-bottom: 1rem !important;
     display: inline-block;
     position: relative;
 }
+
 .section-title::after {
     content: '';
     display: block;
@@ -31,18 +37,20 @@
     border-radius: 2px;
 }
 
-/* Réduction globale du padding des cartes pour ce template */
+/* Réduction globale du padding des cartes */
 .project-card {
     padding: 1.25rem !important;
     margin-bottom: 1rem !important;
     border-radius: 12px !important;
-    border-left: 3px solid rgba(56, 189, 248, 0.3) !important;
+    border-left: 3px solid rgba(var(--accent-rgb), 0.3) !important;
 }
 
-/* Typographie plus dense */
-p, li, figcaption {
+/* Typographie */
+p,
+li,
+figcaption {
     color: var(--text-muted) !important;
-    font-size: 0.95rem; /* Un peu plus petit */
+    font-size: 0.95rem;
     line-height: 1.5;
 }
 
@@ -50,45 +58,119 @@ p.lead {
     font-size: 1.05rem !important;
 }
 
-h1, h2, h3, h4, .text-light {
-    color: #fff !important;
+h1, h2, h3, h4 {
+    color: var(--text-headings) !important;
 }
 
-/* Images moins envahissantes */
+[data-theme="light"] .text-white {
+    color: var(--text-headings) !important;
+}
+
+/* Images */
 .figure-img {
-    max-height: 300px !important; /* Réduit la hauteur des schémas */
+    max-height: 300px !important;
     width: auto;
 }
 
 .badge-tech {
-    background: rgba(56, 189, 248, 0.1);
+    background: var(--badge-bg);
     color: var(--accent);
     padding: 4px 12px;
     border-radius: 50px;
     font-size: 0.8rem;
-    border: 1px solid rgba(56, 189, 248, 0.3);
+    border: 1px solid rgba(var(--accent-rgb), 0.3);
     font-weight: 600;
 }
 
-/* Ajustement KPI (résultats) */
+/* KPI */
 .display-6 {
     font-size: 2rem !important;
 }
 
-/* Liste Interactive (Accordéon) */
+/* Accordéon */
 .mission-trigger {
     cursor: pointer;
     transition: color 0.2s ease;
 }
+
 .mission-trigger:hover {
-    color: #fff !important;
+    color: var(--text-headings) !important;
 }
+
 .mission-icon {
     transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     display: inline-block;
 }
-/* Rotation quand ouvert (géré par Bootstrap via aria-expanded) */
+
 .mission-trigger[aria-expanded="true"] .mission-icon {
     transform: rotate(90deg);
-    color: #fff; /* L'icône devient blanche pour marquer l'état actif */
+    color: var(--text-headings);
 }
+
+/* Icon boxes */
+.icon-box-base {
+    width: 100px;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    border-radius: 50%;
+}
+
+.icon-box-warning {
+    color: #ffc107;
+    background: radial-gradient(circle, rgba(255, 193, 7, 0.2) 0%, rgba(255, 193, 7, 0) 70%);
+    text-shadow: 0 0 25px rgba(255, 193, 7, 0.8);
+}
+
+.icon-box-primary {
+    color: #0d6efd;
+    background: radial-gradient(circle, rgba(13, 110, 253, 0.2) 0%, rgba(13, 110, 253, 0) 70%);
+    text-shadow: 0 0 25px rgba(13, 110, 253, 0.8);
+}
+
+.icon-box-success {
+    color: #198754;
+    background: radial-gradient(circle, rgba(25, 135, 84, 0.2) 0%, rgba(25, 135, 84, 0) 70%);
+    text-shadow: 0 0 25px rgba(25, 135, 84, 0.8);
+}
+
+/* Light theme adjustments for sub-pages */
+[data-theme="light"] .alert.bg-dark-soft {
+    background: rgba(241, 245, 249, 0.8) !important;
+    color: var(--text-primary) !important;
+}
+
+[data-theme="light"] .border-secondary {
+    border-color: rgba(0, 0, 0, 0.08) !important;
+}
+
+[data-theme="light"] .carousel-inner.bg-dark-soft {
+    background: rgba(241, 245, 249, 0.8) !important;
+}
+
+[data-theme="light"] .btn-outline-light {
+    color: var(--text-primary) !important;
+    border-color: var(--accent) !important;
+}
+
+[data-theme="light"] .btn-outline-light:hover {
+    background: var(--accent) !important;
+    color: #fff !important;
+}
+
+/* Navbar on sub-pages */
+.navbar {
+    background: var(--nav-bg);
+    backdrop-filter: blur(16px);
+    padding: 1rem 0;
+    z-index: 1030;
+}
+
+.navbar .navbar-brand {
+    color: var(--text-primary) !important;
+    font-size: 1.5rem;
+}
+

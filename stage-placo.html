@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="dark">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,236 +13,482 @@
     <link rel="stylesheet" href="css/gallery.css">
 
 </head>
+
 <body>
-<nav class="navbar navbar-expand-lg fixed-top">
-    <div class="container">
-        <a class="navbar-brand fw-bold" href="index.html">Portfolio</a>
-    </div>
-</nav>
-
-<main class="site-frame">
-
-<header class="page-hero page-hero-stage d-flex align-items-center justify-content-center text-center">
-    <div class="container">
-        <h1 class="display-3 fw-bold name-gradient mb-2">Stage — Placo by Saint-Gobain</h1>
-        <p class="typing-text fs-4">Digitalisation & Automatisation OCR</p>
-    </div>
-    <div class="shape shape-1"></div>
-    <div class="shape shape-2"></div>
-</header>
-
-<div class="container main-content position-relative z-2">
-    
-    <!-- Header Card : Compacte -->
-    <div class="project-card p-3 mb-4">
-        <div class="row align-items-center gy-3">
-            <div class="col-md-4 text-center text-md-start">
-                <div class="p-2 rounded-3 d-inline-block shadow-sm" style="background: rgba(255,255,255,0.9);">
-                    <img src="images/placo-logo.png" alt="Placo by Saint-Gobain" class="img-fluid" style="max-height: 50px; width: auto;">
-                </div>
-            </div>
-            <div class="col-md-5 text-center text-md-start">
-                <span class="badge-tech mb-1 d-inline-block">Placo by Saint‑Gobain — SA</span>
-                <p class="text-light-muted small mb-0"><i class="fa-regular fa-calendar-days me-2"></i>19 mai 2025 au 2 juillet 2025</p>
-            </div>
-            <div class="col-md-3 text-center text-md-end">
-                <a class="btn btn-outline-light rounded-pill px-3 btn-sm" href="index.html#projects">
+    <nav class="navbar navbar-expand-lg fixed-top glass-nav">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a class="navbar-brand fw-bold" href="index.html">
+                <span class="text-accent">&lt;</span>JB<span class="text-accent">/&gt;</span>
+            </a>
+            <div class="d-flex align-items-center gap-3">
+                <a class="btn btn-outline-light rounded-pill btn-sm px-3" href="index.html#experiences">
                     <i class="fa-solid fa-arrow-left me-2"></i>Retour
                 </a>
+                <button class="theme-toggle" id="themeToggle" aria-label="Changer de thème">
+                    <i class="fa-solid fa-sun"></i>
+                </button>
             </div>
         </div>
-    </div>
+    </nav>
 
-    <div class="row gy-4">
-        <div class="col-lg-8">
-            
-            <!-- 1ère Mission : Keepass -->
-            <div class="project-card mb-4">
-                <span class="text-uppercase text-accent fw-bold small mb-2 d-block">1ère Mission</span>
-                <h2 class="section-title mb-3"><i class="fa-solid fa-lock me-2"></i>Sécurité Keepass</h2>
-                <p class="lead mb-3">
-                    Sécurisation et centralisation de la gestion des accès pour les équipes de Placo.
-                </p>
-                <div class="p-3 rounded bg-dark-soft border border-secondary mb-3">
-                    <h5 class="text-white h6"><i class="fa-solid fa-triangle-exclamation text-warning me-2"></i>Problématique Initiale</h5>
-                    <p class="small text-light-muted mb-0">
-                        La gestion des mots de passe et des accès sensibles reposait sur des fichiers Excel partagés, posant des risques de sécurité et de confidentialité majeurs.
-                    </p>
-                </div>
-                <div class="p-3 rounded bg-dark-soft border border-secondary border-start border-success border-4">
-                    <h5 class="text-white h6"><i class="fa-solid fa-check-circle text-success me-2"></i>Solution Apportée</h5>
-                    <p class="small text-light-muted mb-0">
-                        Déploiement de <strong>KeePass</strong> pour une gestion chiffrée. Migration de l'ensemble des identifiants vers une base de données centralisée et sécurisée, avec gestion fine des droits d'accès utilisateurs.
-                    </p>
+    <main class="site-frame">
+
+        <header class="page-hero page-hero-stage d-flex align-items-center justify-content-center text-center">
+            <div class="container">
+                <h1 class="display-3 fw-bold name-gradient mb-2">Stage — Placo by Saint-Gobain</h1>
+                <p class="typing-text fs-4">Digitalisation & Automatisation OCR</p>
+            </div>
+            <div class="shape shape-1"></div>
+            <div class="shape shape-2"></div>
+        </header>
+
+        <div class="container main-content position-relative z-2">
+
+            <!-- Header Card : Compacte -->
+            <div class="project-card p-3 mb-4">
+                <div class="row align-items-center gy-3">
+                    <div class="col-md-4 text-center text-md-start">
+                        <div class="p-2 rounded-3 d-inline-block shadow-sm" style="background: rgba(255,255,255,0.9);">
+                            <img src="images/placo-logo.png" alt="Placo by Saint-Gobain" class="img-fluid"
+                                style="max-height: 50px; width: auto;">
+                        </div>
+                    </div>
+                    <div class="col-md-5 text-center text-md-start">
+                        <span class="badge-tech mb-1 d-inline-block">Placo by Saint‑Gobain — SA</span>
+                        <p class="text-light-muted small mb-0"><i class="fa-regular fa-calendar-days me-2"></i>19 mai
+                            2025 au 2 juillet 2025</p>
+                    </div>
+                    <div class="col-md-3 text-center text-md-end">
+                    </div>
                 </div>
             </div>
 
-            <!-- 2ème Mission : OCR & Digitalisation -->
-            <div class="project-card mb-4">
-                <span class="text-uppercase text-accent fw-bold small mb-2 d-block">2ème Mission</span>
-                <h2 class="section-title mb-3"><i class="fa-solid fa-microchip me-2"></i>Digitalisation & OCR</h2>
-                <p class="lead mb-3">
-                    Automatisation complète du traitement des fiches de postes via l'Intelligence Artificielle.
-                </p>
+            <div class="row gy-4">
+                <div class="col-lg-8">
 
-                <div class="alert alert-light border-start border-primary border-4 text-white bg-dark-soft p-3 mb-4" role="alert">
-                    <i class="fa-solid fa-bullseye me-2 text-accent"></i> <strong>Objectif :</strong> Supprimer la double saisie manuelle des formulaires papier.
-                </div>
+                    <!-- À Propos de Placo -->
+                    <div class="project-card mb-4">
+                        <span class="text-uppercase text-accent fw-bold small mb-2 d-block">Contexte Entreprise</span>
+                        <h2 class="section-title mb-3"><i class="fa-solid fa-building me-2"></i>À propos de Placo®</h2>
+                        <div class="row g-4 align-items-center">
+                            <div class="col-md-12">
+                                <p class="lead mb-3">
+                                    Leader français du confort intérieur, <strong>Placo®</strong> est la référence en
+                                    matière de solutions en plâtre et d'isolation.
+                                </p>
 
-                <h3 class="h6 mb-3 text-white fw-bold">Technologies mises en œuvre :</h3>
-                <div class="row g-3">
-                    <div class="col-md-6">
-                        <div class="p-3 rounded bg-dark-soft h-100 border border-secondary">
-                            <h6 class="text-accent mb-2"><i class="fa-solid fa-eye me-2"></i>Numérisation OCR</h6>
+                                <!-- Mini Diapo Histoire -->
+                                <div id="historyCarousel" class="carousel slide mb-4 mt-3" data-bs-ride="carousel">
+                                    <div class="carousel-indicators">
+                                        <button type="button" data-bs-target="#historyCarousel" data-bs-slide-to="0"
+                                            class="active" aria-current="true" aria-label="1946"></button>
+                                        <button type="button" data-bs-target="#historyCarousel" data-bs-slide-to="1"
+                                            aria-label="2005"></button>
+                                        <button type="button" data-bs-target="#historyCarousel" data-bs-slide-to="2"
+                                            aria-label="Aujourd'hui"></button>
+                                    </div>
+                                    <div class="carousel-inner rounded border border-secondary bg-dark-soft">
+                                        <!-- Slide 1: Création -->
+                                        <div class="carousel-item active">
+                                            <div class="d-flex flex-column align-items-center justify-content-center p-4 p-md-5 text-center"
+                                                style="min-height: 250px;">
+                                                <div class="icon-box-base icon-box-warning mb-3">
+                                                    <i class="fa-solid fa-industry"></i>
+                                                </div>
+                                                <h3 class="h4 text-white">1946 — La Fondation</h3>
+                                                <p class="text-light-muted mb-0 px-md-5">
+                                                    Création de Placoplatre pour répondre aux besoins urgents de la
+                                                    <strong>reconstruction d'après-guerre</strong>, lançant la première
+                                                    plaque de plâtre française en 1948.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <!-- Slide 2: Saint-Gobain -->
+                                        <div class="carousel-item">
+                                            <div class="d-flex flex-column align-items-center justify-content-center p-4 p-md-5 text-center"
+                                                style="min-height: 250px;">
+                                                <div class="icon-box-base icon-box-primary mb-3">
+                                                    <i class="fa-solid fa-handshake"></i>
+                                                </div>
+                                                <h3 class="h4 text-white">2005 — Groupe Saint-Gobain</h3>
+                                                <p class="text-light-muted mb-0 px-md-5">
+                                                    Intégration au sein de <strong>Saint-Gobain</strong>, leader mondial
+                                                    de la construction durable, permettant d'accélérer l'innovation et
+                                                    l'expansion internationale.
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <!-- Slide 3: Futur -->
+                                        <div class="carousel-item">
+                                            <div class="d-flex flex-column align-items-center justify-content-center p-4 p-md-5 text-center"
+                                                style="min-height: 250px;">
+                                                <div class="icon-box-base icon-box-success mb-3">
+                                                    <i class="fa-solid fa-leaf"></i>
+                                                </div>
+                                                <h3 class="h4 text-white">Aujourd'hui — Recyclage & Innovation</h3>
+                                                <p class="text-light-muted mb-0 px-md-5">
+                                                    Placo® est le <strong>1er recycleur de plâtre</strong> en France
+                                                    (120k tonnes/an) et continue d'innover pour l'habitat bas-carbone.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="carousel-control-prev" type="button"
+                                        data-bs-target="#historyCarousel" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Précédent</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button"
+                                        data-bs-target="#historyCarousel" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Suivant</span>
+                                    </button>
+                                </div>
+
+                                <div class="row g-2 mt-3">
+                                    <div class="col-md-4">
+                                        <div class="p-3 rounded bg-dark-soft border border-secondary text-center h-100">
+                                            <h5 class="text-accent fw-bold mb-1">1946</h5>
+                                            <p class="small text-light-muted mb-0">Création de la société</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="p-3 rounded bg-dark-soft border border-secondary text-center h-100">
+                                            <h5 class="text-accent fw-bold mb-1">1600+</h5>
+                                            <p class="small text-light-muted mb-0">Collaborateurs en France</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="p-3 rounded bg-dark-soft border border-secondary text-center h-100">
+                                            <h5 class="text-accent fw-bold mb-1">120k T</h5>
+                                            <p class="small text-light-muted mb-0">Plâtre recyclé / an</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="alert alert-light border-start border-warning border-4 text-white bg-dark-soft p-3 mt-4 mb-0"
+                                    role="alert">
+                                    <i class="fa-solid fa-earth-europe me-2 text-warning"></i> <strong>Appartenance
+                                        Groupe :</strong> Filiale de Saint-Gobain, leader mondial de la construction
+                                    durable (46,6 Mds€ CA, présent dans 80 pays).
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Analyse SWOT -->
+                    <div class="project-card mb-4">
+                        <span class="text-uppercase text-accent fw-bold small mb-2 d-block">Stratégie</span>
+                        <h2 class="section-title mb-3"><i class="fa-solid fa-chart-pie me-2"></i>Analyse SWOT</h2>
+
+                        <div class="row g-3">
+                            <!-- Forces -->
+                            <div class="col-md-6">
+                                <div class="p-3 rounded h-100 border border-success border-opacity-25"
+                                    style="background: rgba(25, 135, 84, 0.1);">
+                                    <h5 class="text-success fw-bold mb-3"><i class="fa-solid fa-bolt me-2"></i>Forces
+                                    </h5>
+                                    <ul class="list-unstyled mb-0 text-light-muted small">
+                                        <li class="mb-2"><i
+                                                class="fa-solid fa-check text-success me-2"></i><strong>Leader du
+                                                marché</strong> des solutions plâtre et isolation.</li>
+                                        <li class="mb-2"><i class="fa-solid fa-check text-success me-2"></i>Appartenance
+                                            au groupe <strong>Saint-Gobain</strong> (puissance financière & R&D).</li>
+                                        <li><i class="fa-solid fa-check text-success me-2"></i>Forte capacité
+                                            d'<strong>innovation</strong> et engagement RSE (Recyclage).</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Faiblesses -->
+                            <div class="col-md-6">
+                                <div class="p-3 rounded h-100 border border-warning border-opacity-25"
+                                    style="background: rgba(255, 193, 7, 0.1);">
+                                    <h5 class="text-warning fw-bold mb-3"><i
+                                            class="fa-solid fa-triangle-exclamation me-2"></i>Faiblesses</h5>
+                                    <ul class="list-unstyled mb-0 text-light-muted small">
+                                        <li class="mb-2"><i class="fa-solid fa-minus text-warning me-2"></i>Coûts élevés
+                                            de <strong>R&D</strong> et de mise en conformité.</li>
+                                        <li><i class="fa-solid fa-minus text-warning me-2"></i>Forte sensibilité aux
+                                            <strong>cycles économiques</strong> du BTP (neuf vs rénovation).</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Opportunités -->
+                            <div class="col-md-6">
+                                <div class="p-3 rounded h-100 border border-info border-opacity-25"
+                                    style="background: rgba(13, 202, 240, 0.1);">
+                                    <h5 class="text-info fw-bold mb-3"><i
+                                            class="fa-solid fa-lightbulb me-2"></i>Opportunités</h5>
+                                    <ul class="list-unstyled mb-0 text-light-muted small">
+                                        <li class="mb-2"><i
+                                                class="fa-solid fa-arrow-trend-up text-info me-2"></i><strong>Rénovation
+                                                énergétique</strong> (Green Deal, aides de l'État).</li>
+                                        <li><i class="fa-solid fa-arrow-trend-up text-info me-2"></i>Réglementation
+                                            environnementale <strong>RE2020</strong> favorisant les matériaux durables.
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Menaces -->
+                            <div class="col-md-6">
+                                <div class="p-3 rounded h-100 border border-danger border-opacity-25"
+                                    style="background: rgba(220, 53, 69, 0.1);">
+                                    <h5 class="text-danger fw-bold mb-3"><i
+                                            class="fa-solid fa-shield-halved me-2"></i>Menaces</h5>
+                                    <ul class="list-unstyled mb-0 text-light-muted small">
+                                        <li class="mb-2"><i class="fa-solid fa-xmark text-danger me-2"></i>Volatilité
+                                            des prix des <strong>matières premières</strong> et de l'énergie.</li>
+                                        <li><i class="fa-solid fa-xmark text-danger me-2"></i>Pression concurrentielle
+                                            sur les <strong>prix</strong> et arrivée de nouveaux entrants.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 1ère Mission : Keepass -->
+                    <div class="project-card mb-4">
+                        <span class="text-uppercase text-accent fw-bold small mb-2 d-block">1ère Mission</span>
+                        <h2 class="section-title mb-3"><i class="fa-solid fa-lock me-2"></i>Sécurité Keepass</h2>
+                        <p class="lead mb-3">
+                            Sécurisation et centralisation de la gestion des accès pour les équipes de Placo.
+                        </p>
+                        <div class="p-3 rounded bg-dark-soft border border-secondary mb-3">
+                            <h5 class="text-white h6"><i
+                                    class="fa-solid fa-triangle-exclamation text-warning me-2"></i>Problématique
+                                Initiale</h5>
                             <p class="small text-light-muted mb-0">
-                                Configuration de l'IA pour extraire automatiquement le texte des formulaires papier scannés, identifiant les champs clés (dates, noms, mesures).
+                                La gestion des mots de passe et des accès sensibles reposait sur des fichiers Excel
+                                partagés, posant des risques de sécurité et de confidentialité majeurs.
+                            </p>
+                        </div>
+                        <div
+                            class="p-3 rounded bg-dark-soft border border-secondary border-start border-success border-4">
+                            <h5 class="text-white h6"><i class="fa-solid fa-check-circle text-success me-2"></i>Solution
+                                Apportée</h5>
+                            <p class="small text-light-muted mb-0">
+                                Déploiement de <strong>KeePass</strong> pour une gestion chiffrée. Migration de
+                                l'ensemble des identifiants vers une base de données centralisée et sécurisée, avec
+                                gestion fine des droits d'accès utilisateurs.
                             </p>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <div class="p-3 rounded bg-dark-soft h-100 border border-secondary">
-                            <h6 class="text-accent mb-2"><i class="fa-brands fa-microsoft me-2"></i>Power Platform</h6>
-                            <p class="small text-light-muted mb-0">
-                                Développement d'une application <strong>Power Apps</strong> pour la validation des données et flux <strong>Power Automate</strong> pour l'intégration SharePoint.
-                            </p>
+
+                    <!-- 2ème Mission : OCR & Digitalisation -->
+                    <div class="project-card mb-4">
+                        <span class="text-uppercase text-accent fw-bold small mb-2 d-block">2ème Mission</span>
+                        <h2 class="section-title mb-3"><i class="fa-solid fa-microchip me-2"></i>Digitalisation & OCR
+                        </h2>
+                        <p class="lead mb-3">
+                            Automatisation complète du traitement des fiches de postes via l'Intelligence Artificielle.
+                        </p>
+
+                        <div class="alert alert-light border-start border-primary border-4 text-white bg-dark-soft p-3 mb-4"
+                            role="alert">
+                            <i class="fa-solid fa-bullseye me-2 text-accent"></i> <strong>Objectif :</strong> Supprimer
+                            la double saisie manuelle des formulaires papier.
                         </div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Section 2: OCR -->
-            <div class="project-card">
-                <h2 class="section-title">La Solution OCR</h2>
-                <p class="mb-2">Reconnaissance optique pour les fiches de postes.</p>
-                
-                <div class="text-center bg-dark-soft p-2 rounded mb-3">
-                    <img src="images/ocr-schema.png" class="img-fluid rounded border border-secondary shadow-sm gallery-img" alt="Schéma OCR" style="max-height: 250px;">
-                </div>
-
-                <div class="row g-2">
-                    <div class="col-4"><img src="images/power-automate-flow-1.png" class="img-fluid rounded border border-secondary gallery-img" alt="Flow 1"></div>
-                    <div class="col-4"><img src="images/power-automate-flow-2.png" class="img-fluid rounded border border-secondary gallery-img" alt="Flow 2"></div>
-                    <div class="col-4"><img src="images/power-automate-flow-3.png" class="img-fluid rounded border border-secondary gallery-img" alt="Flow 3"></div>
-                </div>
-            </div>
-
-            <!-- Section 3: PowerApps -->
-            <div class="project-card">
-                <h2 class="section-title">Application Mobile</h2>
-                <p class="mb-2">Interface PowerApps pour tablette.</p>
-                <div class="row g-2">
-                    <div class="col-3"><img src="images/powerapps-screen-1.png" class="img-fluid rounded border border-secondary gallery-img" alt="App 1"></div>
-                    <div class="col-3"><img src="images/powerapps-screen-2.png" class="img-fluid rounded border border-secondary gallery-img" alt="App 2"></div>
-                    <div class="col-3"><img src="images/powerapps-screen-3.png" class="img-fluid rounded border border-secondary gallery-img" alt="App 3"></div>
-                    <div class="col-3"><img src="images/powerapps-screen-4.png" class="img-fluid rounded border border-secondary gallery-img" alt="App 4"></div>
-                </div>
-            </div>
-
-            <!-- Section 4: Résultats -->
-            <div class="project-card">
-                <h2 class="section-title">Résultats</h2>
-                <div class="row g-2 text-center">
-                    <div class="col-6">
-                        <div class="p-2 rounded bg-dark-soft border border-secondary">
-                            <span class="display-6 fw-bold text-accent">-50%</span>
-                            <p class="mb-0 small">Temps de saisie</p>
-                        </div>
-                    </div>
-                    <div class="col-6">
-                        <div class="p-2 rounded bg-dark-soft border border-secondary">
-                            <span class="display-6 fw-bold text-accent">100%</span>
-                            <p class="mb-0 small">Fiabilité</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Section Contact -->
-            <div id="contact-stage" class="project-card">
-                <h2 class="section-title">Contact</h2>
-                <form action="https://formspree.io/f/mqakovrz" method="POST" class="contact-form">
-                    <div class="row g-2">
-                        <div class="col-md-6">
-                            <div class="form-floating">
-                                <input type="text" class="form-control glass-input form-control-sm" id="prenom" name="prenom" placeholder="Prénom" required>
-                                <label for="prenom">Prénom</label>
+                        <h3 class="h6 mb-3 text-white fw-bold">Technologies mises en œuvre :</h3>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="p-3 rounded bg-dark-soft h-100 border border-secondary">
+                                    <h6 class="text-accent mb-2"><i class="fa-solid fa-eye me-2"></i>Numérisation OCR
+                                    </h6>
+                                    <p class="small text-light-muted mb-0">
+                                        Configuration de l'IA pour extraire automatiquement le texte des formulaires
+                                        papier scannés, identifiant les champs clés (dates, noms, mesures).
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="p-3 rounded bg-dark-soft h-100 border border-secondary">
+                                    <h6 class="text-accent mb-2"><i class="fa-brands fa-microsoft me-2"></i>Power
+                                        Platform</h6>
+                                    <p class="small text-light-muted mb-0">
+                                        Développement d'une application <strong>Power Apps</strong> pour la validation
+                                        des données et flux <strong>Power Automate</strong> pour l'intégration
+                                        SharePoint.
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="form-floating">
-                                <input type="text" class="form-control glass-input form-control-sm" id="nom" name="nom" placeholder="Nom" required>
-                                <label for="nom">Nom</label>
-                            </div>
+                    </div>
+
+                    <!-- Section 2: OCR -->
+                    <div class="project-card">
+                        <h2 class="section-title">La Solution OCR</h2>
+                        <p class="mb-2">Reconnaissance optique pour les fiches de postes.</p>
+
+                        <div class="text-center bg-dark-soft p-2 rounded mb-3">
+                            <img src="images/ocr-schema.png"
+                                class="img-fluid rounded border border-secondary shadow-sm gallery-img" alt="Schéma OCR"
+                                style="max-height: 250px;">
                         </div>
-                        <div class="col-12">
-                            <div class="form-floating">
-                                <input type="email" class="form-control glass-input form-control-sm" id="email" name="email" placeholder="Email" required>
-                                <label for="email">Email</label>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <div class="form-floating">
-                                <textarea class="form-control glass-input form-control-sm" id="message" name="message" placeholder="Votre message" style="height: 100px" required></textarea>
-                                <label for="message">Votre message</label>
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <button type="submit" class="btn btn-outline-light w-100 py-2 rounded-pill fw-bold btn-sm">
-                                Envoyer <i class="fa-solid fa-paper-plane ms-2"></i>
-                            </button>
+
+
+                    </div>
+
+                    <!-- Section: Application et Sécurisation -->
+                    <div class="project-card mb-4">
+                        <h2 class="section-title">Application et Sécurisation</h2>
+                        <p class="mb-2">Aperçu de l'interface et des fonctionnalités de sécurité.</p>
+                        <div class="row g-2">
+                            <div class="col-4"><img src="images/powerapps-screen-2.png"
+                                    class="img-fluid rounded border border-secondary gallery-img" alt="App 2"></div>
+                            <div class="col-4"><img src="images/powerapps-screen-3.png"
+                                    class="img-fluid rounded border border-secondary gallery-img" alt="App 3"></div>
+                            <div class="col-4"><img src="images/powerapps-screen-4.png"
+                                    class="img-fluid rounded border border-secondary gallery-img" alt="App 4"></div>
                         </div>
                     </div>
-                </form>
+
+                    <!-- Section 3: PowerApps -->
+                    <div class="project-card">
+                        <h2 class="section-title">Application Mobile</h2>
+                        <p class="mb-2">Interface PowerApps pour tablette.</p>
+                        <div class="row g-2">
+                            <div class="col-3"><img src="images/powerapps-screen-1.png"
+                                    class="img-fluid rounded border border-secondary gallery-img" alt="App 1"></div>
+                        </div>
+                    </div>
+
+                    <!-- Section: Flux Power Automate -->
+                    <div class="project-card mb-4">
+                        <h2 class="section-title">Flux d'Automatisation</h2>
+                        <div class="row g-2">
+                            <div class="col-4"><img src="images/power-automate-flow-1.png"
+                                    class="img-fluid rounded border border-secondary gallery-img" alt="Flow 1"></div>
+                            <div class="col-4"><img src="images/power-automate-flow-2.png"
+                                    class="img-fluid rounded border border-secondary gallery-img" alt="Flow 2"></div>
+                            <div class="col-4"><img src="images/power-automate-flow-3.png"
+                                    class="img-fluid rounded border border-secondary gallery-img" alt="Flow 3"></div>
+                        </div>
+                    </div>
+
+                    <!-- Section 4: Objectifs finaux -->
+                    <div class="project-card">
+                        <h2 class="section-title">Objectifs finaux</h2>
+                        <div class="row g-2 text-center">
+                            <div class="col-6">
+                                <div class="p-2 rounded bg-dark-soft border border-secondary">
+                                    <span class="display-6 fw-bold text-accent">-50%</span>
+                                    <p class="mb-0 small">Temps de saisie</p>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="p-2 rounded bg-dark-soft border border-secondary">
+                                    <span class="display-6 fw-bold text-accent">100%</span>
+                                    <p class="mb-0 small">Fiabilité</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section Contact -->
+                    <div id="contact-stage" class="project-card">
+                        <h2 class="section-title">Contact</h2>
+                        <form action="https://formspree.io/f/mqakovrz" method="POST" class="contact-form">
+                            <div class="row g-2">
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control glass-input form-control-sm" id="prenom"
+                                            name="prenom" placeholder="Prénom" required>
+                                        <label for="prenom">Prénom</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control glass-input form-control-sm" id="nom"
+                                            name="nom" placeholder="Nom" required>
+                                        <label for="nom">Nom</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <input type="email" class="form-control glass-input form-control-sm" id="email"
+                                            name="email" placeholder="Email" required>
+                                        <label for="email">Email</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-floating">
+                                        <textarea class="form-control glass-input form-control-sm" id="message"
+                                            name="message" placeholder="Votre message" style="height: 100px"
+                                            required></textarea>
+                                        <label for="message">Votre message</label>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit"
+                                        class="btn btn-outline-light w-100 py-2 rounded-pill fw-bold btn-sm">
+                                        Envoyer <i class="fa-solid fa-paper-plane ms-2"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Sidebar Info -->
+                <aside class="col-lg-4">
+                    <div class="sticky-top" style="top: 100px;">
+                        <div class="project-card">
+                            <h4 class="h6 fw-bold mb-3 text-accent">Fiche technique</h4>
+
+                            <div class="mb-3">
+                                <p class="text-uppercase text-light-muted small fw-bold mb-1"
+                                    style="font-size: 0.7rem;">
+                                    Entreprise</p>
+                                <p class="fw-bold mb-1 text-white small">Placo by Saint‑Gobain</p>
+                                <span class="badge bg-secondary text-light border border-secondary"
+                                    style="font-size: 0.7rem;">Grande Entreprise</span>
+                            </div>
+
+                            <div class="mb-3">
+                                <p class="text-uppercase text-light-muted small fw-bold mb-1"
+                                    style="font-size: 0.7rem;">Stack
+                                    Technique</p>
+                                <div class="d-flex flex-wrap gap-1">
+                                    <span class="badge-tech">Power Apps</span>
+                                    <span class="badge-tech">Power Automate</span>
+                                    <span class="badge-tech">OCR AI</span>
+                                </div>
+                            </div>
+
+                            <div class="mb-0">
+                                <p class="text-uppercase text-light-muted small fw-bold mb-1"
+                                    style="font-size: 0.7rem;">Mission
+                                </p>
+                                <ul class="list-unstyled mb-0 small text-light-muted" style="font-size: 0.8rem;">
+                                    <li class="mb-1"><i class="fa-solid fa-check text-accent me-2"></i>Audit existant
+                                    </li>
+                                    <li class="mb-1"><i class="fa-solid fa-check text-accent me-2"></i>Prototype</li>
+                                    <li class="mb-1"><i class="fa-solid fa-check text-accent me-2"></i>Dév Low-Code</li>
+                                    <li><i class="fa-solid fa-check text-accent me-2"></i>Tests</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="project-card text-center">
+                            <h4 class="h6 fw-bold text-white mb-2">Une question ?</h4>
+                            <a href="#contact-stage" class="btn btn-outline-light rounded-pill w-100 fw-bold btn-sm">
+                                Me contacter <i class="fa-solid fa-arrow-down ms-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </aside>
             </div>
         </div>
 
-        <!-- Sidebar Info -->
-        <aside class="col-lg-4">
-            <div class="sticky-top" style="top: 100px;">
-                <div class="project-card">
-                    <h4 class="h6 fw-bold mb-3 text-accent">Fiche technique</h4>
-                    
-                    <div class="mb-3">
-                        <p class="text-uppercase text-light-muted small fw-bold mb-1" style="font-size: 0.7rem;">Entreprise</p>
-                        <p class="fw-bold mb-1 text-white small">Placo by Saint‑Gobain</p>
-                        <span class="badge bg-secondary text-light border border-secondary" style="font-size: 0.7rem;">Grande Entreprise</span>
-                    </div>
+    </main>
 
-                    <div class="mb-3">
-                        <p class="text-uppercase text-light-muted small fw-bold mb-1" style="font-size: 0.7rem;">Stack Technique</p>
-                        <div class="d-flex flex-wrap gap-1">
-                            <span class="badge-tech">Power Apps</span>
-                            <span class="badge-tech">Power Automate</span>
-                            <span class="badge-tech">OCR AI</span>
-                        </div>
-                    </div>
-
-                    <div class="mb-0">
-                        <p class="text-uppercase text-light-muted small fw-bold mb-1" style="font-size: 0.7rem;">Mission</p>
-                        <ul class="list-unstyled mb-0 small text-light-muted" style="font-size: 0.8rem;">
-                            <li class="mb-1"><i class="fa-solid fa-check text-accent me-2"></i>Audit existant</li>
-                            <li class="mb-1"><i class="fa-solid fa-check text-accent me-2"></i>Prototype</li>
-                            <li class="mb-1"><i class="fa-solid fa-check text-accent me-2"></i>Dév Low-Code</li>
-                            <li><i class="fa-solid fa-check text-accent me-2"></i>Tests</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="project-card text-center">
-                    <h4 class="h6 fw-bold text-white mb-2">Une question ?</h4>
-                    <a href="#contact-stage" class="btn btn-outline-light rounded-pill w-100 fw-bold btn-sm">
-                        Me contacter <i class="fa-solid fa-arrow-down ms-2"></i>
-                    </a>
-                </div>
-            </div>
-        </aside>
-    </div>
-</div>
-
-</main>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="js/main.js"></script>
-<script src="js/gallery.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/gallery.js"></script>
 </body>
+
 </html>
