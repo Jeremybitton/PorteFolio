@@ -662,6 +662,8 @@ body {
 .skill-icon-img.python-icon {
     width: 3rem;
     height: 3rem;
+    max-width: 3rem;
+    max-height: 3rem;
     display: block;
     margin: 0 auto 0.8rem;
     object-fit: contain;
