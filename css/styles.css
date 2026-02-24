@@ -178,12 +178,12 @@
     box-shadow: 0 0 0 4px rgba(var(--accent-rgb), 0.1) !important;
 }
 
-[data-theme="light"] .form-floating > label {
+[data-theme="light"] .form-floating>label {
     color: var(--text-muted) !important;
 }
 
-[data-theme="light"] .form-floating > .form-control:focus ~ label,
-[data-theme="light"] .form-floating > .form-control:not(:placeholder-shown) ~ label {
+[data-theme="light"] .form-floating>.form-control:focus~label,
+[data-theme="light"] .form-floating>.form-control:not(:placeholder-shown)~label {
     color: var(--accent) !important;
 }
 
@@ -425,8 +425,15 @@ body {
 }
 
 @keyframes floatShape {
-    0%, 100% { transform: translate(0, 0); }
-    50% { transform: translate(20px, -20px); }
+
+    0%,
+    100% {
+        transform: translate(0, 0);
+    }
+
+    50% {
+        transform: translate(20px, -20px);
+    }
 }
 
 /* ── Cards Projets ── */
@@ -542,9 +549,17 @@ body {
 
 /* ── Skills Section ── */
 @keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-8px); }
-    100% { transform: translateY(0px); }
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
 }
 
 .skill-card {
@@ -571,8 +586,13 @@ body {
     filter: drop-shadow(0 0 0 rgba(0, 0, 0, 0));
 }
 
-.col-lg-2:nth-child(odd) .skill-icon { animation-delay: 0s; }
-.col-lg-2:nth-child(even) .skill-icon { animation-delay: 1.5s; }
+.col-lg-2:nth-child(odd) .skill-icon {
+    animation-delay: 0s;
+}
+
+.col-lg-2:nth-child(even) .skill-icon {
+    animation-delay: 1.5s;
+}
 
 .skill-card:hover {
     background: var(--skill-card-hover-bg);
@@ -598,15 +618,86 @@ body {
     -webkit-text-fill-color: transparent;
 }
 
-.skill-card:hover .fa-php { color: #777bb3; filter: drop-shadow(0 0 15px rgba(119, 123, 179, 0.6)); }
-.skill-card:hover .fa-python { color: #3776ab; filter: drop-shadow(0 0 15px rgba(55, 118, 171, 0.6)); }
-.skill-card:hover .fa-database { color: #00758f; filter: drop-shadow(0 0 15px rgba(0, 117, 143, 0.6)); }
-.skill-card:hover .fa-js { color: #f7df1e; filter: drop-shadow(0 0 15px rgba(247, 223, 30, 0.6)); }
-.skill-card:hover .fa-html5 { color: #e34c26; filter: drop-shadow(0 0 15px rgba(227, 76, 38, 0.6)); }
-.skill-card:hover .fa-css3-alt { color: #264de4; filter: drop-shadow(0 0 15px rgba(38, 77, 228, 0.6)); }
-.skill-card:hover .fa-docker { color: #2496ed; filter: drop-shadow(0 0 15px rgba(36, 150, 237, 0.6)); }
-.skill-card:hover .fa-git-alt { color: #f05032; filter: drop-shadow(0 0 15px rgba(240, 80, 50, 0.6)); }
-.skill-card:hover .fa-github { color: #333; filter: drop-shadow(0 0 15px rgba(0, 0, 0, 0.4)); }
+.skill-card:hover .fa-php {
+    color: #777bb3;
+    filter: drop-shadow(0 0 15px rgba(119, 123, 179, 0.6));
+}
+
+.skill-card:hover .fa-database {
+    color: #00758f;
+    filter: drop-shadow(0 0 15px rgba(0, 117, 143, 0.6));
+}
+
+.skill-card:hover .fa-js {
+    color: #f7df1e;
+    filter: drop-shadow(0 0 15px rgba(247, 223, 30, 0.6));
+}
+
+.skill-card:hover .fa-html5 {
+    color: #e34c26;
+    filter: drop-shadow(0 0 15px rgba(227, 76, 38, 0.6));
+}
+
+.skill-card:hover .fa-css3-alt {
+    color: #264de4;
+    filter: drop-shadow(0 0 15px rgba(38, 77, 228, 0.6));
+}
+
+.skill-card:hover .fa-docker {
+    color: #2496ed;
+    filter: drop-shadow(0 0 15px rgba(36, 150, 237, 0.6));
+}
+
+.skill-card:hover .fa-git-alt {
+    color: #f05032;
+    filter: drop-shadow(0 0 15px rgba(240, 80, 50, 0.6));
+}
+
+.skill-card:hover .fa-github {
+    color: #333;
+    filter: drop-shadow(0 0 15px rgba(0, 0, 0, 0.4));
+}
+
+/* ── Python SVG icon in skill-card ── */
+.skill-icon-img.python-icon {
+    width: 3rem;
+    height: 3rem;
+    display: block;
+    margin: 0 auto 0.8rem;
+    object-fit: contain;
+    animation: float 3s ease-in-out infinite;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* Match the blue-purple accent-gradient of other skill-icons */
+    filter: brightness(0.9) saturate(0.3) sepia(1) hue-rotate(190deg) brightness(1.4) saturate(2.5);
+}
+
+[data-theme="light"] .skill-icon-img.python-icon {
+    filter: brightness(0.6) saturate(0.3) sepia(1) hue-rotate(190deg) brightness(0.8) saturate(3);
+}
+
+.skill-card:hover .skill-icon-img.python-icon {
+    filter: drop-shadow(0 5px 12px rgba(48, 105, 152, 0.6)) drop-shadow(0 -5px 12px rgba(255, 212, 59, 0.5));
+    animation-play-state: paused;
+    transform: scale(1.1) rotate(5deg);
+}
+
+
+/* ── Pandas logo: invert only in dark mode ── */
+.pandas-logo {
+    filter: invert(1);
+}
+
+[data-theme="light"] .pandas-logo {
+    filter: none;
+}
+
+.badge-tech .pandas-logo {
+    filter: invert(1);
+}
+
+[data-theme="light"] .badge-tech .pandas-logo {
+    filter: none;
+}
 
 [data-theme="light"] .skill-card:hover .fa-github {
     color: #24292e;
@@ -955,12 +1046,12 @@ body {
     color: var(--text-primary) !important;
 }
 
-.form-floating > label {
+.form-floating>label {
     color: var(--text-muted) !important;
 }
 
-.form-floating > .form-control:focus ~ label,
-.form-floating > .form-control:not(:placeholder-shown) ~ label {
+.form-floating>.form-control:focus~label,
+.form-floating>.form-control:not(:placeholder-shown)~label {
     color: var(--accent) !important;
     opacity: 1;
 }
@@ -1003,12 +1094,25 @@ body {
     opacity: 1;
 }
 
-.toast-notification.success { border-left-color: #10b981; }
-.toast-notification.error { border-left-color: #ef4444; }
+.toast-notification.success {
+    border-left-color: #10b981;
+}
 
-.toast-icon { font-size: 1.2rem; }
-.toast-success-icon { color: #10b981; }
-.toast-error-icon { color: #ef4444; }
+.toast-notification.error {
+    border-left-color: #ef4444;
+}
+
+.toast-icon {
+    font-size: 1.2rem;
+}
+
+.toast-success-icon {
+    color: #10b981;
+}
+
+.toast-error-icon {
+    color: #ef4444;
+}
 
 /* ── Animations d'apparition ── */
 section {
