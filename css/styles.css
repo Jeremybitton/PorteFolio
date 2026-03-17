@@ -1230,74 +1230,333 @@ section.visible {
     color: var(--text-muted) !important;
 }
 
-/* ── Modal Styles ── */
+/*
+  ═══════════════════════════════════════
+   NEW PROJECT CARD STYLES (GestTravaux)
+  ═══════════════════════════════════════
+*/
+
+.project-image-container {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+    background-color: var(--bg-dark);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Ensure .project-img is compatible */
+.project-card .project-image-container .project-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.project-card:hover .project-image-container .project-image {
+    transform: scale(1.05);
+}
+
+/* Overlay & Button */
+.project-overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(15, 23, 42, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(2px);
+}
+
+.project-card:hover .project-overlay {
+    opacity: 1;
+}
+
+.btn-more {
+    background: var(--accent);
+    color: #000;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transform: translateY(20px);
+    transition: transform 0.3s ease, background 0.3s;
+    box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4);
+}
+
+.project-card:hover .btn-more {
+    transform: translateY(0);
+}
+
+.btn-more:hover {
+    background: #fff;
+    color: var(--accent);
+}
+
+/* Project Info */
+.project-info {
+    padding: 1.5rem;
+}
+
+.project-category {
+    font-size: 0.75rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.project-title {
+    margin: 0 0 0.8rem 0;
+    font-size: 1.5rem;
+    color: var(--text-headings);
+    font-weight: 700;
+}
+
+.project-description {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+/* Tech Tags */
+.project-techs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.tech-tag {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-primary);
+    padding: 5px 12px;
+    border-radius: 30px;
+    font-size: 0.8rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.project-card:hover .tech-tag {
+    border-color: rgba(var(--accent-rgb), 0.3);
+    background: rgba(var(--accent-rgb), 0.1);
+    color: var(--accent);
+}
+
+/* Links */
+.project-links {
+    margin-top: auto;
+    padding-top: 15px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.project-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+}
+
+.project-link:hover {
+    color: #fff;
+    text-decoration: underline;
+}
+
+/* Modal Styles */
 .modal {
     display: none;
     position: fixed;
     z-index: 2000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(5px);
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
     align-items: center;
     justify-content: center;
-    animation: fadeIn 0.3s;
+    backdrop-filter: blur(8px);
 }
 
 .modal-content {
-    background: var(--card-bg);
-    border: var(--card-border);
-    backdrop-filter: blur(16px);
-    padding: 2rem;
+    background: var(--bg-dark); /* Fallback */
+    background: linear-gradient(145deg, #1e293b, #0f172a);
+    padding: 40px;
     border-radius: 20px;
     max-width: 700px;
     width: 90%;
     position: relative;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-    color: var(--text-primary);
-    max-height: 90vh;
-    overflow-y: auto;
-    animation: slideUp 0.3s;
-}
-
-[data-theme="light"] .modal-content {
-    background: #ffffff;
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+    animation: modalFadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     color: var(--text-primary);
 }
 
 .close-btn {
-    position: absolute;
-    top: 15px;
-    right: 20px;
     color: var(--text-muted);
-    font-size: 1.8rem;
-    cursor: pointer;
-    transition: color 0.3s;
+    position: absolute;
+    top: 20px; right: 25px;
+    font-size: 28px;
     line-height: 1;
-    z-index: 10;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.2s;
+    background: rgba(255,255,255,0.05);
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .close-btn:hover {
-    color: var(--accent);
+    color: white;
+    background: var(--accent);
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+.modal-content h2 {
+    color: var(--text-headings);
+    margin-bottom: 1.5rem;
+    font-weight: 700;
 }
 
-@keyframes slideUp {
-    from { transform: translateY(20px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+.modal-content p, .modal-content li {
+    color: var(--text-muted);
+    line-height: 1.7;
 }
 
-/* Overlay on Project Card */
-.project-card:hover .project-overlay {
-    opacity: 1 !important;
+.modal-content strong {
+    color: var(--text-primary);
 }
 
-.project-overlay {
-    backdrop-filter: blur(2px);
+.modal-content ul {
+    padding-left: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.modal-content li {
+    margin-bottom: 0.5rem;
+}
+
+@keyframes modalFadeIn {
+    from {opacity: 0; transform: translateY(30px) scale(0.95);}
+    to {opacity: 1; transform: translateY(0) scale(1);}
+}
+
+/* ── Project Logo Wrappers (personal projects) ── */
+.project-logo-wrapper {
+    background: linear-gradient(145deg, rgba(56, 189, 248, 0.08), rgba(168, 85, 247, 0.08));
+    border-bottom: 1px solid rgba(var(--accent-rgb), 0.1);
+    transition: background 0.3s ease;
+}
+
+[data-theme="light"] .project-logo-wrapper {
+    background: linear-gradient(145deg, rgba(37, 99, 235, 0.06), rgba(124, 58, 237, 0.06));
+    border-bottom: 1px solid rgba(37, 99, 235, 0.1);
+}
+
+/* Java icon in the wrapper */
+.project-logo-icon {
+    font-size: 6rem;
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    transition: transform 0.4s ease, filter 0.4s ease;
+    filter: drop-shadow(0 0 20px rgba(var(--accent-rgb), 0.15));
+}
+
+.project-card:hover .project-logo-icon {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 30px rgba(var(--accent-rgb), 0.35));
+}
+
+/* Portfolio logo — fond blanc */
+.project-logo-portfolio {
+    background: #ffffff;
+}
+
+[data-theme="light"] .project-logo-portfolio {
+    background: linear-gradient(145deg, #ffffff, #f0f4f8);
+}
+
+/* Texte "JB" : foncé sur fond blanc */
+.project-logo-portfolio .portfolio-brand-text {
+    color: #0f172a;
+}
+
+/* Brand text logo (<JB/>) */
+.project-logo-brand {
+    font-size: 3.5rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    font-family: 'Poppins', sans-serif;
+    transition: transform 0.4s ease, filter 0.4s ease;
+    filter: drop-shadow(0 0 20px rgba(var(--accent-rgb), 0.15));
+}
+
+.project-card:hover .project-logo-brand {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 30px rgba(var(--accent-rgb), 0.35));
+}
+
+/* Image logo (ImmoSync Web) */
+.project-logo-img {
+    max-height: 130px;
+    max-width: 80%;
+    object-fit: contain;
+    transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+/* ImmoSync Web logo — fond blanc (logo bleu sur blanc) */
+.project-logo-web {
+    background: #ffffff;
+}
+
+[data-theme="light"] .project-logo-web {
+    background: linear-gradient(145deg, #ffffff, #f0f4f8);
+}
+
+/* ImmoSync Java logo — fond toujours blanc car logo foncé */
+.project-logo-java {
+    background: #ffffff;
+}
+
+[data-theme="light"] .project-logo-java {
+    background: linear-gradient(145deg, #ffffff, #f0f4f8);
+}
+
+/* Taille et comportement du logo Java */
+.project-logo-java-img {
+    max-height: 300px;
+    max-width: 120%;
+    object-fit: contain;
+    filter: none;
+    transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.project-card:hover .project-logo-java-img {
+    transform: scale(1.08);
+    filter: drop-shadow(0 4px 20px rgba(var(--accent-rgb), 0.25));
+}
+
+.project-card:hover .project-logo-img {
+    transform: scale(1.08);
+}
+
+/* Dark mode: if logo is dark-colored, brighten it slightly */
+[data-theme="dark"] .project-logo-img,
+:root:not([data-theme="light"]) .project-logo-img {
+    filter: brightness(1.05) drop-shadow(0 4px 16px rgba(var(--accent-rgb), 0.2));
+}
+
+[data-theme="light"] .project-logo-img {
+    filter: none;
 }

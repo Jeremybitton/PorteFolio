@@ -121,112 +121,141 @@
                 <h2 class="section-title text-center mb-5">Projets Personnels</h2>
                 <div class="row g-4 justify-content-center">
 
-                    <div class="col-md-6">
-                        <div class="project-card image-card h-100">
-                            <a href="immosync.html" class="text-decoration-none">
-                                <div class="project-img-wrapper position-relative">
-                                    <img src="images/immosync-java/img.png" alt="ImmoSync Desktop" class="project-img">
-                                    <div class="project-overlay d-flex flex-column align-items-center justify-content-center position-absolute top-0 start-0 w-100 h-100" style="background: rgba(0,0,0,0.7); opacity: 0; transition: opacity 0.3s;">
-                                        <i class="fa-brands fa-java fa-3x text-white mb-2"></i>
-                                        <span class="btn btn-primary rounded-pill btn-sm">Découvrir la version Desktop</span>
+                    <!-- ImmoSync Java -->
+                    <div class="col-md-6 col-lg-4">
+                        <a href="immosync.html" class="text-decoration-none">
+                            <div class="project-card image-card h-100">
+                                <div class="project-img-wrapper">
+                                    <div class="project-logo-wrapper project-logo-java d-flex align-items-center justify-content-center h-100">
+                                        <img src="images/logo.png" alt="ImmoSync Java" class="project-logo-img project-logo-java-img">
                                     </div>
                                 </div>
-                            </a>
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <h5 class="card-title mb-0">ImmoSync Java (GestTravaux)</h5>
-                                    <span class="badge bg-primary">Desktop</span>
-                                </div>
-                                <p class="card-text text-light-muted small">
-                                    Application de gestion immobilière lourde. Focus sur l'architecture <strong>MVC</strong>, la gestion des rôles (RBAC) et l'interaction directe avec une base <strong>MySQL</strong>.
-                                </p>
-                                <div class="tags mb-3">
-                                    <span class="badge-tech"><i class="fa-brands fa-java me-1"></i>JavaFX</span>
-                                    <span class="badge-tech"><i class="fa-solid fa-database me-1"></i>MySQL</span>
-                                    <span class="badge-tech">SceneBuilder</span>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <a href="https://github.com/Jeremybitton" target="_blank" class="small text-accent text-decoration-none">
-                                        <i class="fa-brands fa-github me-1"></i> Source
-                                    </a>
-                                    <a href="immosync.html" class="small text-white text-decoration-none">Détails <i class="fa-solid fa-arrow-right"></i></a>
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                        <div class="icon-box mb-0">
+                                            <i class="fa-solid fa-desktop"></i>
+                                        </div>
+                                        <span class="badge bg-primary">Desktop</span>
+                                    </div>
+                                    <h5 class="card-title mb-2">ImmoSync Java (GestTravaux)</h5>
+                                    <div class="row g-3 mb-3">
+                                        <div class="col-6 border-end border-secondary border-opacity-25">
+                                            <div class="d-flex flex-column h-100">
+                                                <span class="text-uppercase text-muted small fw-bold mb-1" style="font-size:0.7rem;">Architecture</span>
+                                                <h6 class="text-accent mb-1 small"><i class="fa-solid fa-layer-group me-1"></i>MVC JavaFX</h6>
+                                                <p class="card-text text-light-muted small mb-0">Structuration en couches MVC avec FXML et SceneBuilder.</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="d-flex flex-column h-100">
+                                                <span class="text-uppercase text-muted small fw-bold mb-1" style="font-size:0.7rem;">Base de données</span>
+                                                <h6 class="text-accent mb-1 small"><i class="fa-solid fa-database me-1"></i>MySQL JDBC</h6>
+                                                <p class="card-text text-light-muted small mb-0">Connexion directe et gestion des rôles RBAC.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tags mt-auto">
+                                        <span class="badge-tech"><i class="fa-brands fa-java me-1"></i>JavaFX</span>
+                                        <span class="badge-tech"><i class="fa-solid fa-database me-1"></i>MySQL</span>
+                                        <span class="badge-tech">SceneBuilder</span>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
 
-                    <div class="col-md-6">
-                        <div class="project-card image-card h-100">
-                            <div class="project-img-wrapper position-relative">
-                                <img src="images/immosync-web/img.png" alt="ImmoSync Web" class="project-img">
-                                <div class="project-overlay d-flex flex-column align-items-center justify-content-center position-absolute top-0 start-0 w-100 h-100" style="background: rgba(0,0,0,0.7); opacity: 0; transition: opacity 0.3s;">
-                                    <i class="fa-brands fa-php fa-3x text-white mb-2"></i>
-                                    <span class="badge bg-warning text-dark mb-2">En développement</span>
+                    <!-- ImmoSync Web -->
+                    <div class="col-md-6 col-lg-4">
+                        <a href="immosync-web.html" class="text-decoration-none">
+                            <div class="project-card image-card h-100">
+                                <div class="project-img-wrapper">
+                                    <div class="project-logo-wrapper project-logo-web d-flex align-items-center justify-content-center h-100">
+                                        <img src="images/logoImmoPhp.png" alt="ImmoSync Web" class="project-logo-img">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center mb-2">
-                                    <h5 class="card-title mb-0">ImmoSync Web</h5>
-                                    <span class="badge bg-info text-dark">SaaS / Web</span>
-                                </div>
-                                <p class="card-text text-light-muted small">
-                                    Adaptation de la solution en version Web. Interface responsive pour les techniciens sur le terrain et tableau de bord client en temps réel.
-                                </p>
-                                <div class="tags mb-3">
-                                    <span class="badge-tech"><i class="fa-brands fa-php me-1"></i>PHP</span>
-                                    <span class="badge-tech"><i class="fa-brands fa-bootstrap me-1"></i>Bootstrap</span>
-                                    <span class="badge-tech"><i class="fa-solid fa-code me-1"></i>PDO</span>
-                                </div>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <span class="small text-muted fst-italic">Bientôt disponible</span>
-                                    <div class="icon-circle" style="width: 30px; height: 30px; font-size: 0.8rem;">
-                                        <i class="fa-solid fa-globe"></i>
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                        <div class="icon-box mb-0">
+                                            <i class="fa-solid fa-globe"></i>
+                                        </div>
+                                        <span class="badge bg-warning text-dark">En développement</span>
+                                    </div>
+                                    <h5 class="card-title mb-2">ImmoSync Web</h5>
+                                    <div class="row g-3 mb-3">
+                                        <div class="col-6 border-end border-secondary border-opacity-25">
+                                            <div class="d-flex flex-column h-100">
+                                                <span class="text-uppercase text-muted small fw-bold mb-1" style="font-size:0.7rem;">Interface</span>
+                                                <h6 class="text-accent mb-1 small"><i class="fa-solid fa-mobile-screen me-1"></i>Responsive Web</h6>
+                                                <p class="card-text text-light-muted small mb-0">Accès terrain depuis n'importe quel appareil.</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="d-flex flex-column h-100">
+                                                <span class="text-uppercase text-muted small fw-bold mb-1" style="font-size:0.7rem;">Backend</span>
+                                                <h6 class="text-accent mb-1 small"><i class="fa-brands fa-php me-1"></i>PHP / PDO</h6>
+                                                <p class="card-text text-light-muted small mb-0">Architecture MVC natif avec accès sécurisé MySQL.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tags mt-auto">
+                                        <span class="badge-tech"><i class="fa-brands fa-php me-1"></i>PHP</span>
+                                        <span class="badge-tech"><i class="fa-brands fa-bootstrap me-1"></i>Bootstrap</span>
+                                        <span class="badge-tech"><i class="fa-solid fa-code me-1"></i>PDO</span>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
+                    </div>
+
+                    <!-- Portfolio -->
+                    <div class="col-md-6 col-lg-4">
+                        <a href="https://github.com/Jeremybitton" target="_blank" class="text-decoration-none">
+                            <div class="project-card image-card h-100">
+                                <div class="project-img-wrapper">
+                                    <div class="project-logo-wrapper project-logo-portfolio d-flex align-items-center justify-content-center h-100">
+                                        <span class="project-logo-brand">
+                                            <span class="text-accent">&lt;</span><span class="portfolio-brand-text">JB</span><span class="text-accent">/&gt;</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between align-items-start mb-2">
+                                        <div class="icon-box mb-0">
+                                            <i class="fa-solid fa-briefcase"></i>
+                                        </div>
+                                        <span class="badge bg-success">En ligne</span>
+                                    </div>
+                                    <h5 class="card-title mb-2">Portfolio Personnel</h5>
+                                    <div class="row g-3 mb-3">
+                                        <div class="col-6 border-end border-secondary border-opacity-25">
+                                            <div class="d-flex flex-column h-100">
+                                                <span class="text-uppercase text-muted small fw-bold mb-1" style="font-size:0.7rem;">Design</span>
+                                                <h6 class="text-accent mb-1 small"><i class="fa-solid fa-palette me-1"></i>Glassmorphism</h6>
+                                                <p class="card-text text-light-muted small mb-0">UI moderne avec thème jour/nuit et animations CSS.</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="d-flex flex-column h-100">
+                                                <span class="text-uppercase text-muted small fw-bold mb-1" style="font-size:0.7rem;">Front-end</span>
+                                                <h6 class="text-accent mb-1 small"><i class="fa-brands fa-bootstrap me-1"></i>Bootstrap 5</h6>
+                                                <p class="card-text text-light-muted small mb-0">100% responsive, sans framework JS.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tags mt-auto">
+                                        <span class="badge-tech"><i class="fa-brands fa-html5 me-1"></i>HTML5</span>
+                                        <span class="badge-tech"><i class="fa-brands fa-css3-alt me-1"></i>CSS3</span>
+                                        <span class="badge-tech"><i class="fa-brands fa-js me-1"></i>JavaScript</span>
+                                        <span class="badge-tech"><i class="fa-brands fa-bootstrap me-1"></i>Bootstrap</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
                     </div>
 
                 </div>
             </div>
         </section>
-
-        <!-- Modal GestTravaux -->
-        <div id="modal-gesttravaux" class="modal">
-            <div class="modal-content text-start">
-                <span class="close-btn" onclick="closeModal('modal-gesttravaux')">&times;</span>
-                <h2 class="section-title mb-3">GestTravaux - En détails</h2>
-                <span class="badge bg-secondary mb-3">Projet Scolaire (BTS SIO)</span>
-
-                <p class="text-light-muted mb-4">
-                    <strong>Contexte :</strong> Projet de 2ème année de BTS SIO.<br>
-                    Ce projet consiste à développer une solution logicielle pour faciliter la communication et la gestion entre les différents acteurs d'un chantier immobilier.
-                </p>
-
-                <h5 class="text-accent mb-2"><i class="fa-solid fa-list-check me-2"></i>Fonctionnalités clés</h5>
-                <ul class="text-light-muted small mb-4">
-                    <li>Gestion multi-rôles (Administrateur, Gestionnaire, Inspecteur, Entrepreneur, Propriétaire)</li>
-                    <li>Gestion des biens immobiliers et suivi des chantiers</li>
-                    <li>Système de connexion sécurisé</li>
-                    <li>Suivi des prestations et planning</li>
-                </ul>
-
-                <h5 class="text-accent mb-2"><i class="fa-solid fa-layer-group me-2"></i>Architecture Technique</h5>
-                <ul class="text-light-muted small mb-4">
-                    <li><strong>Architecture MVC :</strong> Structuration en couches (Controllers, Services, Repositories, Entities/DTO).</li>
-                    <li><strong>Base de données :</strong> Modélisation et requêtes SQL avec JDBC/Connector MySQL.</li>
-                    <li><strong>Interface :</strong> Vues réalisées avec FXML (SceneBuilder) et stylisées avec CSS.</li>
-                    <li><strong>Outils :</strong> Maven pour la gestion des dépendances.</li>
-                </ul>
-
-                <div class="d-flex justify-content-end mt-4">
-                    <button class="btn btn-outline-light rounded-pill btn-sm" onclick="closeModal('modal-gesttravaux')">Fermer</button>
-                    <a href="https://github.com/Jeremybitton" target="_blank" class="btn btn-primary rounded-pill btn-sm ms-2">
-                        <i class="fa-brands fa-github me-2"></i>Voir le dépôt
-                    </a>
-                </div>
-            </div>
-        </div>
 
         <!-- ════════ EXPÉRIENCES PROFESSIONNELLES ════════ -->
         <section id="experiences" class="py-5">
