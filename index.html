@@ -115,6 +115,102 @@
             </div>
         </section>
 
+        <!-- ════════ PROJETS PERSONNELS ════════ -->
+        <section id="personal-projects" class="py-5">
+            <div class="container">
+                <h2 class="section-title text-center mb-5">Projets Personnels</h2>
+                <div class="row g-4 justify-content-center">
+
+                    <div class="col-md-6 col-lg-4">
+                        <div class="project-card image-card h-100">
+                            <div class="project-img-wrapper">
+                                <img src="images/personal_project_placeholder.png" alt="Projet Perso"
+                                     class="project-img">
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">Mon Site Portfolio</h5>
+                                <p class="card-text text-light-muted small">
+                                    Le site sur lequel vous naviguez actuellement ! Conçu avec HTML, CSS et Bootstrap.
+                                    Inclut un mode sombre/clair et un design responsive.
+                                </p>
+                                <div class="tags">
+                                    <span class="badge-tech">HTML5</span>
+                                    <span class="badge-tech">CSS3</span>
+                                    <span class="badge-tech">Bootstrap</span>
+                                    <span class="badge-tech">JavaScript</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-lg-4">
+                        <div class="project-card image-card h-100">
+                            <div class="project-img-wrapper position-relative">
+                                <img src="images/personal_project_placeholder.png" alt="Aperçu GestTravaux" class="project-img">
+                                <div class="project-overlay d-flex align-items-center justify-content-center position-absolute top-0 start-0 w-100 h-100" style="background: rgba(0,0,0,0.6); opacity: 0; transition: opacity 0.3s;">
+                                    <button class="btn btn-primary rounded-pill btn-sm" onclick="openModal('modal-gesttravaux')">Détails du projet</button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title">GestTravaux (ImmoSync)</h5>
+                                <p class="card-text text-light-muted small">Application Desktop JavaFX pour la gestion immobilière et le suivi de chantier.</p>
+                                <div class="tags">
+                                    <span class="badge-tech">Java</span>
+                                    <span class="badge-tech">JavaFX</span>
+                                    <span class="badge-tech">MySQL</span>
+                                    <span class="badge-tech">MVC</span>
+                                </div>
+                                <div class="mt-3">
+                                    <a href="https://github.com/Jeremybitton" target="_blank"
+                                        class="small text-accent text-decoration-none">
+                                        <i class="fa-brands fa-github me-1"></i> Code source
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- Modal GestTravaux -->
+        <div id="modal-gesttravaux" class="modal">
+            <div class="modal-content text-start">
+                <span class="close-btn" onclick="closeModal('modal-gesttravaux')">&times;</span>
+                <h2 class="section-title mb-3">GestTravaux - En détails</h2>
+                <span class="badge bg-secondary mb-3">Projet Scolaire (BTS SIO)</span>
+
+                <p class="text-light-muted mb-4">
+                    <strong>Contexte :</strong> Projet de 2ème année de BTS SIO.<br>
+                    Ce projet consiste à développer une solution logicielle pour faciliter la communication et la gestion entre les différents acteurs d'un chantier immobilier.
+                </p>
+
+                <h5 class="text-accent mb-2"><i class="fa-solid fa-list-check me-2"></i>Fonctionnalités clés</h5>
+                <ul class="text-light-muted small mb-4">
+                    <li>Gestion multi-rôles (Administrateur, Gestionnaire, Inspecteur, Entrepreneur, Propriétaire)</li>
+                    <li>Gestion des biens immobiliers et suivi des chantiers</li>
+                    <li>Système de connexion sécurisé</li>
+                    <li>Suivi des prestations et planning</li>
+                </ul>
+
+                <h5 class="text-accent mb-2"><i class="fa-solid fa-layer-group me-2"></i>Architecture Technique</h5>
+                <ul class="text-light-muted small mb-4">
+                    <li><strong>Architecture MVC :</strong> Structuration en couches (Controllers, Services, Repositories, Entities/DTO).</li>
+                    <li><strong>Base de données :</strong> Modélisation et requêtes SQL avec JDBC/Connector MySQL.</li>
+                    <li><strong>Interface :</strong> Vues réalisées avec FXML (SceneBuilder) et stylisées avec CSS.</li>
+                    <li><strong>Outils :</strong> Maven pour la gestion des dépendances.</li>
+                </ul>
+
+                <div class="d-flex justify-content-end mt-4">
+                    <button class="btn btn-outline-light rounded-pill btn-sm" onclick="closeModal('modal-gesttravaux')">Fermer</button>
+                    <a href="https://github.com/Jeremybitton" target="_blank" class="btn btn-primary rounded-pill btn-sm ms-2">
+                        <i class="fa-brands fa-github me-2"></i>Voir le dépôt
+                    </a>
+                </div>
+            </div>
+        </div>
+
         <!-- ════════ EXPÉRIENCES PROFESSIONNELLES ════════ -->
         <section id="experiences" class="py-5">
             <div class="container">
@@ -185,8 +281,8 @@
                                 <div class="project-img-wrapper">
                                     <div class="d-flex align-items-center justify-content-center bg-light p-4"
                                         style="height:100%;">
-                                        <img src="images/allperf_logo.svg" alt="Allperf" class="img-fluid"
-                                            style="max-height: 120px; width: auto;">
+                                        <img src="images/allperf-logo.png" class="img-fluid"
+                                            style="max-height: 180px; width: auto;">
                                     </div>
                                 </div>
                                 <div class="card-body">
@@ -194,7 +290,7 @@
                                         <div class="d-flex align-items-center gap-2">
                                             <div class="icon-box-sm p-0 overflow-hidden"
                                                 style="background: rgba(255,255,255,0.9); border-radius: 8px;">
-                                                <img src="images/allperf_logo.svg" alt="Allperf Logo" width="40"
+                                                <img src="images/allperf-logo.png" alt="Allperf Logo" width="40"
                                                     height="40" style="object-fit: contain; padding: 4px;">
                                             </div>
                                             <small class="text-light-muted fw-bold">Allperf</small>
@@ -222,37 +318,6 @@
             </div>
         </section>
 
-        <!-- ════════ PROJETS PERSONNELS ════════ -->
-        <section id="personal-projects" class="py-5">
-            <div class="container">
-                <h2 class="section-title text-center mb-5">Projets Personnels</h2>
-                <div class="row g-4 justify-content-center">
-
-                    <div class="col-md-6 col-lg-4">
-                        <div class="project-card image-card h-100">
-                            <div class="project-img-wrapper">
-                                <img src="images/personal_project_placeholder.png" alt="Projet Perso"
-                                    class="project-img">
-                            </div>
-                            <div class="card-body">
-                                <h5 class="card-title">Mon Site Portfolio</h5>
-                                <p class="card-text text-light-muted small">
-                                    Le site sur lequel vous naviguez actuellement ! Conçu avec HTML, CSS et Bootstrap.
-                                    Inclut un mode sombre/clair et un design responsive.
-                                </p>
-                                <div class="tags">
-                                    <span class="badge-tech">HTML5</span>
-                                    <span class="badge-tech">CSS3</span>
-                                    <span class="badge-tech">Bootstrap</span>
-                                    <span class="badge-tech">JavaScript</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
 
         <!-- ════════ COMPÉTENCES TECHNIQUES ════════ -->
         <section id="skills" class="py-5">
@@ -686,17 +751,16 @@
                             <small>Fichier Excel complet avec toutes les réalisations professionnelles</small>
                         </p>
                         <div class="d-flex flex-wrap justify-content-center gap-3">
-                            <a href="documents/tableau_synthese_E5_BTS_SIO_2026.xlsx" download class="btn-download-cv">
+                            <a href="documents/EPREUVE_E5_TABLEAU_DE_SYNTHESE_-_BTS_SIO_2026.xlsx" download class="btn-download-cv">
                                 <i class="fa-solid fa-download"></i> Télécharger le tableau
                             </a>
-                            <a href="https://view.officeapps.live.com/op/view.aspx?src=https%3A%2F%2Fjeremybitton.github.io%2FPorteFolio%2Fdocuments%2Ftableau_synthese_E5_BTS_SIO_2026.xlsx"
-                                target="_blank" class="btn-view-cv">
-                                <i class="fa-solid fa-up-right-from-square"></i> Ouvrir dans le navigateur
+                            <a href="documents/EPREUVE_E5_TABLEAU_DE_SYNTHESE_-_BTS_SIO_2026.pdf" target="_blank"
+                                class="btn-view-cv">
+                                <i class="fa-solid fa-up-right-from_square"></i> Ouvrir dans le navigateur
                             </a>
                         </div>
                         <div class="mt-4 d-flex flex-wrap justify-content-center gap-2">
-                            <span class="badge-tech"><i class="fa-solid fa-file-excel me-1"></i>Format Excel
-                                (.xlsx)</span>
+                            <span class="badge-tech"><i class="fa-solid fa-file-excel me-1"></i>Excel & PDF</span>
                             <span class="badge-tech"><i class="fa-solid fa-language me-1"></i>Français</span>
                             <span class="badge-tech"><i class="fa-solid fa-graduation-cap me-1"></i>BTS SIO SLAM
                                 2026</span>

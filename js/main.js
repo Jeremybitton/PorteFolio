@@ -220,5 +220,74 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 4000);
     }
 
-});
+    // ═══════════════════════════════════════
+    //  SCROLLSPY EST BASIQUE
+    // ═══════════════════════════════════════
+    const mainNavLinks = document.querySelectorAll('#navbarNav .nav-link');
+    const mainSections = document.querySelectorAll('section');
 
+    function updateActiveLink() {
+        let currentSection = '';
+        
+        mainSections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            // Ajustement pour la navbar fixe (~120px)
+            if (window.scrollY >= (sectionTop - 150)) {
+                currentSection = section.getAttribute('id');
+            }
+        });
+
+        mainNavLinks.forEach(link => {
+            link.classList.remove('active');
+            const href = link.getAttribute('href');
+            if (currentSection && href && href.includes('#' + currentSection)) {
+                link.classList.add('active');
+            }
+        });
+    }
+    
+    window.addEventListener('scroll', updateActiveLink);
+    // Appel initial au cas où on charge la page au milieu
+    updateActiveLink();
+
+    // ═══════════════════════════════════════
+    //  GESTION DES MODALES (Projets Personnels)
+    // ═══════════════════════════════════════
+    window.openModal = function(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // Empêche le scroll en arrière-plan
+        }
+    };
+
+    window.closeModal = function(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto'; // Réactive le scroll
+        }
+    };
+
+    // Fermer la modale si on clique en dehors
+    window.addEventListener('click', (e) => {
+        if (e.target.classList.contains('modal')) {
+            e.target.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    });
+
+    // Fermer avec Echap
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (modal.style.display === 'flex') {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+        }
+    });
+
+});
