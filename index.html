@@ -121,50 +121,67 @@
                 <h2 class="section-title text-center mb-5">Projets Personnels</h2>
                 <div class="row g-4 justify-content-center">
 
-                    <div class="col-md-6 col-lg-4">
+                    <div class="col-md-6">
                         <div class="project-card image-card h-100">
-                            <div class="project-img-wrapper">
-                                <img src="images/personal_project_placeholder.png" alt="Projet Perso"
-                                     class="project-img">
-                            </div>
+                            <a href="immosync.html" class="text-decoration-none">
+                                <div class="project-img-wrapper position-relative">
+                                    <img src="images/immosync-java/img.png" alt="ImmoSync Desktop" class="project-img">
+                                    <div class="project-overlay d-flex flex-column align-items-center justify-content-center position-absolute top-0 start-0 w-100 h-100" style="background: rgba(0,0,0,0.7); opacity: 0; transition: opacity 0.3s;">
+                                        <i class="fa-brands fa-java fa-3x text-white mb-2"></i>
+                                        <span class="btn btn-primary rounded-pill btn-sm">Découvrir la version Desktop</span>
+                                    </div>
+                                </div>
+                            </a>
                             <div class="card-body">
-                                <h5 class="card-title">Mon Site Portfolio</h5>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h5 class="card-title mb-0">ImmoSync Java (GestTravaux)</h5>
+                                    <span class="badge bg-primary">Desktop</span>
+                                </div>
                                 <p class="card-text text-light-muted small">
-                                    Le site sur lequel vous naviguez actuellement ! Conçu avec HTML, CSS et Bootstrap.
-                                    Inclut un mode sombre/clair et un design responsive.
+                                    Application de gestion immobilière lourde. Focus sur l'architecture <strong>MVC</strong>, la gestion des rôles (RBAC) et l'interaction directe avec une base <strong>MySQL</strong>.
                                 </p>
-                                <div class="tags">
-                                    <span class="badge-tech">HTML5</span>
-                                    <span class="badge-tech">CSS3</span>
-                                    <span class="badge-tech">Bootstrap</span>
-                                    <span class="badge-tech">JavaScript</span>
+                                <div class="tags mb-3">
+                                    <span class="badge-tech"><i class="fa-brands fa-java me-1"></i>JavaFX</span>
+                                    <span class="badge-tech"><i class="fa-solid fa-database me-1"></i>MySQL</span>
+                                    <span class="badge-tech">SceneBuilder</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <a href="https://github.com/Jeremybitton" target="_blank" class="small text-accent text-decoration-none">
+                                        <i class="fa-brands fa-github me-1"></i> Source
+                                    </a>
+                                    <a href="immosync.html" class="small text-white text-decoration-none">Détails <i class="fa-solid fa-arrow-right"></i></a>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-md-6 col-lg-4">
+                    <div class="col-md-6">
                         <div class="project-card image-card h-100">
                             <div class="project-img-wrapper position-relative">
-                                <img src="images/personal_project_placeholder.png" alt="Aperçu GestTravaux" class="project-img">
-                                <div class="project-overlay d-flex align-items-center justify-content-center position-absolute top-0 start-0 w-100 h-100" style="background: rgba(0,0,0,0.6); opacity: 0; transition: opacity 0.3s;">
-                                    <button class="btn btn-primary rounded-pill btn-sm" onclick="openModal('modal-gesttravaux')">Détails du projet</button>
+                                <img src="images/immosync-web/img.png" alt="ImmoSync Web" class="project-img">
+                                <div class="project-overlay d-flex flex-column align-items-center justify-content-center position-absolute top-0 start-0 w-100 h-100" style="background: rgba(0,0,0,0.7); opacity: 0; transition: opacity 0.3s;">
+                                    <i class="fa-brands fa-php fa-3x text-white mb-2"></i>
+                                    <span class="badge bg-warning text-dark mb-2">En développement</span>
                                 </div>
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">GestTravaux (ImmoSync)</h5>
-                                <p class="card-text text-light-muted small">Application Desktop JavaFX pour la gestion immobilière et le suivi de chantier.</p>
-                                <div class="tags">
-                                    <span class="badge-tech">Java</span>
-                                    <span class="badge-tech">JavaFX</span>
-                                    <span class="badge-tech">MySQL</span>
-                                    <span class="badge-tech">MVC</span>
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <h5 class="card-title mb-0">ImmoSync Web</h5>
+                                    <span class="badge bg-info text-dark">SaaS / Web</span>
                                 </div>
-                                <div class="mt-3">
-                                    <a href="https://github.com/Jeremybitton" target="_blank"
-                                        class="small text-accent text-decoration-none">
-                                        <i class="fa-brands fa-github me-1"></i> Code source
-                                    </a>
+                                <p class="card-text text-light-muted small">
+                                    Adaptation de la solution en version Web. Interface responsive pour les techniciens sur le terrain et tableau de bord client en temps réel.
+                                </p>
+                                <div class="tags mb-3">
+                                    <span class="badge-tech"><i class="fa-brands fa-php me-1"></i>PHP</span>
+                                    <span class="badge-tech"><i class="fa-brands fa-bootstrap me-1"></i>Bootstrap</span>
+                                    <span class="badge-tech"><i class="fa-solid fa-code me-1"></i>PDO</span>
+                                </div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="small text-muted fst-italic">Bientôt disponible</span>
+                                    <div class="icon-circle" style="width: 30px; height: 30px; font-size: 0.8rem;">
+                                        <i class="fa-solid fa-globe"></i>
+                                    </div>
                                 </div>
                             </div>
                         </div>
