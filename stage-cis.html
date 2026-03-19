@@ -4,992 +4,1175 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Projet CIS - Automatisation & Sécurité</title>
+    <title>Stage AllPerf - CIS Databases</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/stage-placo.css"> <!-- We reuse the same stylesheet for consistency -->
+    <link rel="stylesheet" href="css/stage-placo.css">
     <link rel="stylesheet" href="css/gallery.css">
 
+    <style>
+        /* ─── Scroll Progress Bar ─── */
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            width: 0%;
+            background: var(--accent-gradient, linear-gradient(90deg, #7c3aed, #a78bfa));
+            z-index: 9999;
+            transition: width 0.1s linear;
+        }
+
+        /* ─── Quick Navigation ─── */
+        .quick-nav {
+            position: sticky;
+            top: 70px;
+            z-index: 100;
+            background: var(--card-bg);
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+            backdrop-filter: blur(12px);
+            padding: 0.6rem 0;
+            margin-bottom: 2rem;
+        }
+
+        .quick-nav .nav-pills .nav-link {
+            font-size: 0.78rem;
+            font-weight: 600;
+            padding: 0.35rem 0.85rem;
+            color: var(--text-muted);
+            border-radius: 50px;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+
+        .quick-nav .nav-pills .nav-link:hover,
+        .quick-nav .nav-pills .nav-link.active {
+            color: var(--accent);
+            background: rgba(var(--accent-rgb), 0.12);
+        }
+
+        .quick-nav-scroll {
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+        .quick-nav-scroll::-webkit-scrollbar { display: none; }
+
+        /* ─── Hero scroll hint ─── */
+        .scroll-hint {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            color: rgba(255,255,255,0.4);
+            font-size: 1.4rem;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(8px); }
+        }
+
+        /* ─── Section anchor offset ─── */
+        .section-anchor {
+            scroll-margin-top: 120px;
+        }
+
+        /* ─── Timeline ─── */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0.45rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: rgba(var(--accent-rgb), 0.2);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .timeline-item:last-child { margin-bottom: 0; }
+
+        .timeline-dot {
+            position: absolute;
+            left: -2rem;
+            top: 0.2rem;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 2px solid var(--card-bg);
+            box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.2);
+        }
+
+        .timeline-week {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--accent);
+            letter-spacing: 0.05em;
+        }
+
+        .timeline-label {
+            font-size: 0.88rem;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .timeline-desc {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        /* ─── Tech Comparison ─── */
+        .tech-comparison-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+            margin: 1.2rem 0;
+        }
+
+        .tech-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 18px;
+            flex: 1 1 260px;
+            max-width: 100%;
+            border-top: 4px solid var(--accent);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .tech-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .streamlit-card { border-top-color: #FF4B4B; }
+        .flask-card { border-top-color: #ffffff; }
+        [data-theme="light"] .flask-card { border-top-color: #000000; }
+
+        .tech-card .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+            background: transparent;
+            border-radius: 0;
+        }
+
+        .tech-card .card-header h3 {
+            margin: 0 !important;
+            font-size: 1.1rem !important;
+            color: var(--text-headings) !important;
+        }
+
+        .tech-card .badge {
+            background: rgba(var(--accent-rgb), 0.1) !important;
+            color: var(--accent) !important;
+            border: 1px solid rgba(var(--accent-rgb), 0.2) !important;
+            font-size: 0.72rem !important;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .feature-list li {
+            margin-bottom: 7px;
+            font-size: 0.83rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: flex-start;
+            gap: 7px;
+        }
+
+        .feature-list li strong { color: var(--text-primary); }
+
+        /* ─── SWOT ─── */
+        .swot-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+            margin-top: 1rem;
+        }
+
+        .swot-item {
+            padding: 14px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.02);
+            border-left: 3px solid var(--accent);
+        }
+
+        .swot-s { border-left-color: #198754; background: rgba(25, 135, 84, 0.05); }
+        .swot-w { border-left-color: #dc3545; background: rgba(220, 53, 69, 0.05); }
+        .swot-o { border-left-color: #0d6efd; background: rgba(13, 110, 253, 0.05); }
+        .swot-t { border-left-color: #ffc107; background: rgba(255, 193, 7, 0.05); }
+
+        .swot-title {
+            font-weight: 700;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            margin-bottom: 7px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            color: var(--text-headings);
+        }
+
+        /* ─── Pipeline ─── */
+        .pipeline-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            text-align: center;
+        }
+
+        .pipeline-step .step-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(var(--accent-rgb), 0.12);
+            border: 1px solid rgba(var(--accent-rgb), 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--accent);
+        }
+
+        .pipeline-step .step-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .pipeline-arrow {
+            color: rgba(var(--accent-rgb), 0.5);
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            padding-top: 0;
+        }
+
+        /* ─── Gallery filters ─── */
+        .gallery-filter {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            border-radius: 50px !important;
+            font-size: 0.82rem !important;
+            font-weight: 600 !important;
+            padding: 0.3rem 1rem !important;
+            transition: all 0.2s !important;
+        }
+
+        .filter-btn.active {
+            background: var(--accent) !important;
+            border-color: var(--accent) !important;
+            color: #fff !important;
+        }
+
+        /* ─── Back to top ─── */
+        #back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 999;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            font-size: 1rem;
+            cursor: pointer;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s, transform 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(var(--accent-rgb), 0.4);
+        }
+
+        #back-to-top.visible {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        #back-to-top:hover { transform: translateY(-3px); }
+
+        /* ─── Sidebar sticky ─── */
+        .sidebar-sticky {
+            position: sticky;
+            top: 130px;
+        }
+
+        /* ─── Objective item ─── */
+        .objective-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+            background: rgba(var(--accent-rgb), 0.03);
+            border: 1px solid rgba(var(--accent-rgb), 0.08);
+            transition: background 0.2s;
+        }
+
+        .objective-item:hover {
+            background: rgba(var(--accent-rgb), 0.07);
+        }
+
+        .objective-icon {
+            width: 36px;
+            height: 36px;
+            min-width: 36px;
+            border-radius: 10px;
+            background: rgba(var(--accent-rgb), 0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 0.95rem;
+        }
+
+        /* ─── Gallery ─── */
+        .gallery-card {
+            position: relative;
+            border-radius: 10px;
+            background: var(--card-bg);
+            border: 1px solid rgba(255,255,255,0.06);
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .gallery-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+        }
+
+        .gallery-img-wrapper {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px 10px 0 0;
+            background: #0d1117;
+            /* Fixed height so all cards align */
+            height: 175px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+        }
+
+        .gallery-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            display: block;
+            transition: transform 0.35s ease;
+        }
+
+        .gallery-card:hover .gallery-img-wrapper img {
+            transform: scale(1.04);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.2s;
+            color: #fff;
+            font-size: 1.6rem;
+            pointer-events: none;
+        }
+
+        .gallery-img-wrapper:hover .gallery-overlay { opacity: 1; }
+
+        .gallery-info {
+            padding: 8px 10px 10px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .gallery-title {
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            line-height: 1.3;
+        }
+
+        /* Sub-section label */
+        .gallery-section-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 1.5rem 0 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+        }
+
+        .gallery-section-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(255,255,255,0.07);
+        }
+
+        .gallery-section-label:first-child { margin-top: 0; }
+
+        /* ─── Competences ─── */
+        .skill-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(var(--accent-rgb), 0.07);
+            border: 1px solid rgba(var(--accent-rgb), 0.18);
+            color: var(--text-primary);
+            border-radius: 50px;
+            padding: 5px 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            margin: 3px;
+        }
+
+        .skill-pill i { color: var(--accent); font-size: 0.7rem; }
+
+        .hide { display: none !important; }
+    </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg fixed-top glass-nav">
-        <div class="container d-flex justify-content-between align-items-center">
-            <a class="navbar-brand fw-bold" href="index.html">
-                <span class="text-accent">&lt;</span>JB<span class="text-accent">/&gt;</span>
+<!-- Scroll Progress -->
+<div id="scroll-progress"></div>
+
+<!-- Back to Top -->
+<button id="back-to-top" aria-label="Retour en haut">
+    <i class="fa-solid fa-chevron-up"></i>
+</button>
+
+<nav class="navbar navbar-expand-lg fixed-top glass-nav">
+    <div class="container d-flex justify-content-between align-items-center">
+        <a class="navbar-brand fw-bold" href="index.html">
+            <span class="text-accent">&lt;</span>JB<span class="text-accent">/&gt;</span>
+        </a>
+        <div class="d-flex align-items-center gap-3">
+            <a class="btn btn-outline-light rounded-pill btn-sm px-3" href="index.html#experiences">
+                <i class="fa-solid fa-arrow-left me-2"></i>Retour
             </a>
-            <div class="d-flex align-items-center gap-3">
-                <a class="btn btn-outline-light rounded-pill btn-sm px-3" href="index.html#experiences">
-                    <i class="fa-solid fa-arrow-left me-2"></i>Retour
-                </a>
-                <button class="theme-toggle" id="themeToggle" aria-label="Changer de thème">
-                    <i class="fa-solid fa-sun"></i>
-                </button>
+            <button class="theme-toggle" id="themeToggle" aria-label="Changer de thème">
+                <i class="fa-solid fa-sun"></i>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<main class="site-frame">
+    <!-- Hero -->
+    <header class="page-hero page-hero-stage d-flex align-items-center justify-content-center text-center" style="position:relative;">
+        <div class="container">
+            <span class="badge bg-danger mb-3 px-3 py-2 rounded-pill" style="font-size:0.8rem;">
+                <i class="fa-solid fa-shield-halved me-1"></i> Sécurité & Conformité
+            </span>
+            <h1 class="display-3 fw-bold name-gradient mb-2">Stage — AllPerf BI</h1>
+            <p class="typing-text fs-4 mb-0">Automatisation CIS Databases</p>
+            <p class="text-light-muted small mt-2">Janvier – Février 2026 · 5 semaines</p>
+        </div>
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="scroll-hint"><i class="fa-solid fa-chevron-down"></i></div>
+    </header>
+
+    <!-- Quick Navigation -->
+    <div class="quick-nav">
+        <div class="container">
+            <div class="quick-nav-scroll">
+                <ul class="nav nav-pills flex-nowrap gap-1">
+                    <li class="nav-item"><a class="nav-link" href="#presentation"><i class="fa-solid fa-shield-halved me-1"></i>Présentation</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#objectifs"><i class="fa-solid fa-bullseye me-1"></i>Objectifs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#deroulement"><i class="fa-solid fa-calendar-check me-1"></i>Déroulement</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#architecture"><i class="fa-solid fa-diagram-project me-1"></i>Architecture</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#swot"><i class="fa-solid fa-magnifying-glass-chart me-1"></i>SWOT</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#galerie"><i class="fa-solid fa-images me-1"></i>Galerie</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#bilan"><i class="fa-solid fa-flag-checkered me-1"></i>Bilan</a></li>
+                </ul>
             </div>
         </div>
-    </nav>
+    </div>
 
-    <main class="site-frame">
+    <div class="container main-content position-relative z-2">
 
-        <header class="page-hero page-hero-cis d-flex align-items-center justify-content-center text-center">
-            <div class="container">
-                <h1 class="display-3 fw-bold name-gradient mb-2">Automatisation CIS</h1>
-                <p class="typing-text fs-4">Audit de Sécurité & Conformité</p>
-            </div>
-            <div class="shape shape-1"></div>
-            <div class="shape shape-2"></div>
-        </header>
-
-        <div class="container main-content position-relative z-2">
-
-            <!-- Header Card : Compacte -->
-            <div class="project-card p-3 mb-4">
-                <div class="row align-items-center gy-3">
-                    <div class="col-md-4 text-center text-md-start">
-                        <div class="p-2 rounded-3 d-inline-block shadow-sm" style="background: rgba(255,255,255,0.1);">
-                            <i class="fa-solid fa-shield-halved fa-3x text-white"></i>
-                        </div>
-                    </div>
-                    <div class="col-md-5 text-center text-md-start">
-                        <span class="badge-tech mb-1 d-inline-block">Stage chez Allperf — 2026</span>
-                        <p class="text-light-muted small mb-0"><i class="fa-regular fa-calendar-days me-2"></i>Du 5
-                            janvier au 6 février 2026</p>
-                    </div>
-                    <div class="col-md-3 text-center text-md-end">
+        <!-- Info banner -->
+        <div class="project-card p-3 mb-4">
+            <div class="row align-items-center gy-3">
+                <div class="col-md-4 text-center text-md-start">
+                    <div class="p-2 rounded-3 d-inline-block shadow-sm" style="background: rgba(255,255,255,0.9);">
+                        <img src="images/allperf-logo.png" alt="AllPerf Business Intelligence" class="img-fluid" style="max-height: 50px; width: auto;">
                     </div>
                 </div>
+                <div class="col-md-5 text-center text-md-start">
+                    <span class="badge-tech mb-1 d-inline-block">AllPerf Business Intelligence</span>
+                    <p class="text-light-muted small mb-0"><i class="fa-regular fa-calendar-days me-2"></i>Janvier – Février 2026</p>
+                </div>
+                <div class="col-md-3 text-center text-md-end">
+                    <span class="badge bg-success-subtle text-success border border-success-subtle px-3 py-2 rounded-pill">
+                        <i class="fa-solid fa-check-circle me-1"></i> Projet Terminé
+                    </span>
+                </div>
             </div>
+        </div>
 
-            <div class="row gy-4">
-                <!-- Main Content Column -->
-                <div class="col-lg-8">
+        <!-- KPI Cards -->
+        <div class="row g-3 mb-4">
+            <div class="col-6 col-md-3">
+                <div class="project-card text-center py-4 h-100">
+                    <h3 class="display-6 fw-bold text-accent mb-1">5</h3>
+                    <p class="small text-uppercase mb-0">Scripts Livrés</p>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="project-card text-center py-4 h-100">
+                    <h3 class="display-6 fw-bold text-accent mb-1">5</h3>
+                    <p class="small text-uppercase mb-0">Semaines</p>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="project-card text-center py-4 h-100">
+                    <h3 class="display-6 fw-bold text-accent mb-1">7+</h3>
+                    <p class="small text-uppercase mb-0">Technologies</p>
+                </div>
+            </div>
+            <div class="col-6 col-md-3">
+                <div class="project-card text-center py-4 h-100">
+                    <h3 class="display-6 fw-bold text-accent mb-1">3</h3>
+                    <p class="small text-uppercase mb-0">SGBD Ciblés</p>
+                </div>
+            </div>
+        </div>
 
-                    <!-- À Propos de Allperf -->
-                    <div class="project-card mb-4">
-                        <div class="d-flex align-items-center mb-3">
-                            <div class="p-2 rounded bg-white me-3"
-                                style="width: 60px; height: 60px; display: flex; align-items: center; justify-content: center;">
-                                <img src="images/allperf-logo.png" alt="Logo Allperf" class="img-fluid">
-                            </div>
-                            <div>
-                                <h2 class="section-title mb-0">Allperf</h2>
-                                <p class="text-accent small mb-0 fw-bold">Business Intelligence & Dématérialisation</p>
-                            </div>
-                        </div>
+        <!-- Main Layout -->
+        <div class="row gy-4">
 
-                        <p class="text-light-muted mb-3">
-                            Société d'informatique issue de la <strong>recherche électronique et informatique</strong>,
-                            Allperf est un acteur clé dans l'édition de logiciels de dématérialisation.
-                            Membre de la <strong>FNTC</strong> (Fédération Nationale des Tiers de Confiance), elle
-                            propose des solutions SaaS sécurisées pour la signature électronique et l'hébergement de
-                            documents légaux, en stricte conformité avec les directives européennes.
-                        </p>
+            <!-- ── Left Column ── -->
+            <div class="col-lg-8">
 
-                        <div class="row g-2 mt-2">
-                            <div class="col-sm-4">
-                                <div class="p-2 rounded border border-secondary bg-dark-soft text-center">
-                                    <i class="fa-solid fa-file-signature text-primary mb-1"></i>
-                                    <p class="small text-white mb-0 fw-bold">Signature Élec.</p>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="p-2 rounded border border-secondary bg-dark-soft text-center">
-                                    <i class="fa-solid fa-server text-success mb-1"></i>
-                                    <p class="small text-white mb-0 fw-bold">Solutions SaaS</p>
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="p-2 rounded border border-secondary bg-dark-soft text-center">
-                                    <i class="fa-solid fa-shield-halved text-warning mb-1"></i>
-                                    <p class="small text-white mb-0 fw-bold">Tiers de Confiance</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Fiche d'identité juridique -->
-                    <div class="project-card mb-4">
-                        <span class="text-uppercase text-accent fw-bold small mb-2 d-block">CEJM</span>
-                        <h2 class="section-title mb-3"><i class="fa-solid fa-id-card me-2"></i>Fiche d'identité de
-                            l'entreprise</h2>
-
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <div class="p-3 rounded bg-dark-soft border border-secondary h-100">
-                                    <p class="text-uppercase text-light-muted small fw-bold mb-1"
-                                        style="font-size:0.7rem;">Raison sociale</p>
-                                    <p class="text-white fw-bold mb-0">Allperf</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="p-3 rounded bg-dark-soft border border-secondary h-100">
-                                    <p class="text-uppercase text-light-muted small fw-bold mb-1"
-                                        style="font-size:0.7rem;">Forme juridique</p>
-                                    <p class="text-white fw-bold mb-0">SAS (Société par Actions Simplifiée)</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="p-3 rounded bg-dark-soft border border-secondary h-100">
-                                    <p class="text-uppercase text-light-muted small fw-bold mb-1"
-                                        style="font-size:0.7rem;">Secteur d'activité</p>
-                                    <p class="text-white fw-bold mb-0">Services numériques — Éditeur de logiciels</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="p-3 rounded bg-dark-soft border border-secondary h-100">
-                                    <p class="text-uppercase text-light-muted small fw-bold mb-1"
-                                        style="font-size:0.7rem;">Spécialisation</p>
-                                    <p class="text-white fw-bold mb-0">Dématérialisation & Tiers de confiance</p>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="p-3 rounded bg-dark-soft border border-secondary text-center h-100">
-                                    <p class="text-uppercase text-light-muted small fw-bold mb-1"
-                                        style="font-size:0.7rem;">Taille</p>
-                                    <p class="text-accent fw-bold mb-0 fs-5">PME</p>
-                                    <p class="small text-light-muted mb-0">
-                                        < 50 salariés</p>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="p-3 rounded bg-dark-soft border border-secondary text-center h-100">
-                                    <p class="text-uppercase text-light-muted small fw-bold mb-1"
-                                        style="font-size:0.7rem;">Membre</p>
-                                    <p class="text-accent fw-bold mb-0 fs-5">FNTC</p>
-                                    <p class="small text-light-muted mb-0">Fédération Nationale des Tiers de Confiance
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="p-3 rounded bg-dark-soft border border-secondary text-center h-100">
-                                    <p class="text-uppercase text-light-muted small fw-bold mb-1"
-                                        style="font-size:0.7rem;">Modèle</p>
-                                    <p class="text-accent fw-bold mb-0 fs-5">SaaS</p>
-                                    <p class="small text-light-muted mb-0">Software as a Service</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="alert alert-light border-start border-info border-4 text-white bg-dark-soft p-3 mt-3 mb-0"
-                            role="alert">
-                            <i class="fa-solid fa-circle-info me-2 text-info"></i>
-                            <strong>Type de société :</strong> En tant que <strong>SAS (Société par Actions
-                                Simplifiée)</strong>, Allperf bénéficie d'une grande souplesse statutaire avec un
-                            Président comme dirigeant. La responsabilité des associés est limitée à leurs apports. C'est
-                            la forme juridique privilégiée par les PME innovantes du secteur numérique.
-                        </div>
-                    </div>
-
-                    <!-- Environnement économique -->
-                    <div class="project-card mb-4">
-                        <span class="text-uppercase text-accent fw-bold small mb-2 d-block">CEJM — Environnement
-                            économique</span>
-                        <h2 class="section-title mb-3"><i class="fa-solid fa-chart-line me-2"></i>Environnement
-                            économique</h2>
-
-                        <div class="row g-3 mb-3">
-                            <div class="col-md-6">
-                                <div class="p-3 rounded h-100 border border-secondary"
-                                    style="background: rgba(255, 255, 255, 0.03);">
-                                    <h6 class="text-accent fw-bold mb-2"><i
-                                            class="fa-solid fa-building-columns me-2"></i>Marché</h6>
-                                    <p class="small text-light-muted mb-0">
-                                        Le marché de la <strong>cybersécurité</strong> et de la
-                                        <strong>dématérialisation</strong> est en forte croissance (+12%/an en France).
-                                        La transformation numérique des entreprises et les obligations réglementaires
-                                        (eIDAS, RGPD) stimulent la demande de solutions de confiance numérique.
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="p-3 rounded h-100 border border-secondary"
-                                    style="background: rgba(255, 255, 255, 0.03);">
-                                    <h6 class="text-accent fw-bold mb-2"><i
-                                            class="fa-solid fa-users me-2"></i>Concurrence</h6>
-                                    <p class="small text-light-muted mb-0">
-                                        Allperf évolue dans un écosystème concurrentiel face à des acteurs comme
-                                        <strong>DocuSign</strong>, <strong>Yousign</strong>,
-                                        <strong>Certeurope</strong>. Son positionnement de niche (tiers de confiance
-                                        FNTC) et sa maîtrise du cadre réglementaire européen constituent ses avantages
-                                        différenciants.
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="p-3 rounded bg-dark-soft border border-secondary">
-                            <h6 class="text-white fw-bold mb-2"><i
-                                    class="fa-solid fa-scale-balanced me-2 text-accent"></i>Réglementation</h6>
-                            <p class="small text-light-muted mb-0">
-                                Le secteur est encadré par le règlement européen <strong>eIDAS</strong> (identification
-                                électronique et services de confiance), le <strong>RGPD</strong>, la directive
-                                <strong>NIS2</strong> (certification de l'organization of standardization) (sécurité des réseaux et systèmes d'information) et les normes
-                                <strong>ISO 27001</strong> (certification de sécurité de l'internationnal)pour la gestion de la sécurité de l'information.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Analyse SWOT -->
-                    <div class="project-card mb-4">
-                        <span class="text-uppercase text-accent fw-bold small mb-2 d-block">CEJM — Stratégie</span>
-                        <h2 class="section-title mb-3"><i class="fa-solid fa-chart-pie me-2"></i>Analyse SWOT</h2>
-
-                        <div class="row g-3">
-                            <!-- Forces -->
-                            <div class="col-md-6">
-                                <div class="p-3 rounded h-100 border border-success border-opacity-25"
-                                    style="background: rgba(25, 135, 84, 0.1);">
-                                    <h5 class="text-success fw-bold mb-3"><i class="fa-solid fa-bolt me-2"></i>Forces
-                                    </h5>
-                                    <ul class="list-unstyled mb-0 text-light-muted small">
-                                        <li class="mb-2"><i
-                                                class="fa-solid fa-check text-success me-2"></i><strong>Expertise
-                                                reconnue</strong> en dématérialisation et tiers de confiance (FNTC).
-                                        </li>
-                                        <li class="mb-2"><i class="fa-solid fa-check text-success me-2"></i>Solutions
-                                            <strong>SaaS conformes</strong> aux normes européennes (eIDAS).
-                                        </li>
-                                        <li><i class="fa-solid fa-check text-success me-2"></i>Équipe technique
-                                            spécialisée en <strong>cybersécurité</strong> et audit.</li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <!-- Faiblesses -->
-                            <div class="col-md-6">
-                                <div class="p-3 rounded h-100 border border-warning border-opacity-25"
-                                    style="background: rgba(255, 193, 7, 0.1);">
-                                    <h5 class="text-warning fw-bold mb-3"><i
-                                            class="fa-solid fa-triangle-exclamation me-2"></i>Faiblesses</h5>
-                                    <ul class="list-unstyled mb-0 text-light-muted small">
-                                        <li class="mb-2"><i
-                                                class="fa-solid fa-minus text-warning me-2"></i><strong>Taille
-                                                limitée</strong> (PME) face aux grands éditeurs internationaux.</li>
-                                        <li><i class="fa-solid fa-minus text-warning me-2"></i>Notoriété
-                                            <strong>moindre</strong> par rapport aux leaders du marché (DocuSign, Adobe
-                                            Sign).
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <!-- Opportunités -->
-                            <div class="col-md-6">
-                                <div class="p-3 rounded h-100 border border-info border-opacity-25"
-                                    style="background: rgba(13, 202, 240, 0.1);">
-                                    <h5 class="text-info fw-bold mb-3"><i
-                                            class="fa-solid fa-lightbulb me-2"></i>Opportunités</h5>
-                                    <ul class="list-unstyled mb-0 text-light-muted small">
-                                        <li class="mb-2"><i
-                                                class="fa-solid fa-arrow-trend-up text-info me-2"></i><strong>Croissance
-                                                du marché</strong> cybersécurité (+12%/an) et obligations de conformité.
-                                        </li>
-                                        <li><i class="fa-solid fa-arrow-trend-up text-info me-2"></i>Directive
-                                            <strong>NIS2</strong> imposant des audits de sécurité aux entreprises
-                                            européennes.
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <!-- Menaces -->
-                            <div class="col-md-6">
-                                <div class="p-3 rounded h-100 border border-danger border-opacity-25"
-                                    style="background: rgba(220, 53, 69, 0.1);">
-                                    <h5 class="text-danger fw-bold mb-3"><i
-                                            class="fa-solid fa-shield-halved me-2"></i>Menaces</h5>
-                                    <ul class="list-unstyled mb-0 text-light-muted small">
-                                        <li class="mb-2"><i class="fa-solid fa-xmark text-danger me-2"></i>Concurrence
-                                            des <strong>géants du cloud</strong> (AWS, Azure, Google) proposant des
-                                            solutions intégrées.</li>
-                                        <li><i class="fa-solid fa-xmark text-danger me-2"></i>Évolution rapide des
-                                            <strong>cybermenaces</strong> nécessitant des investissements constants en
-                                            R&D.
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- RSE -->
-                    <div class="project-card mb-4">
-                        <span class="text-uppercase text-accent fw-bold small mb-2 d-block">CEJM — Responsabilité
-                            sociétale</span>
-                        <h2 class="section-title mb-3"><i class="fa-solid fa-leaf me-2"></i>Démarche RSE</h2>
-
-                        <p class="text-light-muted mb-3">
-                            En tant que PME du numérique, Allperf intègre les enjeux de responsabilité sociétale à son
-                            activité :
-                        </p>
-
-                        <div class="row g-3">
-                            <div class="col-md-4">
-                                <div class="p-3 rounded h-100 border border-success border-opacity-25"
-                                    style="background: rgba(25, 135, 84, 0.1);">
-                                    <div class="text-center mb-2">
-                                        <i class="fa-solid fa-server fa-2x text-success"></i>
-                                    </div>
-                                    <h6 class="text-success fw-bold text-center mb-2">Numérique responsable</h6>
-                                    <ul class="list-unstyled mb-0 text-light-muted small">
-                                        <li class="mb-1"><i
-                                                class="fa-solid fa-check text-success me-2"></i><strong>Hébergement en
-                                                France</strong> (data centers certifiés)</li>
-                                        <li class="mb-1"><i
-                                                class="fa-solid fa-check text-success me-2"></i>Dématérialisation =
-                                            <strong>réduction du papier</strong>
-                                        </li>
-                                        <li><i class="fa-solid fa-check text-success me-2"></i>Optimisation des
-                                            ressources serveur (Green IT)</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="p-3 rounded h-100 border border-info border-opacity-25"
-                                    style="background: rgba(13, 202, 240, 0.1);">
-                                    <div class="text-center mb-2">
-                                        <i class="fa-solid fa-users fa-2x text-info"></i>
-                                    </div>
-                                    <h6 class="text-info fw-bold text-center mb-2">Social</h6>
-                                    <ul class="list-unstyled mb-0 text-light-muted small">
-                                        <li class="mb-1"><i class="fa-solid fa-check text-info me-2"></i>Accueil de
-                                            <strong>stagiaires</strong> et alternants
-                                        </li>
-                                        <li class="mb-1"><i class="fa-solid fa-check text-info me-2"></i>Formation
-                                            continue des équipes techniques</li>
-                                        <li><i class="fa-solid fa-check text-info me-2"></i>Flexibilité du travail
-                                            (télétravail)</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="p-3 rounded h-100 border border-warning border-opacity-25"
-                                    style="background: rgba(255, 193, 7, 0.1);">
-                                    <div class="text-center mb-2">
-                                        <i class="fa-solid fa-lock fa-2x text-warning"></i>
-                                    </div>
-                                    <h6 class="text-warning fw-bold text-center mb-2">Éthique & Confiance</h6>
-                                    <ul class="list-unstyled mb-0 text-light-muted small">
-                                        <li class="mb-1"><i class="fa-solid fa-check text-warning me-2"></i>Membre
-                                            <strong>FNTC</strong> (charte de déontologie)
-                                        </li>
-                                        <li class="mb-1"><i class="fa-solid fa-check text-warning me-2"></i>Transparence
-                                            envers les clients</li>
-                                        <li><i class="fa-solid fa-check text-warning me-2"></i>Respect strict de la
-                                            <strong>confidentialité</strong>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Cadre juridique / RGPD -->
-                    <div class="project-card mb-4">
-                        <span class="text-uppercase text-accent fw-bold small mb-2 d-block">CEJM — Cadre
-                            juridique</span>
-                        <h2 class="section-title mb-3"><i class="fa-solid fa-scale-balanced me-2"></i>Cadre juridique &
-                            RGPD</h2>
-
-                        <div class="row g-3 mb-3">
-                            <div class="col-md-6">
-                                <div class="p-3 rounded h-100 border border-primary border-opacity-25"
-                                    style="background: rgba(13, 110, 253, 0.1);">
-                                    <h6 class="text-primary fw-bold mb-2"><i
-                                            class="fa-solid fa-shield-halved me-2"></i>RGPD & Protection des données
-                                    </h6>
-                                    <ul class="list-unstyled mb-0 text-light-muted small">
-                                        <li class="mb-1"><i class="fa-solid fa-check text-primary me-2"></i>Traitement
-                                            de benchmarks CIS contenant des <strong>configurations sensibles</strong>
-                                        </li>
-                                        <li class="mb-1"><i class="fa-solid fa-check text-primary me-2"></i>Conformité
-                                            au <strong>RGPD</strong> pour les données clients</li>
-                                        <li class="mb-1"><i class="fa-solid fa-check text-primary me-2"></i>Respect du
-                                            règlement <strong>eIDAS</strong> (signature électronique qualifiée)</li>
-                                        <li><i class="fa-solid fa-check text-primary me-2"></i>Hébergement des données
-                                            en <strong>France</strong> (souveraineté numérique)</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="p-3 rounded h-100 border border-secondary"
-                                    style="background: rgba(255, 255, 255, 0.03);">
-                                    <h6 class="text-accent fw-bold mb-2"><i class="fa-solid fa-gavel me-2"></i>Lien avec
-                                        ma mission</h6>
-                                    <ul class="list-unstyled mb-0 text-light-muted small">
-                                        <li class="mb-2"><i
-                                                class="fa-solid fa-shield-halved text-accent me-2"></i><strong>Automatisation
-                                                CIS :</strong> Les benchmarks CIS sont des <strong>référentiels de
-                                                sécurité</strong> utilisés pour auditer la conformité des systèmes. Mon
-                                            outil automatise l'extraction et la comparaison de ces règles.</li>
-                                        <li><i class="fa-solid fa-file-contract text-accent me-2"></i><strong>Confidentialité
-                                                :</strong> Les rapports d'audit contiennent des informations sur les
-                                            vulnérabilités des systèmes clients. Un <strong>accord de confidentialité
-                                                (NDA)</strong> encadre leur manipulation.</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="alert alert-light border-start border-primary border-4 text-white bg-dark-soft p-3 mb-0"
-                            role="alert">
-                            <i class="fa-solid fa-book me-2 text-primary"></i>
-                            <strong>Textes de référence :</strong> RGPD (UE 2016/679), Règlement eIDAS (UE 910/2014),
-                            Directive NIS2 (UE 2022/2555), Loi Informatique et Libertés (1978, modifiée 2018), Norme ISO
-                            27001, Référentiels CIS Benchmarks.
-                        </div>
-                    </div>
-
-                    <!-- À Propos du Projet -->
-                    <div class="project-card mb-4">
-                        <span class="text-uppercase text-accent fw-bold small mb-2 d-block">Contexte</span>
-                        <h2 class="section-title mb-3"><i class="fa-solid fa-laptop-code me-2"></i>Le Projet</h2>
-                        <div class="row g-4 align-items-center">
-                            <div class="col-md-12">
-                                <p class="lead mb-3">
-                                    Développement d'un outil professionnel d'<strong>extraction et de
-                                        structuration</strong> des règles de sécurité CIS (Center for Internet Security)
-                                    à partir de fichiers PDF.
-                                </p>
-                                <p class="text-light-muted">
-                                    L'objectif est d'automatiser la comparaison entre différentes versions de benchmarks
-                                    (ex: Oracle Linux 9 vs 10) et de générer des rapports d'audit exploitables pour les
-                                    équipes sécurité.
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Les 5 Scripts Développés -->
-                    <div class="project-card mb-4">
-                        <span class="text-uppercase text-accent fw-bold small mb-2 d-block">Missions</span>
-                        <h2 class="section-title mb-3"><i class="fa-solid fa-list-check me-2"></i>Les 5 scripts
-                            développés</h2>
-                        <p class="text-light-muted mb-4">Cinq scripts automatisés couvrant l'intégralité du processus de
-                            conformité CIS.</p>
-
-                        <!-- Script 1 -->
-                        <div class="d-flex mb-4">
-                            <div class="me-3 d-flex flex-column align-items-center">
-                                <div class="rounded-circle bg-primary"
-                                    style="width: 12px; height: 12px; flex-shrink: 0; margin-top: 5px;"></div>
-                                <div
-                                    style="width: 2px; flex-grow: 1; background: rgba(255,255,255,0.1); margin-top: 4px;">
-                                </div>
-                            </div>
-                            <div>
-                                <h5 class="text-white fw-bold mb-1">Script 1 — Lecture et analyse des documents CIS</h5>
-                                <p class="text-light-muted small mb-2">Extraction automatique des informations
-                                    pertinentes des documents CIS (PDF) et structuration des données en formats
-                                    exploitables pour les étapes suivantes.</p>
-                                <div class="d-flex flex-wrap gap-1">
-                                    <span class="badge-tech">Python</span><span
-                                        class="badge-tech">pdfplumber</span><span class="badge-tech">pandas</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Script 2 -->
-                        <div class="d-flex mb-4">
-                            <div class="me-3 d-flex flex-column align-items-center">
-                                <div class="rounded-circle bg-primary"
-                                    style="width: 12px; height: 12px; flex-shrink: 0; margin-top: 5px;"></div>
-                                <div
-                                    style="width: 2px; flex-grow: 1; background: rgba(255,255,255,0.1); margin-top: 4px;">
-                                </div>
-                            </div>
-                            <div>
-                                <h5 class="text-white fw-bold mb-1">Script 2 — Scan automatique des bases de données
-                                </h5>
-                                <p class="text-light-muted small mb-2">Scan des configurations des bases Oracle, MYSQL
-                                    et PostgreSQL pour identifier les paramètres non conformes aux recommandations CIS,
-                                    avec prise en compte des différences entre production et non-production.</p>
-                                <div class="d-flex flex-wrap gap-1">
-                                    <span class="badge-tech">Python</span><span class="badge-tech">Oracle</span><span
-                                        class="badge-tech">MYSQL</span><span class="badge-tech">PostgreSQL</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Script 3 -->
-                        <div class="d-flex mb-4">
-                            <div class="me-3 d-flex flex-column align-items-center">
-                                <div class="rounded-circle bg-primary"
-                                    style="width: 12px; height: 12px; flex-shrink: 0; margin-top: 5px;"></div>
-                                <div
-                                    style="width: 2px; flex-grow: 1; background: rgba(255,255,255,0.1); margin-top: 4px;">
-                                </div>
-                            </div>
-                            <div>
-                                <h5 class="text-white fw-bold mb-1">Script 3 — Visualisation des modifications</h5>
-                                <p class="text-light-muted small mb-2">Génération de rapports visuels listant clairement
-                                    toutes les modifications à effectuer pour mettre les bases de données en conformité
-                                    avec les standards CIS.</p>
-                                <div class="d-flex flex-wrap gap-1">
-                                    <span class="badge-tech">Streamlit</span><span class="badge-tech">Flask</span><span
-                                        class="badge-tech">pandas</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Script 4 -->
-                        <div class="d-flex mb-4">
-                            <div class="me-3 d-flex flex-column align-items-center">
-                                <div class="rounded-circle bg-primary"
-                                    style="width: 12px; height: 12px; flex-shrink: 0; margin-top: 5px;"></div>
-                                <div
-                                    style="width: 2px; flex-grow: 1; background: rgba(255,255,255,0.1); margin-top: 4px;">
-                                </div>
-                            </div>
-                            <div>
-                                <h5 class="text-white fw-bold mb-1">Script 4 — Collecte et remédiation</h5>
-                                <p class="text-light-muted small mb-2">Inventaire complet des non-conformités avec
-                                    génération d'un plan de remédiation détaillé. Produit un fichier de remédiation par
-                                    base de données analysée.</p>
-                                <div class="d-flex flex-wrap gap-1">
-                                    <span class="badge-tech">Python</span><span class="badge-tech">openpyxl</span><span
-                                        class="badge-tech">XlsxWriter</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Script 5 -->
-                        <div class="d-flex mb-4">
-                            <div class="me-3 d-flex flex-column align-items-center">
-                                <div class="rounded-circle bg-primary"
-                                    style="width: 12px; height: 12px; flex-shrink: 0; margin-top: 5px;"></div>
-                            </div>
-                            <div>
-                                <h5 class="text-white fw-bold mb-1">Script 5 — Application des corrections</h5>
-                                <p class="text-light-muted small mb-2">Après validation manuelle par les
-                                    administrateurs, application automatique des corrections pour modifier les
-                                    paramètres non conformes identifiés.</p>
-                                <div class="d-flex flex-wrap gap-1">
-                                    <span class="badge-tech">Python</span><span class="badge-tech">SQL</span><span
-                                        class="badge-tech">Automatisation</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Interface Streamlit -->
-                    <div class="project-card mb-4">
-                        <span class="text-uppercase text-accent fw-bold small mb-2 d-block">Interface Utilisateur</span>
-                        <h2 class="section-title mb-3"><i class="fa-solid fa-desktop me-2"></i>Dashboard Streamlit</h2>
-                        <p class="lead mb-3">
-                            Une interface web interactive développée avec <strong>Streamlit</strong> pour faciliter
-                            l'usage de l'outil par les équipes non-techniques.
-                        </p>
-
-                        <div class="text-center bg-dark-soft p-2 rounded mb-3">
-                            <!-- Placeholder for Dashboard Image -->
-                            <img src="images/cis_dashboard_mockup.png"
-                                class="img-fluid rounded border border-secondary shadow-sm gallery-img"
-                                alt="Interface Streamlit" style="max-height: 400px; width: 100%; object-fit: cover;">
-                        </div>
-                    </div>
-
-                    <!-- Stack Technique Détaillée -->
-                    <div class="project-card mb-4">
-                        <span class="text-uppercase text-accent fw-bold small mb-2 d-block">Technologies</span>
-                        <h2 class="section-title mb-3"><i class="fa-solid fa-layer-group me-2"></i>Stack utilisé</h2>
-                        <p class="text-light-muted mb-3">Python au cœur de la solution, avec deux frameworks web et des
-                            bibliothèques de traitement de données.</p>
-                        <div class="row g-3">
-                            <div class="col-md-4">
-                                <div class="p-3 rounded bg-dark-soft border border-secondary text-center h-100">
-                                    <img src="images/logo-python.png" alt="Python" width="32" height="32" class="mb-2"
-                                        style="object-fit:contain;">
-                                    <h6 class="text-white">Python</h6>
-                                    <p class="small text-light-muted mb-0">Langage principal du projet, utilisé pour
-                                        tous les scripts d'automatisation.</p>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="p-3 rounded bg-dark-soft border border-secondary text-center h-100">
-                                    <i class="fa-solid fa-flask fa-2x mb-2" style="color: #7952b3;"></i>
-                                    <h6 class="text-white">Flask</h6>
-                                    <p class="small text-light-muted mb-0">Framework web pour la version finale,
-                                        répondant aux exigences de sécurité.</p>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="p-3 rounded bg-dark-soft border border-secondary text-center h-100">
-                                    <img src="images/Streamlit.svg" alt="Streamlit" width="32" height="32" class="mb-2">
-                                    <h6 class="text-white">Streamlit</h6>
-                                    <p class="small text-light-muted mb-0">Framework de prototypage rapide pour la
-                                        première version de l'interface.</p>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="p-3 rounded bg-dark-soft border border-secondary text-center h-100">
-                                    <i class="fa-solid fa-file-pdf fa-2x text-danger mb-2"></i>
-                                    <h6 class="text-white">pdfplumber</h6>
-                                    <p class="small text-light-muted mb-0">Extraction de texte et tableaux depuis les
-                                        documents PDF des benchmarks CIS.</p>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="p-3 rounded bg-dark-soft border border-secondary text-center h-100">
-                                    <img src="images/Pandas.png" alt="Pandas" width="32" height="32"
-                                        class="mb-2 pandas-logo">
-                                    <h6 class="text-white">pandas</h6>
-                                    <p class="small text-light-muted mb-0">Manipulation et structuration des données en
-                                        DataFrames pour analyse.</p>
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="p-3 rounded bg-dark-soft border border-secondary text-center h-100">
-                                    <i class="fa-solid fa-file-excel fa-2x text-success mb-2"></i>
-                                    <h6 class="text-white">openpyxl</h6>
-                                    <p class="small text-light-muted mb-0">Lecture et écriture de fichiers Excel pour
-                                        les rapports de conformité.</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="p-3 rounded bg-dark-soft border border-secondary text-center h-100">
-                                    <i class="fa-solid fa-table fa-2x mb-2" style="color: #27ae60;"></i>
-                                    <h6 class="text-white">XlsxWriter</h6>
-                                    <p class="small text-light-muted mb-0">Génération de rapports Excel formatés avec
-                                        mise en forme avancée pour les livrables clients.</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="p-3 rounded bg-dark-soft border border-secondary text-center h-100">
-                                    <i class="fa-solid fa-code fa-2x text-info mb-2"></i>
-                                    <h6 class="text-white">Regex</h6>
-                                    <p class="small text-light-muted mb-0">Expressions régulières pour le parsing et
-                                        l'extraction de données structurées.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pipeline de conformité -->
-                    <div class="project-card mb-4">
-                        <span class="text-uppercase text-accent fw-bold small mb-2 d-block">Architecture</span>
-                        <h2 class="section-title mb-3"><i class="fa-solid fa-diagram-project me-2"></i>Pipeline de
-                            conformité</h2>
-
-                        <div class="d-flex flex-wrap align-items-center justify-content-center gap-0 mb-3">
-                            <div class="p-2 rounded border border-secondary text-center"
-                                style="background: rgba(255,255,255,0.03); min-width: 110px;">
-                                <i class="fa-solid fa-file-pdf text-danger d-block mb-1"></i>
-                                <span class="small text-white fw-bold">Docs CIS</span>
-                            </div>
-                            <i class="fa-solid fa-arrow-right text-light-muted mx-2"></i>
-                            <div class="p-2 rounded border border-secondary text-center"
-                                style="background: rgba(255,255,255,0.03); min-width: 110px;">
-                                <i class="fab fa-python text-info d-block mb-1"></i>
-                                <span class="small text-white fw-bold">pdfplumber</span>
-                            </div>
-                            <i class="fa-solid fa-arrow-right text-light-muted mx-2"></i>
-                            <div class="p-2 rounded border border-secondary text-center"
-                                style="background: rgba(255,255,255,0.03); min-width: 110px;">
-                                <i class="fa-solid fa-database text-warning d-block mb-1"></i>
-                                <span class="small text-white fw-bold">Scan BDD</span>
-                            </div>
-                            <i class="fa-solid fa-arrow-right text-light-muted mx-2"></i>
-                            <div class="p-2 rounded border border-secondary text-center"
-                                style="background: rgba(255,255,255,0.03); min-width: 110px;">
-                                <i class="fa-solid fa-chart-bar text-success d-block mb-1"></i>
-                                <span class="small text-white fw-bold">Rapport</span>
-                            </div>
-                        </div>
-
-                        <p class="text-light-muted small mb-2">Le pipeline commence par l'<strong>extraction des
-                                recommandations CIS</strong> depuis les documents PDF via pdfplumber. Les données sont
-                            structurées avec pandas puis comparées aux configurations réelles des bases de données
-                            Oracle, MYSQL et PostgreSQL.</p>
-                        <p class="text-light-muted small mb-0">Deux interfaces ont été développées : une première
-                            version en <strong>Streamlit</strong> pour le prototypage rapide, puis une version en
-                            <strong>Flask</strong> pour répondre aux exigences de sécurité de l'entreprise. Les
-                            résultats sont exportés en Excel via openpyxl et XlsxWriter.
+                <!-- 01 — Présentation -->
+                <div class="project-card mb-4 section-anchor" id="presentation">
+                    <span class="text-uppercase text-accent fw-bold small mb-2 d-block">01 — Présentation</span>
+                    <h2 class="section-title mb-3"><i class="fa-solid fa-shield-halved me-2"></i>Le projet CIS</h2>
+                    <p class="lead">Le projet CIS vise à automatiser la lecture des documentations de mise en conformité des bases de données avec les standards de sécurité du <strong>Center for Internet Security</strong>.</p>
+                    <p>Trois technologies de bases de données sont ciblées : <strong>Oracle, Microsoft SQL Server et PostgreSQL</strong>.</p>
+                    <div class="alert bg-dark-soft border-secondary mt-3 mb-0">
+                        <p class="mb-0">
+                            <i class="fa-solid fa-circle-info text-accent me-2"></i>
+                            Actuellement, chaque administrateur de base de données doit parcourir <strong>manuellement</strong> l'ensemble des documents CIS pour identifier les nouvelles mises à jour et recommandations. Ce processus est inefficace face aux versions multiples publiées et aux différences entre environnements de production et non-production.
                         </p>
                     </div>
+                </div>
 
-                    <!-- Version Flask -->
-                    <div class="project-card mb-4" style="border-left: 4px solid #7952b3;">
-                        <h2 class="section-title mb-3"><i class="fa-solid fa-flask me-2"
-                                style="color: #7952b3;"></i>Version Alternative</h2>
-                        <div class="row align-items-center">
-                            <div class="col-md-8">
-                                <h5 class="fw-bold text-white mb-2">Variante Flask</h5>
-                                <p class="text-light-muted mb-0">
-                                    Une version allégée de l'outil a également été développée sous
-                                    <strong>Flask</strong>.
-                                    Elle offre une architecture plus flexible pour une intégration future via API REST
-                                    et une personnalisation poussée du frontend (HTML/CSS/JS).
-                                </p>
+                <!-- 02 — Objectifs -->
+                <div class="project-card mb-4 section-anchor" id="objectifs">
+                    <span class="text-uppercase text-accent fw-bold small mb-2 d-block">02 — Objectifs du projet</span>
+                    <h2 class="section-title mb-3"><i class="fa-solid fa-bullseye me-2"></i>Missions & Buts</h2>
+
+                    <div class="objective-item">
+                        <div class="objective-icon"><i class="fa-solid fa-robot"></i></div>
+                        <div>
+                            <h4 class="h6 mb-1">Automatiser la lecture des documentations</h4>
+                            <p class="small mb-0">Extraire et analyser les recommandations de sécurité depuis les benchmarks PDF CIS.</p>
+                        </div>
+                    </div>
+                    <div class="objective-item">
+                        <div class="objective-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+                        <div>
+                            <h4 class="h6 mb-1">Scanner les configurations des BDD</h4>
+                            <p class="small mb-0">Comparer automatiquement les configurations d'Oracle, MSSQL et PostgreSQL aux recommandations validées.</p>
+                        </div>
+                    </div>
+                    <div class="objective-item">
+                        <div class="objective-icon"><i class="fa-solid fa-file-excel"></i></div>
+                        <div>
+                            <h4 class="h6 mb-1">Générer des plans de remédiation</h4>
+                            <p class="small mb-0">Produire des rapports comparatifs détaillant les ajouts, modifications et suppressions, dans un fichier Excel consolidé.</p>
+                        </div>
+                    </div>
+                    <div class="objective-item" style="margin-bottom:0">
+                        <div class="objective-icon"><i class="fa-solid fa-desktop"></i></div>
+                        <div>
+                            <h4 class="h6 mb-1">Développer une interface de visualisation</h4>
+                            <p class="small mb-0">Créer un dashboard interactif (Streamlit / Flask) pour un suivi fluide des non-conformités.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 03 — Déroulement -->
+                <div class="project-card mb-4 section-anchor" id="deroulement">
+                    <span class="text-uppercase text-accent fw-bold small mb-2 d-block">03 — Déroulement</span>
+                    <h2 class="section-title mb-3"><i class="fa-solid fa-calendar-check me-2"></i>Chronologie du projet</h2>
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-week">Semaine 1</div>
+                            <div class="timeline-label">Analyse & Exploration</div>
+                            <p class="timeline-desc">Prise en main des documents CIS, compréhension des standards et définition du périmètre du projet.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-week">Semaine 2</div>
+                            <div class="timeline-label">Extraction PDF (pdfplumber)</div>
+                            <p class="timeline-desc">Développement du parser capable d'extraire et structurer les recommandations CIS depuis les benchmarks PDF.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-week">Semaine 3</div>
+                            <div class="timeline-label">Scan & Comparaison BDD</div>
+                            <p class="timeline-desc">Scripts de connexion et d'audit des bases Oracle, MSSQL et PostgreSQL, comparaison avec les recommandations extraites.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-week">Semaine 4</div>
+                            <div class="timeline-label">Interface Streamlit → Flask</div>
+                            <p class="timeline-desc">Prototype Streamlit puis migration vers Flask pour répondre aux exigences de sécurité de l'entreprise.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-week">Semaine 5</div>
+                            <div class="timeline-label">Livraison & Documentation</div>
+                            <p class="timeline-desc">Génération des rapports Excel, tests finaux, documentation et livraison des 5 scripts à l'équipe.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 04 — Architecture -->
+                <div class="project-card mb-4 section-anchor" id="architecture">
+                    <span class="text-uppercase text-accent fw-bold small mb-2 d-block">04 — Architecture</span>
+                    <h2 class="section-title mb-3"><i class="fa-solid fa-diagram-project me-2"></i>Pipeline de conformité</h2>
+
+                    <div class="text-center p-4 bg-dark-soft rounded mb-4">
+                        <div class="d-flex flex-wrap justify-content-center align-items-center gap-2">
+                            <div class="pipeline-step">
+                                <div class="step-icon"><i class="fa-solid fa-chart-bar"></i></div>
+                                <div class="step-label">Dashboard</div>
                             </div>
-                            <div class="col-md-4 text-center">
-                                <span class="badge bg-dark border border-secondary text-light p-2 mt-3 mt-md-0">
-                                    <i class="fa-solid fa-code-branch me-2"></i>Backend API
-                                </span>
+                            <div class="pipeline-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                            <div class="pipeline-step">
+                                <div class="step-icon"><i class="fa-solid fa-file-pdf"></i></div>
+                                <div class="step-label">Docs CIS</div>
+                            </div>
+                            <div class="pipeline-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                            <div class="pipeline-step">
+                                <div class="step-icon"><i class="fa-brands fa-python"></i></div>
+                                <div class="step-label">pdfplumber</div>
+                            </div>
+                            <div class="pipeline-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                            <div class="pipeline-step">
+                                <div class="step-icon"><i class="fa-solid fa-file-arrow-down"></i></div>
+                                <div class="step-label">extraction <br>/comparaison</div>
+                            </div>
+                            <div class="pipeline-arrow"><i class="fa-solid fa-arrow-right"></i></div>
+                            <div class="pipeline-step">
+                                <div class="step-icon"><i class="fa-solid fa-file-excel"></i></div>
+                                <div class="step-label">Rapport Excel</div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Compétences acquises -->
-                    <div class="project-card mb-4">
-                        <span class="text-uppercase text-accent fw-bold small mb-2 d-block">Compétences</span>
-                        <h2 class="section-title mb-3"><i class="fa-solid fa-graduation-cap me-2"></i>Ce que j'ai
-                            développé</h2>
-                        <p class="text-light-muted mb-3">Les aptitudes concrètes acquises au cours de ce stage.</p>
+                    <p>Le pipeline commence par l'extraction des recommandations CIS depuis les documents PDF via <strong>pdfplumber</strong>. Les données sont structurées avec <strong>pandas</strong> puis comparées aux configurations réelles des bases de données Oracle, MSSQL et PostgreSQL.</p>
 
-                        <div class="row g-3">
-                            <div class="col-md-6">
-                                <div class="p-3 rounded h-100 border border-secondary d-flex align-items-start gap-3"
-                                    style="background: rgba(255,255,255,0.03);">
-                                    <div class="p-2 rounded border border-secondary d-flex align-items-center justify-content-center flex-shrink-0"
-                                        style="width:36px; height:36px; background: rgba(255,255,255,0.05);">
-                                        <i class="fab fa-python text-accent small"></i>
-                                    </div>
-                                    <span class="text-light-muted small">Développement de scripts Python automatisés
-                                        pour l'analyse de documents</span>
-                                </div>
+                    <h3 class="h6 mt-4 mb-3">Comparaison des Interfaces</h3>
+                    <div class="tech-comparison-container">
+                        <div class="tech-card streamlit-card">
+                            <div class="card-header">
+                                <h3>Streamlit</h3>
+                                <span class="badge">Prototypage</span>
                             </div>
-                            <div class="col-md-6">
-                                <div class="p-3 rounded h-100 border border-secondary d-flex align-items-start gap-3"
-                                    style="background: rgba(255,255,255,0.03);">
-                                    <div class="p-2 rounded border border-secondary d-flex align-items-center justify-content-center flex-shrink-0"
-                                        style="width:36px; height:36px; background: rgba(255,255,255,0.05);">
-                                        <i class="fa-solid fa-file-pdf text-accent small"></i>
-                                    </div>
-                                    <span class="text-light-muted small">Extraction et structuration de données depuis
-                                        des PDF (pdfplumber)</span>
-                                </div>
+                            <ul class="feature-list">
+                                <li>🚀 <strong>Vitesse :</strong> Ultra-rapide (quelques minutes)</li>
+                                <li>🐍 <strong>Technologie :</strong> 100% Python</li>
+                                <li>🎨 <strong>Design :</strong> Pré-défini et standardisé</li>
+                                <li>⚙️ <strong>Idéal pour :</strong> Dashboards Data/IA, POC</li>
+                            </ul>
+                        </div>
+                        <div class="tech-card flask-card">
+                            <div class="card-header">
+                                <h3>Flask</h3>
+                                <span class="badge">Sur-Mesure</span>
                             </div>
-                            <div class="col-md-6">
-                                <div class="p-3 rounded h-100 border border-secondary d-flex align-items-start gap-3"
-                                    style="background: rgba(255,255,255,0.03);">
-                                    <div class="p-2 rounded border border-secondary d-flex align-items-center justify-content-center flex-shrink-0"
-                                        style="width:36px; height:36px; background: rgba(255,255,255,0.05);">
-                                        <i class="fa-solid fa-shield-halved text-accent small"></i>
-                                    </div>
-                                    <span class="text-light-muted small">Compréhension des standards de sécurité CIS
-                                        pour bases de données</span>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="p-3 rounded h-100 border border-secondary d-flex align-items-start gap-3"
-                                    style="background: rgba(255,255,255,0.03);">
-                                    <div class="p-2 rounded border border-secondary d-flex align-items-center justify-content-center flex-shrink-0"
-                                        style="width:36px; height:36px; background: rgba(255,255,255,0.05);">
-                                        <i class="fa-solid fa-flask text-accent small"></i>
-                                    </div>
-                                    <span class="text-light-muted small">Développement d'interfaces web avec Flask et
-                                        Streamlit</span>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="p-3 rounded h-100 border border-secondary d-flex align-items-start gap-3"
-                                    style="background: rgba(255,255,255,0.03);">
-                                    <div class="p-2 rounded border border-secondary d-flex align-items-center justify-content-center flex-shrink-0"
-                                        style="width:36px; height:36px; background: rgba(255,255,255,0.05);">
-                                        <i class="fa-solid fa-file-excel text-accent small"></i>
-                                    </div>
-                                    <span class="text-light-muted small">Génération de rapports Excel automatisés
-                                        (openpyxl, XlsxWriter)</span>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="p-3 rounded h-100 border border-secondary d-flex align-items-start gap-3"
-                                    style="background: rgba(255,255,255,0.03);">
-                                    <div class="p-2 rounded border border-secondary d-flex align-items-center justify-content-center flex-shrink-0"
-                                        style="width:36px; height:36px; background: rgba(255,255,255,0.05);">
-                                        <i class="fa-solid fa-server text-accent small"></i>
-                                    </div>
-                                    <span class="text-light-muted small">Gestion des différences production /
-                                        non-production</span>
-                                </div>
-                            </div>
+                            <ul class="feature-list">
+                                <li>🛠️ <strong>Architecture :</strong> Contrôle total (Backend, API)</li>
+                                <li>🌐 <strong>Technologies :</strong> Py, HTML, CSS, JS</li>
+                                <li>🎨 <strong>Design :</strong> 100% Personnalisable</li>
+                                <li>⚙️ <strong>Idéal pour :</strong> Apps Web, Production</li>
+                            </ul>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Bilan -->
-                    <div class="project-card mb-4">
-                        <span class="text-uppercase text-accent fw-bold small mb-2 d-block">Bilan</span>
-                        <h2 class="section-title mb-3"><i class="fa-solid fa-flag-checkered me-2"></i>Difficultés &
-                            Conclusion</h2>
-                        <p class="text-light-muted mb-3">Les obstacles rencontrés et les enseignements tirés de cette
-                            expérience.</p>
+                <!-- 05 — SWOT -->
+                <div class="project-card mb-4 section-anchor" id="swot">
+                    <span class="text-uppercase text-accent fw-bold small mb-2 d-block">05 — Analyse stratégique</span>
+                    <h2 class="section-title mb-3"><i class="fa-solid fa-magnifying-glass-chart me-2"></i>Analyse SWOT</h2>
 
-                        <div class="p-3 rounded border border-warning border-opacity-25 mb-3"
-                            style="background: rgba(255, 193, 7, 0.08);">
-                            <h6 class="text-warning fw-bold mb-2"><i
-                                    class="fa-solid fa-exclamation-triangle me-2"></i>Difficultés rencontrées</h6>
-                            <p class="small mb-0" style="color: #fcd34d;">La complexité des documents CIS et la
-                                diversité des versions publiées ont nécessité une analyse approfondie pour concevoir un
-                                système d'extraction robuste. Le passage de Streamlit à Flask a demandé une refonte de
-                                l'interface pour répondre aux exigences de sécurité de l'entreprise.</p>
-                        </div>
-
-                        <div class="p-3 rounded border border-success border-opacity-25"
-                            style="background: rgba(25, 135, 84, 0.08);">
-                            <h6 class="text-success fw-bold mb-2"><i class="fa-solid fa-trophy me-2"></i>Conclusion</h6>
-                            <p class="small mb-0" style="color: #86efac;">Ce stage m'a permis de développer des
-                                compétences approfondies en Python, en traitement de données et en sécurité des bases de
-                                données. J'ai appris à gérer un projet complet de bout en bout, de l'analyse des besoins
-                                à la livraison d'une solution fonctionnelle avec deux interfaces distinctes.</p>
-                        </div>
-                    </div>
-
-                </div> <!-- End of Main Content Column -->
-
-                <!-- Sidebar Info -->
-                <aside class="col-lg-4">
-                    <div class="sticky-lg-top" style="top: 100px; max-height: calc(100vh - 120px); overflow-y: auto; scrollbar-width: thin;">
-
-                        <!-- Fiche Technique -->
-                        <div class="project-card mb-4">
-                            <h4 class="h6 fw-bold mb-3 text-accent">Fiche technique</h4>
-
-                            <div class="mb-3">
-                                <p class="text-uppercase text-light-muted small fw-bold mb-1"
-                                    style="font-size: 0.7rem;">
-                                    Type de Projet</p>
-                                <p class="fw-bold mb-1 text-white small">Outil Interne / Automatisation</p>
-                                <span class="badge bg-secondary text-light border border-secondary"
-                                    style="font-size: 0.7rem;">Cybersécurité</span>
-                            </div>
-
-                            <div class="mb-3">
-                                <p class="text-uppercase text-light-muted small fw-bold mb-1"
-                                    style="font-size: 0.7rem;">Entreprise</p>
-                                <p class="fw-bold mb-1 text-white small">Allperf — SAS</p>
-                                <span class="badge bg-secondary text-light border border-secondary"
-                                    style="font-size: 0.7rem;">PME — Éditeur de logiciels</span>
-                            </div>
-
-                            <div class="mb-3">
-                                <p class="text-uppercase text-light-muted small fw-bold mb-1"
-                                    style="font-size: 0.7rem;">Stack
-                                    Technique</p>
-                                <div class="d-flex flex-wrap gap-1">
-                                    <span class="badge-tech"><i class="fa-brands fa-python me-1"></i>Python 3.10+</span>
-                                    <span class="badge-tech">Flask</span>
-                                    <span class="badge-tech">Streamlit</span>
-                                    <span class="badge-tech">pdfplumber</span>
-                                    <span class="badge-tech"><img src="images/Pandas.png" alt="Pandas" width="14"
-                                            height="14" class="pandas-logo"
-                                            style="vertical-align: -1px; margin-right: 4px;">Pandas</span>
-                                    <span class="badge-tech">openpyxl</span>
-                                    <span class="badge-tech">XlsxWriter</span>
-                                    <span class="badge-tech">Regex</span>
-                                </div>
-                            </div>
-
-                            <div class="mb-3">
-                                <p class="text-uppercase text-light-muted small fw-bold mb-1"
-                                    style="font-size: 0.7rem;">SGBD ciblés</p>
-                                <div class="d-flex flex-wrap gap-1">
-                                    <span class="badge-tech">Oracle</span>
-                                    <span class="badge-tech">MYSQL</span>
-                                    <span class="badge-tech">PostgreSQL</span>
-                                </div>
-                            </div>
-
-                            <div class="mb-0">
-                                <p class="text-uppercase text-light-muted small fw-bold mb-1"
-                                    style="font-size: 0.7rem;">Points Clés</p>
-                                <ul class="list-unstyled mb-0 small text-light-muted" style="font-size: 0.8rem;">
-                                    <li class="mb-1"><i class="fa-solid fa-check text-accent me-2"></i>5 scripts
-                                        automatisés
-                                    </li>
-                                    <li class="mb-1"><i class="fa-solid fa-check text-accent me-2"></i>Parsing PDF
-                                        (pdfplumber)
-                                    </li>
-                                    <li class="mb-1"><i class="fa-solid fa-check text-accent me-2"></i>Algorithme Diff
-                                    </li>
-                                    <li class="mb-1"><i class="fa-solid fa-check text-accent me-2"></i>Export Excel
-                                        formaté
-                                    </li>
-                                    <li class="mb-1"><i class="fa-solid fa-check text-accent me-2"></i>2 interfaces
-                                        (Streamlit + Flask)
-                                    </li>
-                                    <li><i class="fa-solid fa-check text-accent me-2"></i>3 SGBD (Oracle, MYSQL,
-                                        PostgreSQL)</li>
+                    <div class="row g-3">
+                        <!-- Forces -->
+                        <div class="col-md-6">
+                            <div class="p-3 rounded h-100 border border-success border-opacity-25"
+                                style="background: rgba(25, 135, 84, 0.1);">
+                                <h5 class="text-success fw-bold mb-3"><i class="fa-solid fa-bolt me-2"></i>Forces</h5>
+                                <ul class="list-unstyled mb-0 text-light-muted small">
+                                    <li class="mb-2"><i class="fa-solid fa-check text-success me-2"></i>Automatisation du <strong>scan multi-SGBD</strong> (Oracle, MSSQL, PostgreSQL).</li>
+                                    <li class="mb-2"><i class="fa-solid fa-check text-success me-2"></i>Gain de temps majeur pour les <strong>administrateurs BDD</strong>.</li>
+                                    <li><i class="fa-solid fa-check text-success me-2"></i>Double interface adaptée aux besoins (<strong>Streamlit</strong> et <strong>Flask</strong>).</li>
                                 </ul>
                             </div>
                         </div>
 
-                        <!-- CTA Question -->
-                        <div class="project-card text-center">
-                            <h4 class="h6 fw-bold text-white mb-2">Une question ?</h4>
-                            <a href="#contact-stage" class="btn btn-outline-light rounded-pill w-100 fw-bold btn-sm">
-                                Me contacter <i class="fa-solid fa-arrow-down ms-2"></i>
-                            </a>
+                        <!-- Faiblesses -->
+                        <div class="col-md-6">
+                            <div class="p-3 rounded h-100 border border-warning border-opacity-25"
+                                style="background: rgba(255, 193, 7, 0.1);">
+                                <h5 class="text-warning fw-bold mb-3"><i class="fa-solid fa-triangle-exclamation me-2"></i>Faiblesses</h5>
+                                <ul class="list-unstyled mb-0 text-light-muted small">
+                                    <li class="mb-2"><i class="fa-solid fa-minus text-warning me-2"></i>Dépendance à la <strong>structure des PDF CIS</strong> (format variable selon versions).</li>
+                                    <li><i class="fa-solid fa-minus text-warning me-2"></i>Complexité de l'<strong>algorithme d'extraction</strong> initial.</li>
+                                </ul>
+                            </div>
                         </div>
 
-                    </div>
-                </aside>
-            </div>
+                        <!-- Opportunités -->
+                        <div class="col-md-6">
+                            <div class="p-3 rounded h-100 border border-info border-opacity-25"
+                                style="background: rgba(13, 202, 240, 0.1);">
+                                <h5 class="text-info fw-bold mb-3"><i class="fa-solid fa-lightbulb me-2"></i>Opportunités</h5>
+                                <ul class="list-unstyled mb-0 text-light-muted small">
+                                    <li class="mb-2"><i class="fa-solid fa-arrow-trend-up text-info me-2"></i>Extension à d'autres benchmarks (<strong>OS, Cloud</strong>).</li>
+                                    <li><i class="fa-solid fa-arrow-trend-up text-info me-2"></i>Intégration dans des pipelines <strong>DevSecOps</strong> d'entreprise.</li>
+                                </ul>
+                            </div>
+                        </div>
 
-            <!-- Spacer -->
-            <div style="height: 100px;"></div>
-
-            <!-- Section Contact (Moved to Bottom, Full Width) -->
-            <div class="row">
-                <div class="col-12">
-                    <div id="contact-stage" class="project-card text-center mb-5">
-                        <h2 class="section-title mb-4">Me Contacter</h2>
-                        <div class="row justify-content-center">
-                            <div class="col-lg-8">
-                                <form action="https://formspree.io/f/mqakovrz" method="POST" class="contact-form">
-                                    <div class="row g-3 text-start">
-                                        <div class="col-md-6">
-                                            <div class="form-floating">
-                                                <input type="text" class="form-control glass-input form-control-sm"
-                                                    id="prenom" name="prenom" placeholder="Prénom" required>
-                                                <label for="prenom">Prénom</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-floating">
-                                                <input type="text" class="form-control glass-input form-control-sm"
-                                                    id="nom" name="nom" placeholder="Nom" required>
-                                                <label for="nom">Nom</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="form-floating">
-                                                <input type="email" class="form-control glass-input form-control-sm"
-                                                    id="email" name="email" placeholder="Email" required>
-                                                <label for="email">Email</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="form-floating">
-                                                <textarea class="form-control glass-input form-control-sm" id="message"
-                                                    name="message" placeholder="Votre message" style="height: 150px"
-                                                    required></textarea>
-                                                <label for="message">Votre message</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-12 text-center mt-4">
-                                            <button type="submit"
-                                                class="btn btn-outline-light px-5 py-2 rounded-pill fw-bold">
-                                                Envoyer <i class="fa-solid fa-paper-plane ms-2"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
+                        <!-- Menaces -->
+                        <div class="col-md-6">
+                            <div class="p-3 rounded h-100 border border-danger border-opacity-25"
+                                style="background: rgba(220, 53, 69, 0.1);">
+                                <h5 class="text-danger fw-bold mb-3"><i class="fa-solid fa-shield-halved me-2"></i>Menaces</h5>
+                                <ul class="list-unstyled mb-0 text-light-muted small">
+                                    <li class="mb-2"><i class="fa-solid fa-xmark text-danger me-2"></i>Changements radicaux du <strong>format des documents CIS</strong>.</li>
+                                    <li><i class="fa-solid fa-xmark text-danger me-2"></i>Durcissement des <strong>politiques d'accès BDD</strong> en production.</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <!-- 06 — Galerie -->
+                <div class="project-card mb-4 section-anchor" id="galerie">
+                    <span class="text-uppercase text-accent fw-bold small mb-2 d-block">06 — Galerie</span>
+                    <h2 class="section-title mb-3"><i class="fa-solid fa-images me-2"></i>Aperçu visuel des rendus</h2>
+
+                    <div class="gallery-filter mb-4">
+                        <button class="btn btn-outline-light filter-btn active" data-filter="all">
+                            <i class="fa-solid fa-border-all me-1"></i>Tous
+                        </button>
+                        <button class="btn btn-outline-light filter-btn" data-filter="streamlit">
+                            <i class="fa-solid fa-circle me-1" style="color:#FF4B4B;font-size:0.6rem;"></i>Streamlit
+                        </button>
+                        <button class="btn btn-outline-light filter-btn" data-filter="flask">
+                            <i class="fa-solid fa-circle me-1" style="font-size:0.6rem;"></i>Flask
+                        </button>
+                    </div>
+
+                    <div id="gallery-container">
+
+                        <!-- ── Streamlit ── -->
+                        <div class="gallery-section-label gallery-section-streamlit">
+                            <i class="fa-solid fa-circle" style="color:#FF4B4B;font-size:0.6rem;"></i>
+                            Interface Streamlit — Prototype
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-md-4 col-sm-6 gallery-item" data-category="streamlit">
+                                <div class="gallery-card">
+                                    <div class="gallery-img-wrapper">
+                                        <img src="images/cis-image/accueil%20(1).png" class="gallery-img" alt="Streamlit — Accueil extraction">
+                                        <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                                    </div>
+                                    <div class="gallery-info">
+                                        <div class="gallery-title">Accueil extraction / comparaison</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6 gallery-item" data-category="streamlit">
+                                <div class="gallery-card">
+                                    <div class="gallery-img-wrapper">
+                                        <img src="images/cis-image/accueil2.png" class="gallery-img" alt="Streamlit — Accueil mise à jour">
+                                        <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                                    </div>
+                                    <div class="gallery-info">
+                                        <div class="gallery-title">Accueil mise à jour Benchmark</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6 gallery-item" data-category="streamlit">
+                                <div class="gallery-card">
+                                    <div class="gallery-img-wrapper">
+                                        <img src="images/cis-image/extraction.png" class="gallery-img" alt="Streamlit — Extraction PDF">
+                                        <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                                    </div>
+                                    <div class="gallery-info">
+                                        <div class="gallery-title">Extraction PDF</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6 gallery-item" data-category="streamlit">
+                                <div class="gallery-card">
+                                    <div class="gallery-img-wrapper">
+                                        <img src="images/cis-image/comparaison%20resultat.png" class="gallery-img" alt="Streamlit — Résultat extraction">
+                                        <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                                    </div>
+                                    <div class="gallery-info">
+                                        <div class="gallery-title">Résultat d'extraction</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6 gallery-item" data-category="streamlit">
+                                <div class="gallery-card">
+                                    <div class="gallery-img-wrapper">
+                                        <img src="images/cis-image/comparaison.png" class="gallery-img" alt="Streamlit — Comparaison CIS">
+                                        <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                                    </div>
+                                    <div class="gallery-info">
+                                        <div class="gallery-title">Comparaison CIS</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6 gallery-item" data-category="streamlit">
+                                <div class="gallery-card">
+                                    <div class="gallery-img-wrapper">
+                                        <img src="images/cis-image/mise a jour.png" class="gallery-img" alt="Streamlit — Mise à jour">
+                                        <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                                    </div>
+                                    <div class="gallery-info">
+                                        <div class="gallery-title">Mise à jour</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6 gallery-item" data-category="streamlit">
+                                <div class="gallery-card">
+                                    <div class="gallery-img-wrapper">
+                                        <img src="images/cis-image/resultat mise a jour.png" class="gallery-img" alt="Streamlit — Log mise à jour">
+                                        <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                                    </div>
+                                    <div class="gallery-info">
+                                        <div class="gallery-title">Log de mise à jour</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ── Flask ── -->
+                        <div class="gallery-section-label gallery-section-flask">
+                            <i class="fa-solid fa-circle" style="font-size:0.6rem;"></i>
+                            Interface Flask — Production
+                        </div>
+                        <div class="row g-3">
+                            <div class="col-md-4 col-sm-6 gallery-item" data-category="flask">
+                                <div class="gallery-card">
+                                    <div class="gallery-img-wrapper">
+                                        <img src="images/cis-image/accueil (1).png" class="gallery-img" alt="Flask — Accueil">
+                                        <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                                    </div>
+                                    <div class="gallery-info">
+                                        <div class="gallery-title">Accueil</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6 gallery-item" data-category="flask">
+                                <div class="gallery-card">
+                                    <div class="gallery-img-wrapper">
+                                        <img src="images/cis-image/flask/extraction%20(1).png" class="gallery-img" alt="Flask — Extraction">
+                                        <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                                    </div>
+                                    <div class="gallery-info">
+                                        <div class="gallery-title">Extraction</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6 gallery-item" data-category="flask">
+                                <div class="gallery-card">
+                                    <div class="gallery-img-wrapper">
+                                        <img src="images/cis-image/flask/resultat%20extraction.png" class="gallery-img" alt="Flask — Résultat extraction">
+                                        <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                                    </div>
+                                    <div class="gallery-info">
+                                        <div class="gallery-title">Résultat extraction</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6 gallery-item" data-category="flask">
+                                <div class="gallery-card">
+                                    <div class="gallery-img-wrapper">
+                                        <img src="images/cis-image/flask/comparaison%20(1).png" class="gallery-img" alt="Flask — Comparaison">
+                                        <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                                    </div>
+                                    <div class="gallery-info">
+                                        <div class="gallery-title">Comparaison</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6 gallery-item" data-category="flask">
+                                <div class="gallery-card">
+                                    <div class="gallery-img-wrapper">
+                                        <img src="images/cis-image/resultat%20comparaison.png" class="gallery-img" alt="Flask — Résultat comparaison">
+                                        <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                                    </div>
+                                    <div class="gallery-info">
+                                        <div class="gallery-title">Résultat Comparaison</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6 gallery-item" data-category="flask">
+                                <div class="gallery-card">
+                                    <div class="gallery-img-wrapper">
+                                        <img src="images/cis-image/flask/mise%20a%20jour%20(1).png" class="gallery-img" alt="Flask — Mise à jour">
+                                        <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                                    </div>
+                                    <div class="gallery-info">
+                                        <div class="gallery-title">Mise à jour</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-sm-6 gallery-item" data-category="flask">
+                                <div class="gallery-card">
+                                    <div class="gallery-img-wrapper">
+                                        <img src="images/cis-image/maj resultat.png" class="gallery-img" alt="Flask — Log final">
+                                        <div class="gallery-overlay"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
+                                    </div>
+                                    <div class="gallery-info">
+                                        <div class="gallery-title">Log Final</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- 07 — Bilan -->
+                <div class="project-card mb-5 section-anchor" id="bilan">
+                    <span class="text-uppercase text-accent fw-bold small mb-2 d-block">07 — Bilan</span>
+                    <div class="row gy-4">
+                        <div class="col-md-6">
+                            <h2 class="section-title mb-3"><i class="fa-solid fa-triangle-exclamation me-2"></i>Difficultés</h2>
+                            <p>La complexité des documents CIS et la diversité des versions publiées ont nécessité une analyse approfondie pour concevoir un système d'extraction robuste.</p>
+                            <p>Le passage de <strong>Streamlit</strong> à <strong>Flask</strong> a demandé une refonte de l'interface pour répondre aux exigences de sécurité strictes de l'entreprise tout en conservant une expérience utilisateur fluide.</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h2 class="section-title mb-3"><i class="fa-solid fa-flag-checkered me-2"></i>Conclusion</h2>
+                            <p>Ce stage m'a permis de développer des compétences approfondies en Python, en traitement de données et en sécurité des bases de données.</p>
+                            <p>J'ai appris à gérer un projet complet de bout en bout, de l'analyse des besoins à la livraison d'une solution fonctionnelle avec deux interfaces distinctes, répondant à des problématiques réelles de conformité SI.</p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
+            <!-- ── Right Sidebar ── -->
+            <div class="col-lg-4">
+                <div class="sidebar-sticky">
+
+                    <!-- Détails -->
+                    <div class="project-card mb-4">
+                        <h3 class="h5 mb-3"><i class="fa-solid fa-circle-info me-2 text-accent"></i>Détails</h3>
+                        <ul class="list-unstyled mb-0">
+                            <li class="mb-3 d-flex align-items-center">
+                                <i class="fa-solid fa-building me-3 text-accent" style="width: 20px;"></i>
+                                <div>
+                                    <span class="d-block small text-light-muted">Entreprise</span>
+                                    <span>AllPerf Business Intelligence</span>
+                                </div>
+                            </li>
+                            <li class="mb-3 d-flex align-items-center">
+                                <i class="fa-solid fa-user-tie me-3 text-accent" style="width: 20px;"></i>
+                                <div>
+                                    <span class="d-block small text-light-muted">Rôle</span>
+                                    <span>Développeur Python</span>
+                                </div>
+                            </li>
+                            <li class="mb-3 d-flex align-items-center">
+                                <i class="fa-solid fa-location-dot me-3 text-accent" style="width: 20px;"></i>
+                                <div>
+                                    <span class="d-block small text-light-muted">Lieu</span>
+                                    <span>France (Hybride)</span>
+                                </div>
+                            </li>
+                            <li class="mb-0 d-flex align-items-center">
+                                <i class="fa-solid fa-calendar-days me-3 text-accent" style="width: 20px;"></i>
+                                <div>
+                                    <span class="d-block small text-light-muted">Période</span>
+                                    <span>Janvier – Février 2026 (5 sem.)</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Technologies -->
+                    <div class="project-card mb-4">
+                        <span class="text-uppercase text-accent fw-bold small mb-2 d-block">Stack utilisé</span>
+                        <h3 class="h5 mb-3"><i class="fa-solid fa-layer-group me-2 text-accent"></i>Technologies</h3>
+                        <div class="d-flex flex-wrap gap-1 mb-3">
+                            <span class="badge-tech">Python</span>
+                            <span class="badge-tech">Flask</span>
+                            <span class="badge-tech">Streamlit</span>
+                            <span class="badge-tech">pdfplumber</span>
+                            <span class="badge-tech">pandas</span>
+                            <span class="badge-tech">openpyxl</span>
+                            <span class="badge-tech">XlsxWriter</span>
+                            <span class="badge-tech">SQL</span>
+                            <span class="badge-tech">Oracle</span>
+                            <span class="badge-tech">MSSQL</span>
+                            <span class="badge-tech">PostgreSQL</span>
+                        </div>
+                        <div class="mt-3">
+                            <div class="mb-2">
+                                <h4 class="h6 mb-1"><i class="fa-brands fa-python text-accent me-1"></i> Python</h4>
+                                <p class="small mb-0">Langage principal pour tous les scripts d'automatisation et logique métier.</p>
+                            </div>
+                            <div class="mb-2">
+                                <h4 class="h6 mb-1"><i class="fa-solid fa-globe text-accent me-1"></i> Flask & Streamlit</h4>
+                                <p class="small mb-0">Interface finale (Flask) et prototypage rapide (Streamlit).</p>
+                            </div>
+                            <div class="mb-0">
+                                <h4 class="h6 mb-1"><i class="fa-solid fa-table text-accent me-1"></i> Traitement de données</h4>
+                                <p class="small mb-0">pandas et pdfplumber pour l'extraction et l'analyse de données complexes.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Compétences -->
+                    <div class="project-card mb-4">
+                        <span class="text-uppercase text-accent fw-bold small mb-2 d-block">Aptitudes acquises</span>
+                        <h2 class="section-title mb-3"><i class="fa-solid fa-award me-2"></i>Compétences</h2>
+                        <div>
+                            <span class="skill-pill"><i class="fa-solid fa-circle"></i>Scripts Python automatisés</span>
+                            <span class="skill-pill"><i class="fa-solid fa-circle"></i>Extraction PDF</span>
+                            <span class="skill-pill"><i class="fa-solid fa-circle"></i>Standards CIS</span>
+                            <span class="skill-pill"><i class="fa-solid fa-circle"></i>Flask & Streamlit</span>
+                            <span class="skill-pill"><i class="fa-solid fa-circle"></i>Reporting Excel</span>
+                            <span class="skill-pill"><i class="fa-solid fa-circle"></i>Gestion Prod/Non-Prod</span>
+                            <span class="skill-pill"><i class="fa-solid fa-circle"></i>Audit BDD</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
+    </div>
 
-    </main>
+    <footer class="py-4 text-center border-top border-secondary mt-5">
+        <p class="small text-light-muted mb-0">© 2026 Jeremy — Portfolio Stage SIO SLAM</p>
+    </footer>
+</main>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/gallery.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/main.js"></script>
+<script src="js/gallery.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    // ── Gallery Filtering ──
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const galleryItems  = document.querySelectorAll('.gallery-item');
+
+    filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterButtons.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const filter = btn.getAttribute('data-filter');
+
+            galleryItems.forEach(item => {
+                const show = filter === 'all' || item.getAttribute('data-category') === filter;
+                item.classList.toggle('hide', !show);
+            });
+
+            // Show/hide section labels
+            const streamlitLabel = document.querySelector('.gallery-section-streamlit');
+            const flaskLabel     = document.querySelector('.gallery-section-flask');
+            if (streamlitLabel) streamlitLabel.classList.toggle('hide', filter === 'flask');
+            if (flaskLabel)     flaskLabel.classList.toggle('hide', filter === 'streamlit');
+        });
+    });
+
+    // ── Scroll Progress Bar ──
+    const progressBar = document.getElementById('scroll-progress');
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        progressBar.style.width = (scrollTop / docHeight * 100) + '%';
+    }, { passive: true });
+
+    // ── Back to Top ──
+    const backToTop = document.getElementById('back-to-top');
+    window.addEventListener('scroll', () => {
+        backToTop.classList.toggle('visible', window.scrollY > 400);
+    }, { passive: true });
+    backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+    // ── Active Nav Link on Scroll ──
+    const sections = document.querySelectorAll('.section-anchor');
+    const navLinks = document.querySelectorAll('.quick-nav .nav-link');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                navLinks.forEach(link => link.classList.remove('active'));
+                const active = document.querySelector(`.quick-nav .nav-link[href="#${entry.target.id}"]`);
+                if (active) {
+                    active.classList.add('active');
+                    active.scrollIntoView({ inline: 'nearest', block: 'nearest' });
+                }
+            }
+        });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+
+    sections.forEach(s => observer.observe(s));
+
+    // ── Smooth scroll for quick nav ──
+    navLinks.forEach(link => {
+        link.addEventListener('click', e => {
+            e.preventDefault();
+            const target = document.querySelector(link.getAttribute('href'));
+            if (target) target.scrollIntoView({ behavior: 'smooth' });
+        });
+    });
+});
+</script>
 </body>
-
 </html>

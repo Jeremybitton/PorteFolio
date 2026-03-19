@@ -100,6 +100,34 @@
     .lightbox-next { right: 10px; }
 }
 
+/* Lightbox footer: caption + counter */
+.lightbox-footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    background: linear-gradient(transparent, rgba(0,0,0,0.7));
+    z-index: 10002;
+}
+
+.lightbox-caption {
+    color: rgba(255,255,255,0.85);
+    font-size: 0.88rem;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+}
+
+.lightbox-counter {
+    color: rgba(255,255,255,0.5);
+    font-size: 0.8rem;
+    font-family: 'Poppins', sans-serif;
+    white-space: nowrap;
+}
+
 .gallery-img {
     cursor: zoom-in;
     transition: transform 0.2s, filter 0.2s;

@@ -1,113 +1,113 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Inject lightbox HTML with navigation
+    // Inject lightbox HTML with navigation, caption and counter
     const lightboxHTML = `
         <div id="lightbox" class="lightbox-modal">
             <button class="lightbox-close" aria-label="Close">&times;</button>
             <button class="lightbox-nav lightbox-prev" aria-label="Previous"><i class="fa-solid fa-chevron-left"></i></button>
             <img class="lightbox-content" id="lightbox-img" alt="Enlarged view">
             <button class="lightbox-nav lightbox-next" aria-label="Next"><i class="fa-solid fa-chevron-right"></i></button>
+            <div class="lightbox-footer">
+                <span class="lightbox-caption" id="lightbox-caption"></span>
+                <span class="lightbox-counter" id="lightbox-counter"></span>
+            </div>
         </div>
     `;
     document.body.insertAdjacentHTML('beforeend', lightboxHTML);
 
-    const lightbox = document.getElementById('lightbox');
+    const lightbox    = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
-    const closeBtn = document.querySelector('.lightbox-close');
-    const prevBtn = document.querySelector('.lightbox-prev');
-    const nextBtn = document.querySelector('.lightbox-next');
+    const caption     = document.getElementById('lightbox-caption');
+    const counter     = document.getElementById('lightbox-counter');
+    const closeBtn    = document.querySelector('.lightbox-close');
+    const prevBtn     = document.querySelector('.lightbox-prev');
+    const nextBtn     = document.querySelector('.lightbox-next');
 
-    // State
     let currentGroupImages = [];
     let currentIndex = 0;
 
-    // Helper to find all gallery images in the same card container
-    function getImagesInSameCard(clickedImg) {
-        // Find closest parent that acts as a container card
-        const card = clickedImg.closest('.project-card'); 
-        if (!card) return [clickedImg]; // Fallback if not inside a card
-        
-        // Convert NodeList to Array to use array methods
-        return Array.from(card.querySelectorAll('.gallery-img'));
+    // Only include images whose gallery-item parent is visible
+    function getVisibleImagesInCard(clickedImg) {
+        const card = clickedImg.closest('.project-card');
+        if (!card) return [clickedImg];
+        return Array.from(card.querySelectorAll('.gallery-img')).filter(img => {
+            const item = img.closest('.gallery-item');
+            return !item || !item.classList.contains('hide');
+        });
     }
 
-    function updateLightboxImage() {
+    function updateLightbox() {
         if (currentGroupImages.length === 0) return;
-        
+
         const img = currentGroupImages[currentIndex];
         lightboxImg.src = img.src;
-        
-        // Hide/Show arrows based on group size
+        lightboxImg.alt = img.alt || '';
+
+        // Caption: read from sibling .gallery-title
+        const wrapper = img.closest('.gallery-card') || img.parentElement;
+        const titleEl = wrapper ? wrapper.querySelector('.gallery-title') : null;
+        caption.textContent = titleEl ? titleEl.textContent.trim() : (img.alt || '');
+
+        // Counter
         if (currentGroupImages.length > 1) {
+            counter.textContent = `${currentIndex + 1} / ${currentGroupImages.length}`;
             prevBtn.style.display = 'flex';
             nextBtn.style.display = 'flex';
         } else {
+            counter.textContent = '';
             prevBtn.style.display = 'none';
             nextBtn.style.display = 'none';
         }
+
+        // Disable buttons at the boundaries (no loop)
+        prevBtn.disabled = currentIndex === 0;
+        nextBtn.disabled = currentIndex === currentGroupImages.length - 1;
+        prevBtn.style.opacity = prevBtn.disabled ? '0.25' : '1';
+        nextBtn.style.opacity = nextBtn.disabled ? '0.25' : '1';
     }
 
     function showNext() {
-        if (currentGroupImages.length <= 1) return;
-        currentIndex = (currentIndex + 1) % currentGroupImages.length;
-        updateLightboxImage();
+        if (currentIndex >= currentGroupImages.length - 1) return;
+        currentIndex++;
+        updateLightbox();
     }
 
     function showPrev() {
-        if (currentGroupImages.length <= 1) return;
-        currentIndex = (currentIndex - 1 + currentGroupImages.length) % currentGroupImages.length;
-        updateLightboxImage();
+        if (currentIndex <= 0) return;
+        currentIndex--;
+        updateLightbox();
     }
 
     // Attach click events to all gallery images
     const images = document.querySelectorAll('.gallery-img');
     images.forEach(img => {
         img.addEventListener('click', () => {
-            // Identify the group
-            currentGroupImages = getImagesInSameCard(img);
-            // Find index of clicked image in that group
+            currentGroupImages = getVisibleImagesInCard(img);
             currentIndex = currentGroupImages.indexOf(img);
+            if (currentIndex === -1) currentIndex = 0;
 
-            updateLightboxImage();
+            updateLightbox();
             lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden'; // Prevent scrolling
+            document.body.style.overflow = 'hidden';
         });
     });
 
-    // Close functionality
+    // Close
     const closeLightbox = () => {
         lightbox.classList.remove('active');
         document.body.style.overflow = '';
-        // Reset src after transition to avoid flicker if re-opened ? 
-        // Better leave it, or clear it after timeout.
-        setTimeout(() => { lightboxImg.src = ''; }, 300); 
+        setTimeout(() => { lightboxImg.src = ''; }, 300);
     };
 
     closeBtn.addEventListener('click', closeLightbox);
-    
-    // Close on click outside image (on the backdrop)
-    lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) {
-            closeLightbox();
-        }
-    });
+    lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
 
-    // Navigation events
-    prevBtn.addEventListener('click', (e) => {
-        e.stopPropagation(); // Prevent closing
-        showPrev();
-    });
+    prevBtn.addEventListener('click', e => { e.stopPropagation(); showPrev(); });
+    nextBtn.addEventListener('click', e => { e.stopPropagation(); showNext(); });
 
-    nextBtn.addEventListener('click', (e) => {
-        e.stopPropagation(); // Prevent closing
-        showNext();
-    });
-
-    // Keyboard support
-    document.addEventListener('keydown', (e) => {
+    document.addEventListener('keydown', e => {
         if (!lightbox.classList.contains('active')) return;
-
-        if (e.key === 'Escape') closeLightbox();
-        if (e.key === 'ArrowLeft') showPrev();
-        if (e.key === 'ArrowRight') showNext();
+        if (e.key === 'Escape')      closeLightbox();
+        if (e.key === 'ArrowLeft')   showPrev();
+        if (e.key === 'ArrowRight')  showNext();
     });
 });
