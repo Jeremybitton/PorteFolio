@@ -270,7 +270,7 @@ body {
     background-size: cover;
     min-height: 100vh;
     color: var(--text-primary);
-    overflow-x: hidden;
+    overflow-x: clip;
     position: relative;
     line-height: 1.7;
 }
