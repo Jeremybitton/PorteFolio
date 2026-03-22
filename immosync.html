@@ -107,28 +107,49 @@
                     </div>
                 </div>
 
-                <div class="project-card mb-4">
+                <div class="project-card mb-4" id="methodes">
                     <span class="text-uppercase text-accent fw-bold small mb-2 d-block">Technique</span>
-                    <h2 class="section-title mb-3"><i class="fa-solid fa-layer-group me-2"></i>Architecture & Stack</h2>
-                    <div class="p-3 rounded bg-dark-soft border border-secondary mb-3">
+                    <h2 class="section-title mb-3"><i class="fa-solid fa-layer-group me-2"></i>Stack Technique</h2>
+                    <div class="p-3 rounded bg-dark-soft border border-secondary mb-4">
                         <h6 class="text-white"><i class="fa-brands fa-java text-accent me-2"></i>Java & JavaFX</h6>
-                        <p class="small text-light-muted">Utilisation du pattern <strong>MVC (Modèle-Vue-Contrôleur)</strong> pour une séparation claire entre la logique métier, l'interface graphique (FXML) et l'accès aux données.</p>
+                        <p class="small text-light-muted mb-0">Utilisation du pattern <strong>MVC (Modèle-Vue-Contrôleur)</strong> pour une séparation claire entre la logique métier, l'interface graphique (FXML) et l'accès aux données via JDBC.</p>
                     </div>
-                    <div class="row g-2">
-                        <div class="col-md-4">
-                            <div class="p-2 rounded bg-dark-soft border border-secondary text-center">
-                                <span class="text-accent fw-bold small">MySQL</span>
+                    
+                    <div class="tech-grid">
+                        <!-- Java -->
+                        <div class="tech-card" style="border-top-color: #f8981d;">
+                            <div class="tech-card-logo" style="background:rgba(248, 152, 29, 0.12); border:1px solid rgba(248, 152, 29, 0.25); color: #f8981d;">
+                                <i class="fa-brands fa-java"></i>
                             </div>
+                            <h4>Java</h4>
+                            <p>Langage orienté objet avec pattern MVC pour la logique applicative.</p>
                         </div>
-                        <div class="col-md-4">
-                            <div class="p-2 rounded bg-dark-soft border border-secondary text-center">
-                                <span class="text-accent fw-bold small">SceneBuilder</span>
+
+                        <!-- JavaFX -->
+                        <div class="tech-card" style="border-top-color: #2F7DB3;">
+                            <div class="tech-card-logo" style="background:rgba(47, 125, 179, 0.12); border:1px solid rgba(47, 125, 179, 0.25); color: #2F7DB3;">
+                                <i class="fa-solid fa-desktop"></i>
                             </div>
+                            <h4>JavaFX</h4>
+                            <p>Framework pour la création d'interfaces graphiques riches et fluides.</p>
                         </div>
-                        <div class="col-md-4">
-                            <div class="p-2 rounded bg-dark-soft border border-secondary text-center">
-                                <span class="text-accent fw-bold small">JDBC / Connector</span>
+
+                        <!-- MySQL / JDBC -->
+                        <div class="tech-card" style="border-top-color: #f29111;">
+                            <div class="tech-card-logo" style="background:rgba(242, 145, 17, 0.12); border:1px solid rgba(242, 145, 17, 0.25); color: #f29111;">
+                                <i class="fa-solid fa-database"></i>
                             </div>
+                            <h4>MySQL & JDBC</h4>
+                            <p>Connecteur et base de données pour la persistance sécurisée.</p>
+                        </div>
+
+                        <!-- SceneBuilder -->
+                        <div class="tech-card" style="border-top-color: #B1B1B1;">
+                            <div class="tech-card-logo" style="background:rgba(177, 177, 177, 0.12); border:1px solid rgba(177, 177, 177, 0.25); color: #B1B1B1;">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                            </div>
+                            <h4>SceneBuilder</h4>
+                            <p>Outil de conception visuelle pour générer les vues FXML.</p>
                         </div>
                     </div>
                 </div>
@@ -136,37 +157,56 @@
                 <div class="project-card mb-4">
                     <h2 class="section-title">Aperçu de l'Interface</h2>
                     <p class="mb-3">Captures d'écran de l'application JavaFX.</p>
-                    <div class="row g-2">
-                        <div class="col-6 col-md-4">
-                            <img src="images/immosync-java/img.png" class="img-fluid rounded border border-secondary gallery-img" alt="Dashboard">
+                    <div id="immosyncJavaCarousel" class="carousel slide shadow-sm" data-bs-ride="false" data-bs-wrap="false">
+                        <div class="carousel-inner rounded border border-secondary bg-dark-soft">
+                            <div class="carousel-item active">
+                                <img src="images/immosync-java/img.png" class="d-block w-100 gallery-img" alt="Dashboard" style="object-fit: contain; aspect-ratio: 16/9;">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="images/immosync-java/img_1.png" class="d-block w-100 gallery-img" alt="Liste des biens" style="object-fit: contain; aspect-ratio: 16/9;">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="images/immosync-java/img_2.png" class="d-block w-100 gallery-img" alt="Suivi chantier" style="object-fit: contain; aspect-ratio: 16/9;">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="images/immosync-java/img_3.png" class="d-block w-100 gallery-img" alt="Suivi chantier" style="object-fit: contain; aspect-ratio: 16/9;">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="images/immosync-java/img_4.png" class="d-block w-100 gallery-img" alt="visualisation inspecteur" style="object-fit: contain; aspect-ratio: 16/9;">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="images/immosync-java/img_5.png" class="d-block w-100 gallery-img" alt="Suivi chantier" style="object-fit: contain; aspect-ratio: 16/9;">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="images/immosync-java/img_6.png" class="d-block w-100 gallery-img" alt="Suivi chantier" style="object-fit: contain; aspect-ratio: 16/9;">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="images/immosync-java/img_7.png" class="d-block w-100 gallery-img" alt="Suivi chantier" style="object-fit: contain; aspect-ratio: 16/9;">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="images/immosync-java/img_8.png" class="d-block w-100 gallery-img" alt="Suivi chantier" style="object-fit: contain; aspect-ratio: 16/9;">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="images/immosync-java/img_9.png" class="d-block w-100 gallery-img" alt="Suivi chantier" style="object-fit: contain; aspect-ratio: 16/9;">
+                            </div>
                         </div>
-                        <div class="col-6 col-md-4">
-                            <img src="images/immosync-java/img_1.png" class="img-fluid rounded border border-secondary gallery-img" alt="Liste des biens">
-                        </div>
-                        <div class="col-6 col-md-4">
-                            <img src="images/immosync-java/img_2.png" class="img-fluid rounded border border-secondary gallery-img" alt="Suivi chantier">
-                        </div>
-                        <div class="col-6 col-md-4">
-                            <img src="images/immosync-java/img_3.png" class="img-fluid rounded border border-secondary gallery-img" alt="Suivi chantier">
-                        </div>
-                        <div class="col-6 col-md-4">
-                            <img src="images/immosync-java/img_4.png" class="img-fluid rounded border border-secondary gallery-img" alt="visualisation inspecteur">
-                        </div>
-                        <div class="col-6 col-md-4">
-                            <img src="images/immosync-java/img_5.png" class="img-fluid rounded border border-secondary gallery-img" alt="Suivi chantier">
-                        </div>
-                        <div class="col-6 col-md-4">
-                            <img src="images/immosync-java/img_6.png" class="img-fluid rounded border border-secondary gallery-img" alt="Suivi chantier">
-                        </div>
-                        <div class="col-6 col-md-4">
-                            <img src="images/immosync-java/img_7.png" class="img-fluid rounded border border-secondary gallery-img" alt="Suivi chantier">
-                        </div>
-                        <div class="col-6 col-md-4">
-                            <img src="images/immosync-java/img_8.png" class="img-fluid rounded border border-secondary gallery-img" alt="Suivi chantier">
-                        </div>
-                        <div class="col-6 col-md-4">
-                            <img src="images/immosync-java/img_9.png" class="img-fluid rounded border border-secondary gallery-img" alt="Suivi chantier">
-                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#immosyncJavaCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true" style="filter: drop-shadow(0px 0px 4px rgba(0,0,0,0.8));"></span>
+                            <span class="visually-hidden">Précédent</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#immosyncJavaCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true" style="filter: drop-shadow(0px 0px 4px rgba(0,0,0,0.8));"></span>
+                            <span class="visually-hidden">Suivant</span>
+                        </button>
+                    </div>
+                
+                    <div class="d-flex justify-content-between mt-3">
+                        <button class="btn btn-outline-light rounded-pill px-4" type="button" data-bs-target="#immosyncJavaCarousel" data-bs-slide="prev">
+                            <i class="fa-solid fa-arrow-left me-2"></i> Précédent
+                        </button>
+                        <button class="btn btn-outline-light rounded-pill px-4" type="button" data-bs-target="#immosyncJavaCarousel" data-bs-slide="next">
+                            Suivant <i class="fa-solid fa-arrow-right ms-2"></i>
+                        </button>
                     </div>
                 </div>
 

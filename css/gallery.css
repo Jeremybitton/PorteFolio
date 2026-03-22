@@ -138,3 +138,8 @@
     filter: brightness(1.1);
     box-shadow: 0 5px 15px rgba(0,0,0,0.3);
 }
+
+/* Faster Carousel Transition */
+.carousel-item {
+    transition: transform 0.25s ease-in-out !important;
+}

@@ -108,28 +108,49 @@
                     </div>
                 </div>
 
-                <div class="project-card mb-4">
+                <div class="project-card mb-4" id="methodes">
                     <span class="text-uppercase text-accent fw-bold small mb-2 d-block">Technique</span>
-                    <h2 class="section-title mb-3"><i class="fa-solid fa-layer-group me-2"></i>Architecture & Stack</h2>
-                    <div class="p-3 rounded bg-dark-soft border border-secondary mb-3">
+                    <h2 class="section-title mb-3"><i class="fa-solid fa-layer-group me-2"></i>Stack Technique</h2>
+                    <div class="p-3 rounded bg-dark-soft border border-secondary mb-4">
                         <h6 class="text-white"><i class="fa-brands fa-php text-accent me-2"></i>PHP & Bootstrap</h6>
-                        <p class="small text-light-muted">Structure <strong>MVC en PHP natif</strong>, avec un front-end Bootstrap pour une interface responsive et cohérente. La couche d'accès aux données utilise PDO pour sécuriser les échanges avec MySQL.</p>
+                        <p class="small text-light-muted mb-0">Structure <strong>MVC en PHP natif</strong>, avec un front-end Bootstrap pour une interface responsive et cohérente. La couche d'accès aux données utilise PDO pour sécuriser les échanges avec MySQL.</p>
                     </div>
-                    <div class="row g-2">
-                        <div class="col-md-4">
-                            <div class="p-2 rounded bg-dark-soft border border-secondary text-center">
-                                <span class="text-accent fw-bold small">MySQL</span>
+                    
+                    <div class="tech-grid">
+                        <!-- PHP -->
+                        <div class="tech-card" style="border-top-color: #8892BF;">
+                            <div class="tech-card-logo" style="background:rgba(136, 146, 191, 0.12); border:1px solid rgba(136, 146, 191, 0.25); color: #8892BF;">
+                                <i class="fa-brands fa-php"></i>
                             </div>
+                            <h4>PHP</h4>
+                            <p>Langage backend avec architecture MVC native.</p>
                         </div>
-                        <div class="col-md-4">
-                            <div class="p-2 rounded bg-dark-soft border border-secondary text-center">
-                                <span class="text-accent fw-bold small">Bootstrap 5</span>
+
+                        <!-- Bootstrap -->
+                        <div class="tech-card" style="border-top-color: #7952B3;">
+                            <div class="tech-card-logo" style="background:rgba(121, 82, 179, 0.12); border:1px solid rgba(121, 82, 179, 0.25); color: #7952B3;">
+                                <i class="fa-brands fa-bootstrap"></i>
                             </div>
+                            <h4>Bootstrap 5</h4>
+                            <p>Framework CSS pour un design 100% responsive.</p>
                         </div>
-                        <div class="col-md-4">
-                            <div class="p-2 rounded bg-dark-soft border border-secondary text-center">
-                                <span class="text-accent fw-bold small">PDO / SQL</span>
+
+                        <!-- MySQL / PDO -->
+                        <div class="tech-card" style="border-top-color: #f29111;">
+                            <div class="tech-card-logo" style="background:rgba(242, 145, 17, 0.12); border:1px solid rgba(242, 145, 17, 0.25); color: #f29111;">
+                                <i class="fa-solid fa-database"></i>
                             </div>
+                            <h4>MySQL & PDO</h4>
+                            <p>Base de données relationnelle sécurisée par requêtes préparées.</p>
+                        </div>
+
+                        <!-- JavaScript -->
+                        <div class="tech-card" style="border-top-color: #F7DF1E;">
+                            <div class="tech-card-logo" style="background:rgba(247, 223, 30, 0.12); border:1px solid rgba(247, 223, 30, 0.25); color: #F7DF1E;">
+                                <i class="fa-brands fa-js"></i>
+                            </div>
+                            <h4>JavaScript</h4>
+                            <p>Interactivité côté client et dynamisme de l'interface.</p>
                         </div>
                     </div>
                 </div>
@@ -137,22 +158,41 @@
                 <div class="project-card mb-4">
                     <h2 class="section-title">Aperçu de l'Interface</h2>
                     <p class="mb-3">Captures d'écran de l'application web PHP.</p>
-                    <div class="row g-2">
-                        <div class="col-6 col-md-4">
-                            <img src="images/immosync-web/img.png" class="img-fluid rounded border border-secondary gallery-img" alt="Dashboard Web">
+                    <div id="immosyncCarousel" class="carousel slide shadow-sm" data-bs-ride="false" data-bs-wrap="false">
+                        <div class="carousel-inner rounded border border-secondary bg-dark-soft">
+                            <div class="carousel-item active">
+                                <img src="images/immosync-web/img_4.png" class="d-block w-100 gallery-img" alt="Vue mobile" style="object-fit: contain; aspect-ratio: 16/9;">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="images/immosync-web/img_3.png" class="d-block w-100 gallery-img" alt="Gestion utilisateurs" style="object-fit: contain; aspect-ratio: 16/9;">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="images/immosync-web/img_2.png" class="d-block w-100 gallery-img" alt="Suivi chantier" style="object-fit: contain; aspect-ratio: 16/9;">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="images/immosync-web/img_1.png" class="d-block w-100 gallery-img" alt="Liste des biens" style="object-fit: contain; aspect-ratio: 16/9;">
+                            </div>
+                            <div class="carousel-item">
+                                <img src="images/immosync-web/img.png" class="d-block w-100 gallery-img" alt="Dashboard Web" style="object-fit: contain; aspect-ratio: 16/9;">
+                            </div>
                         </div>
-                        <div class="col-6 col-md-4">
-                            <img src="images/immosync-web/img_1.png" class="img-fluid rounded border border-secondary gallery-img" alt="Liste des biens">
-                        </div>
-                        <div class="col-6 col-md-4">
-                            <img src="images/immosync-web/img_2.png" class="img-fluid rounded border border-secondary gallery-img" alt="Suivi chantier">
-                        </div>
-                        <div class="col-6 col-md-4">
-                            <img src="images/immosync-web/img_3.png" class="img-fluid rounded border border-secondary gallery-img" alt="Gestion utilisateurs">
-                        </div>
-                        <div class="col-6 col-md-4">
-                            <img src="images/immosync-web/img_4.png" class="img-fluid rounded border border-secondary gallery-img" alt="Vue mobile">
-                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#immosyncCarousel" data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true" style="filter: drop-shadow(0px 0px 4px rgba(0,0,0,0.8));"></span>
+                            <span class="visually-hidden">Précédent</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#immosyncCarousel" data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true" style="filter: drop-shadow(0px 0px 4px rgba(0,0,0,0.8));"></span>
+                            <span class="visually-hidden">Suivant</span>
+                        </button>
+                    </div>
+
+                    <div class="d-flex justify-content-between mt-3">
+                        <button class="btn btn-outline-light rounded-pill px-4" type="button" data-bs-target="#immosyncCarousel" data-bs-slide="prev">
+                            <i class="fa-solid fa-arrow-left me-2"></i> Précédent
+                        </button>
+                        <button class="btn btn-outline-light rounded-pill px-4" type="button" data-bs-target="#immosyncCarousel" data-bs-slide="next">
+                            Suivant <i class="fa-solid fa-arrow-right ms-2"></i>
+                        </button>
                     </div>
                 </div>
 
