@@ -25,11 +25,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentGroupImages = [];
     let currentIndex = 0;
 
-    // Only include images whose gallery-item parent is visible
+    // Only include images whose container is visible
     function getVisibleImagesInCard(clickedImg) {
-        const card = clickedImg.closest('.project-card');
-        if (!card) return [clickedImg];
-        return Array.from(card.querySelectorAll('.gallery-img')).filter(img => {
+        let container = clickedImg.closest('.project-card');
+        if (!container) container = clickedImg.closest('#gallery-container');
+        if (!container) return [clickedImg];
+        
+        return Array.from(container.querySelectorAll('.gallery-img')).filter(img => {
             const item = img.closest('.gallery-item');
             return !item || !item.classList.contains('hide');
         });
